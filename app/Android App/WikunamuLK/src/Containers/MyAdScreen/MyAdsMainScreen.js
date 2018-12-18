@@ -11,7 +11,7 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,Dimensions,ImageBackground,AsyncStorage,StatusBar
+  Image,Dimensions,ImageBackground,AsyncStorage,StatusBar,BackHandler
 } from 'react-native';
 
 import Toolbar from '../Toolbar/Toolbar';
@@ -23,14 +23,27 @@ export default class MyAdsMainScreen extends Component{
 
   constructor(props) {
     super(props);
+    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
 
 }
 
 
 componentWillMount(){
+ 
+}
 
+componentDidMount(){
+  BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+}
 
+componentWillUnmount() {
+  BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+}
 
+//Back button handle event - Android Only
+handleBackButtonClick() {
+  this.props.navigation.goBack();
+    return true;
 }
 
   render() {

@@ -18,6 +18,13 @@ import MyAdsMainScreen from './Containers/MyAdScreen/MyAdsMainScreen';
 import UserProfile from './Containers/UserProfileScreen/UserProfile';
 import About from './Containers/AboutAppScreen/About';
 
+//import main catagory list
+import MobilePhoneMain from './Containers/CatagoryScreens/MobilePhones/MobilePhoneMain';
+import ElectronicsMain from './Containers/CatagoryScreens/Electroinics/ElectronicsMain';
+import VehiclesMain from './Containers/CatagoryScreens/Vehicles/VehiclesMain';
+import MensFashionMain from './Containers/CatagoryScreens/MensFashion/MensFashionMain';
+import WomensFashionMain from './Containers/CatagoryScreens/WomensFashion/WomensFashionMain';
+
 //Device width and height
 import Metrics from './Containers/Dimensions/Metrics';
 
@@ -138,12 +145,12 @@ contentOptions: {
 drawerOpenRoute: 'DrawerOpen',
 drawerCloseRoute: 'DrawerClose',
 drawerToggleRoute: 'DrawerToggle',
-drawerBackgroundColor: "#626263",
+drawerBackgroundColor: "#333333",
 });
 
 // Main App Navigation
 const NavigationApp = StackNavigator({ 
-
+ 
   Splash:{ screen: Splash,navigationOptions: { title: 'Splash', header: null, gesturesEnabled: false},},
   Drawer:{ screen: Drawer,navigationOptions: { title: 'Drawer', header: null, gesturesEnabled: false},},
   Home:{ screen: Home,navigationOptions: { title: 'Home', header: null, gesturesEnabled: false},},
@@ -151,6 +158,11 @@ const NavigationApp = StackNavigator({
   MyAdsMainScreen:{ screen: MyAdsMainScreen,navigationOptions: { title: ' MyAdsMainScreen', header: null, gesturesEnabled: false},},
   UserProfile:{ screen: UserProfile,navigationOptions: { title: ' UserProfile', header: null, gesturesEnabled: false},},
   About:{ screen: About,navigationOptions: { title: ' About', header: null, gesturesEnabled: false},},
+  MobilePhoneMain:{ screen: MobilePhoneMain,navigationOptions: { title: ' MobilePhoneMain', header: null, gesturesEnabled: false},},
+  ElectronicsMain:{ screen: ElectronicsMain,navigationOptions: { title: ' ElectronicsMain', header: null, gesturesEnabled: false},},
+  VehiclesMain:{ screen: VehiclesMain,navigationOptions: { title: ' VehiclesMain', header: null, gesturesEnabled: false},},
+  MensFashionMain:{ screen: MensFashionMain,navigationOptions: { title: ' MensFashionMain', header: null, gesturesEnabled: false},},
+  WomensFashionMain:{ screen: WomensFashionMain,navigationOptions: { title: ' WomensFashionMain', header: null, gesturesEnabled: false},},
 
 });
 

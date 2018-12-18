@@ -34,7 +34,7 @@ export default class Toolbar extends Component{
     return (
     <View style={styles.header}>
     <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={styles.linearGradient}>
-        <TouchableOpacity style={styles.drawerIcon} onPress={() =>  this.props.navigation.openDrawer()}>
+        <TouchableOpacity style={styles.drawerIcon} onPress={() =>   this.props.navigation.openDrawer()}>
         <Image style={styles.imagestyle}
               source={require('../../Assets/Toolbar/icon_menu.png')} />
         </TouchableOpacity>
