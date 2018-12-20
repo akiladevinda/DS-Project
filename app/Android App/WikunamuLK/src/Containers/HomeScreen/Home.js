@@ -85,6 +85,12 @@ export default class Home extends Component {
     }
   }
 
+  //post ad button
+postMyAdSecondScreen(){
+  this.props.navigation.navigate("PostAdScreenSecond" , {screen:PostAdScreenSecond});
+}
+
+
   render() {
     return (
       <View style={styles.container}>
@@ -92,7 +98,7 @@ export default class Home extends Component {
 <StatusBar backgroundColor="#3764ad" barStyle="light-content"/>
 
 <Toolbar navigation={this.props.navigation}/>
-
+        
         <FlatList style={styles.list}
           contentContainerStyle={styles.listContainer}
           data={this.state.data}
@@ -114,6 +120,27 @@ export default class Home extends Component {
               </TouchableOpacity>
             )
           }}/>
+
+<Button
+                icon={
+                  <Icon
+                    name='plus-circle'
+                    size={25}
+                    color='white'
+                  />
+                }
+                title='QUICKLY POST YOUR AD'
+                raised={true}
+                buttonStyle={{  
+                backgroundColor: "rgba(92, 99,216, 1)",
+                width: Metrics.DEVICE_WIDTH,
+                height: 55,
+                borderColor: "transparent",
+                borderWidth: 0,
+                // marginTop:5,
+                }}
+                onPress={ () =>  this.postMyAdSecondScreen()}
+              />
       </View>
     );
   }
