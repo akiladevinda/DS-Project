@@ -25,7 +25,7 @@ import VehiclesMain from './Containers/CatagoryScreens/Vehicles/VehiclesMain';
 import MensFashionMain from './Containers/CatagoryScreens/MensFashion/MensFashionMain';
 import WomensFashionMain from './Containers/CatagoryScreens/WomensFashion/WomensFashionMain';
 import PostAdScreenSecond from './Containers/PostAdScreen/PostAdSecondary';
-
+import MobilePhoneMore from './Containers/CatagoryScreens/MobilePhones/MobilePhoneMore';
 
 //Device width and height
 import Metrics from './Containers/Dimensions/Metrics';
@@ -165,6 +165,7 @@ const NavigationApp = StackNavigator({
   MensFashionMain:{ screen: MensFashionMain,navigationOptions: { title: ' MensFashionMain', header: null, gesturesEnabled: false},},
   WomensFashionMain:{ screen: WomensFashionMain,navigationOptions: { title: ' WomensFashionMain', header: null, gesturesEnabled: false},},
   PostAdScreenSecond:{ screen: PostAdScreenSecond,navigationOptions: { title: ' PostAdScreenSecond', header: null, gesturesEnabled: false},},
+  MobilePhoneMore:{ screen: MobilePhoneMore,navigationOptions: { title: ' MobilePhoneMore', header: null, gesturesEnabled: false},},
 
 });
 

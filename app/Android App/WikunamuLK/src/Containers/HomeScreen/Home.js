@@ -8,7 +8,8 @@ import {
   Alert,
   ScrollView,
   FlatList,
-  StatusBar
+  StatusBar,
+  BackHandler
 } from 'react-native';
 //System Files
 import Toolbar from '../Toolbar/Toolbar';
@@ -44,6 +45,25 @@ export default class Home extends Component {
       ]
     };
   }
+
+  componentWillMount(){
+  
+
+  }
+  componentDidMount(){
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+  }
+  
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+   
+  }
+  
+  handleBackButton(){
+      BackHandler.exitApp();
+      return true;
+  }
+
 
   clickEventListener(item) {
     if(item == 1){
