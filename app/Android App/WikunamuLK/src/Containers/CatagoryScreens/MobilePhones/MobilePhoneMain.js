@@ -11,14 +11,18 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,Dimensions,ImageBackground,AsyncStorage,StatusBar,BackHandler,TouchableOpacity
+  Image,Dimensions,ImageBackground,AsyncStorage,StatusBar,BackHandler,TouchableOpacity,ScrollView
 } from 'react-native';
 
 
 //Device width and height
 import Metrics from '../../Dimensions/Metrics';
 
+//import custom libraries
 import LinearGradient from 'react-native-linear-gradient';
+import { Card, ListItem, Button } from 'react-native-elements'
+
+
 
 export default class MobilePhoneMain extends Component{
 
@@ -51,7 +55,7 @@ handleBackButtonClick() {
     return (
 
      
-      <View style={styles.containerr}>
+      <View style={styles.container}>
 
         <StatusBar backgroundColor="#3764ad" barStyle="light-content"/>
         <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={styles.linearGradient}>
@@ -62,7 +66,78 @@ handleBackButtonClick() {
         
             <Text style={styles.headerTextMain}>Mobile Phones
             </Text>
+
+            
         </LinearGradient>
+
+
+        <ScrollView style={{width:Metrics.DEVICE_WIDTH}}>
+            <Card
+                  title='Samsung Galaxy S9'r
+                  image={require('../../../Assets/Catagories/phones.jpg')}>
+                  <Text style={{marginBottom: 10}}>
+                   Price - 90 000 LKR
+                  </Text>
+                  <Button
+                   
+                    backgroundColor='#03A9F4'
+                    buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                    title='VIEW NOW' />
+                </Card>
+
+                <Card
+                  title='iPhone 7 Plus 128GB'
+                  image={require('../../../Assets/Catagories/phones.jpg')}>
+                  <Text style={{marginBottom: 10}}>
+                  Price - 95 000 LKR
+                  </Text>
+                  <Button
+                    
+                    backgroundColor='#03A9F4'
+                    buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                    title='VIEW NOW' />
+                </Card>
+
+                <Card
+                  title='Samsung Galaxy S8'
+                  image={require('../../../Assets/Catagories/phones.jpg')}>
+                  <Text style={{marginBottom: 10}}>
+                    Price - 95 000 LKR
+                  </Text>
+                  <Button
+                   
+                    backgroundColor='#03A9F4'
+                    buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                    title='VIEW NOW' />
+                </Card>
+
+                <Card
+                  title='iPhone XS Max'
+                  image={require('../../../Assets/Catagories/phones.jpg')}>
+                  <Text style={{marginBottom: 10}}>
+                    Price - 95 000 LKR
+                  </Text>
+                  <Button
+                   
+                    backgroundColor='#03A9F4'
+                    buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                    title='VIEW NOW' />
+                </Card>
+
+                <Card
+                  title='iPhone XR'
+                  image={require('../../../Assets/Catagories/phones.jpg')}>
+                  <Text style={{marginBottom: 10}}>
+                    Price - 95 000 LKR
+                  </Text>
+                  <Button
+                   
+                    backgroundColor='#03A9F4'
+                    buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                    title='VIEW NOW' />
+                </Card>
+
+            </ScrollView>
       </View>
 
     );
@@ -97,7 +172,7 @@ imagestyle:{
     color: 'white',
     fontSize: 21,
     marginLeft:Metrics.DEVICE_WIDTH/3.1,
-    // width:Metrics.DEVICE_WIDTH,
+    width:Metrics.DEVICE_WIDTH,
     height:60,
     marginTop:20,
   },

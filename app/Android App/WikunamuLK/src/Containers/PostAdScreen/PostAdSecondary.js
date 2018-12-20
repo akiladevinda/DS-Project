@@ -123,7 +123,7 @@ export default class PostAdSecondary extends Component {
     return (
 
 
-      <View style={styles.containerr}>
+      <View style={styles.container}>
 
         <StatusBar backgroundColor="#3764ad" barStyle="light-content" />
         <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={styles.linearGradient}>
@@ -151,9 +151,9 @@ export default class PostAdSecondary extends Component {
 
 
 
-        <ScrollView style={{ backgroundColor: 'white' }}>
+        <ScrollView style={{ backgroundColor: 'white' ,}}>
           <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-            <View style={{ flex:1 , flexDirection:'column', width: Metrics.DEVICE_WIDTH / 1.2, marginLeft: 30, height: 1200, }}>
+            <View style={{ flex:1 , flexDirection:'column', width: Metrics.DEVICE_WIDTH / 1.2, marginLeft: 30, }}>
 
               <Dropdown
                 label='Category'
@@ -276,7 +276,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 21,
     marginLeft: Metrics.DEVICE_WIDTH / 3.1,
-    // width:Metrics.DEVICE_WIDTH,
+    width:Metrics.DEVICE_WIDTH,
     height: 60,
     marginTop: 20,
   },
