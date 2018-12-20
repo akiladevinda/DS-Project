@@ -18,6 +18,11 @@ import MyAdsMainScreen from './Containers/MyAdScreen/MyAdsMainScreen';
 import UserProfile from './Containers/UserProfileScreen/UserProfile';
 import About from './Containers/AboutAppScreen/About';
 
+//import Authentication Screens
+import Register from './Containers/AuthScreens/RegisterScreen/Register';
+import Login from './Containers/AuthScreens/LoginScreen/Login';
+
+
 //import main catagory list
 import MobilePhoneMain from './Containers/CatagoryScreens/MobilePhones/MobilePhoneMain';
 import ElectronicsMain from './Containers/CatagoryScreens/Electroinics/ElectronicsMain';
@@ -151,7 +156,7 @@ drawerBackgroundColor: "white",
 
 // Main App Navigation
 const NavigationApp = StackNavigator({ 
- 
+  
   Splash:{ screen: Splash,navigationOptions: { title: 'Splash', header: null, gesturesEnabled: false},},
   Drawer:{ screen: Drawer,navigationOptions: { title: 'Drawer', header: null, gesturesEnabled: false},},
   Home:{ screen: Home,navigationOptions: { title: 'Home', header: null, gesturesEnabled: false},},

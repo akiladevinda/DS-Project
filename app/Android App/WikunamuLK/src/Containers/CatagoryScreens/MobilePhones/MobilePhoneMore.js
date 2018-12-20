@@ -1,3 +1,10 @@
+/**
+ * © Copyrights 2018
+ * Wikunamu.LK - Mobile Application
+ * Version 1.0
+ * Author : Akila Devinda
+ */
+
 import React, { Component } from 'react';
 import {
   StyleSheet,
