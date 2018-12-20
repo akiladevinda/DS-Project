@@ -11,7 +11,7 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,Dimensions,ImageBackground,AsyncStorage,StatusBar,BackHandler,TouchableOpacity,ScrollView
+  Image,Dimensions,ImageBackground,AsyncStorage,StatusBar,BackHandler,TouchableOpacity,ScrollView,FlatList
 } from 'react-native';
 
 
@@ -21,20 +21,100 @@ import Metrics from '../../Dimensions/Metrics';
 //import custom libraries
 import LinearGradient from 'react-native-linear-gradient';
 import { Card, ListItem, Button } from 'react-native-elements'
+import AwesomeAlert from 'react-native-awesome-alerts';
 
+
+const URL_TESTING = 'http://www.powertrend.lk/backend/web/index.php?r=api/paid-books';
 
 
 export default class MobilePhoneMain extends Component{
 
   constructor(props) {
     super(props);
+    this.state = {
+      paidBooks:[],
+      progress:false,
+  };
+
     this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
 
 }
 
+          fetchData = () => {
+
+            this.setState({
+              progress:true
+            });
+
+            //Downloaded Books API Call  --------------------------------------
+            fetch(URL_TESTING, {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body:JSON.stringify( {
+                "serialNumber": "0bf3575814103e87",
+              })
+
+
+          })
+              .then((response) => response.json())
+              .then((responseText) => {
+                // alert(responseText.success);
+                  this.setState({
+                    paidBooks: responseText.data,
+                    // progress:false,
+                  });
+
+                  if(responseText.success == true){
+                    this.setState({
+                      progress:false,
+                    });
+                  }
+                  
+              })
+              .catch((error) => {
+                  // alert('errorrrr');
+              });
+              
+
+          }
+
+          showPaidBooks(){
+            return(
+              <FlatList
+              horizontal={false}
+              keyExtractor={item => item.id}
+              data={this.state.paidBooks}
+              showsHorizontalScrollIndicator={true}
+              renderItem={({item}) => this.renderDownloadedBooks(item)}
+                />   
+            );
+          }
+
+          renderDownloadedBooks(item) {
+            return(
+
+                          <Card
+                            title={item.bookName}
+                            image={{uri: item.bookImage}}>
+                            <Text style={{marginBottom: 10}}>
+                            {item.bookName}
+                            </Text>
+                            <Button
+                            
+                              backgroundColor='#03A9F4'
+                              buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                              title='VIEW NOW' />
+                          </Card>
+                
+            )
+          }
+
 
 componentWillMount(){
- 
+ this.fetchData();
 }
 
 componentDidMount(){
@@ -72,7 +152,10 @@ handleBackButtonClick() {
 
 
         <ScrollView style={{width:Metrics.DEVICE_WIDTH}}>
-            <Card
+
+        {this.showPaidBooks()}
+        
+            {/* <Card
                   title='Samsung Galaxy S9'r
                   image={require('../../../Assets/Catagories/phones.jpg')}>
                   <Text style={{marginBottom: 10}}>
@@ -135,9 +218,18 @@ handleBackButtonClick() {
                     backgroundColor='#03A9F4'
                     buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                     title='VIEW NOW' />
-                </Card>
+                </Card> */}
 
             </ScrollView>
+
+            <AwesomeAlert
+          title="Loading ..."
+          show={this.state.progress}
+          showProgress={true}
+          closeOnTouchOutside={false}
+          closeOnHardwareBackPress={false}
+        />
+
       </View>
 
     );

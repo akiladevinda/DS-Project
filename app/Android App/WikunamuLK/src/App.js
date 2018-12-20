@@ -62,7 +62,7 @@ const Drawer = DrawerNavigator({
           <Image
             source={require("./Assets/Drawer/m_home.png")}
             resizeMode="contain"
-            style={{ width: 25, height: 25, tintColor: "white" }}
+            style={{ width: 25, height: 25,  }}
           />
         )
       }
@@ -75,7 +75,7 @@ const Drawer = DrawerNavigator({
         <Image
           source={require("./Assets/Drawer/m_postad.png")}
           resizeMode="contain"
-          style={{ width: 25, height: 25, tintColor: "white" }}
+          style={{ width: 25, height: 25,  }}
         />
       )
     }
@@ -87,7 +87,7 @@ const Drawer = DrawerNavigator({
       <Image
         source={require("./Assets/Drawer/m_myads.png")}
         resizeMode="contain"
-        style={{ width: 25, height: 25, tintColor: "white" }}
+        style={{ width: 25, height: 25,  }}
       />
     )
   }
@@ -100,7 +100,7 @@ const Drawer = DrawerNavigator({
       <Image
         source={require("./Assets/Drawer/m_userprofile.png")}
         resizeMode="contain"
-        style={{ width: 25, height: 25, tintColor: "white"}}
+        style={{ width: 25, height: 25, }}
       />
     )
   }
@@ -113,7 +113,7 @@ const Drawer = DrawerNavigator({
       <Image
         source={require("./Assets/Drawer/m_about.png")}
         resizeMode="contain"
-        style={{ width: 25, height: 25, tintColor: "white" }}
+        style={{ width: 25, height: 25,  }}
       />
     )
   }
@@ -126,7 +126,7 @@ const Drawer = DrawerNavigator({
       <Image
         source={require("./Assets/Drawer/m_logout.png")}
         resizeMode="contain"
-        style={{ width: 25, height: 25, tintColor: "white"  }}
+        style={{ width: 25, height: 25, }}
       />
     )
   }
@@ -141,13 +141,12 @@ drawerPosition: 'left',
 contentOptions: {
   labelStyle: {
     fontSize:16,
-    color: 'white',
   },
 },
 drawerOpenRoute: 'DrawerOpen',
 drawerCloseRoute: 'DrawerClose',
 drawerToggleRoute: 'DrawerToggle',
-drawerBackgroundColor: "#333333",
+drawerBackgroundColor: "white",
 });
 
 // Main App Navigation

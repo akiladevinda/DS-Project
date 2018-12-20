@@ -1,25 +1,15 @@
-/**
- * © Copyrights 2018
- * Wikunamu.LK - Mobile Application
- * Version 1.0
- * Author : Akila Devinda
- */
-
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
-  Platform,
   StyleSheet,
   Text,
   View,
+  TouchableOpacity,
   Image,
-  Dimensions,
-  ImageBackground,
-  AsyncStorage,
-  StatusBar,
+  Alert,
   ScrollView,
-  BackHandler,
+  FlatList,
+  StatusBar
 } from 'react-native';
-
 //System Files
 import Toolbar from '../Toolbar/Toolbar';
 //Device width and height
@@ -37,179 +27,137 @@ import MensFashionMain from '../CatagoryScreens/MensFashion/MensFashionMain';
 import WomensFashionMain from '../CatagoryScreens/WomensFashion/WomensFashionMain';
 import PostAdScreenSecond from '../PostAdScreen/PostAdSecondary';
 
-
-export default class Home extends Component{
+export default class Home extends Component {
 
   constructor(props) {
     super(props);
-    // this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
-}
+    this.state = {
+      data: [
+        {id:1, title: "Mobile Phones", image:require('../../Assets/Catagories/phone.png')},
+        {id:2, title: "Electronics", image:require('../../Assets/Catagories/electronics.png')},
+        {id:3, title: "Mens Fashion", image:require('../../Assets/Catagories/mens-fashion.png')} ,
+        {id:4, title: "Womens Fashion", image:require('../../Assets/Catagories/womens-fashion.png')} ,
+        {id:5, title: "Vehicles", image:require('../../Assets/Catagories/vehicles.png')} ,
+        {id:6, title: "Jobs", image:require('../../Assets/Catagories/jobs.png')} ,
+        {id:7, title: "House Rent", image:require('../../Assets/Catagories/rent.png')} ,
+        {id:8, title: "Others", image:require('../../Assets/Catagories/electronics.png')} ,
+      ]
+    };
+  }
 
-
-componentWillMount(){
-  
-
-}
-componentDidMount(){
-  BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
-}
-
-componentWillUnmount() {
-  BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
- 
-}
-
-handleBackButton(){
-    BackHandler.exitApp();
-    return true;
-}
-
-//Handling all screen navigation mehhods
-
-goMobileSection(){
-  this.props.navigation.navigate("MobilePhoneMain" , {screen:MobilePhoneMain});
-}
-
-goVehicleSection(){
-  this.props.navigation.navigate("VehiclesMain" , {screen:VehiclesMain});
-}
-
-goElectronicsSection(){
-  this.props.navigation.navigate("ElectronicsMain" , {screen:ElectronicsMain});
-}
-
-goMensFashionSection(){
-  this.props.navigation.navigate("MensFashionMain" , {screen:MensFashionMain});
-}
-
-goWomensFashionSection(){
-  this.props.navigation.navigate("WomensFashionMain" , {screen:WomensFashionMain});
-}
-
-//post ad button
-postMyAdSecondScreen(){
-  this.props.navigation.navigate("PostAdScreenSecond" , {screen:PostAdScreenSecond});
-}
+  clickEventListener(item) {
+    if(item == 1){
+      this.props.navigation.navigate("MobilePhoneMain" , {screen:MobilePhoneMain});
+    }else if(item == 2){
+      this.props.navigation.navigate("ElectronicsMain" , {screen:ElectronicsMain});
+    }else if(item == 3){
+      this.props.navigation.navigate("MensFashionMain" , {screen:MensFashionMain});
+    }else if(item == 4){
+      this.props.navigation.navigate("WomensFashionMain" , {screen:WomensFashionMain});
+    }else if(item == 5){
+      this.props.navigation.navigate("VehiclesMain" , {screen:VehiclesMain});
+    }else if(item == 6){
+      
+    }else if(item == 7){
+      
+    }else if(item == 8){
+      
+    }
+  }
 
   render() {
     return (
-
-     
       <View style={styles.container}>
 
-        <StatusBar backgroundColor="#3764ad" barStyle="light-content"/>
+<StatusBar backgroundColor="#3764ad" barStyle="light-content"/>
 
-        <Toolbar navigation={this.props.navigation}/>
+<Toolbar navigation={this.props.navigation}/>
 
-   
-              <Button
-                icon={
-                  <Icon
-                    name='plus-circle'
-                    size={25}
-                    color='white'
-                  />
-                }
-                title='QUICKLY POST YOUR AD'
-                raised={true}
-                buttonStyle={{  
-                backgroundColor: "rgba(92, 99,216, 1)",
-                width: Metrics.DEVICE_WIDTH,
-                height: 55,
-                borderColor: "transparent",
-                borderWidth: 0,
-                // marginTop:5,
-                }}
-                onPress={ () =>  this.postMyAdSecondScreen()}
-              />
-            
-            
-            <Divider style={{ backgroundColor: 'white',height: 5 }} />
-
-            <ScrollView>
-            <Animatable.View animation="bounceInLeft">
-
-            {/* Mobile Phone Catagory */}
-
-            <Tile
-              imageSrc={require('../../Assets/Catagories/phones.jpg')}
-              title="Mobile Phones"
-              featured
-              caption="-102 Items"
-              height={Metrics.DEVICE_WIDTH*0.5}
-              onPress={ () =>  this.goMobileSection()}
-             
-              />
-
-            <Divider style={{ backgroundColor: 'white',height: 20 }} />
-
-            {/* Electronics Catagory */}
-            <Tile
-              imageSrc={require('../../Assets/Catagories/electronics.jpg')}
-              title="Electronics"
-              featured
-              caption="-102 Items"
-              height={Metrics.DEVICE_WIDTH*0.5}
-              onPress={ () =>  this.goElectronicsSection()}
-              />
-              
-            <Divider style={{ backgroundColor: 'white',height: 20 }} />
-
-
-            {/* Vehicles Catagory */}
-            <Tile
-              imageSrc={require('../../Assets/Catagories/vehicles.jpg')}
-              title="Vehicles"
-              featured
-              caption="-102 Items"
-              height={Metrics.DEVICE_WIDTH*0.5}
-              onPress={ () =>  this.goVehicleSection()}
-              />
-
-            <Divider style={{ backgroundColor: 'white',height: 20 }} />
-
-            {/* Mens-Fashion Catagory */}
-            <Tile
-            imageSrc={require('../../Assets/Catagories/mens-fashion.jpg')}
-            title="Mens Fashion"
-            featured
-            caption="-102 Items"
-            height={Metrics.DEVICE_WIDTH*0.5}
-            onPress={ () =>  this.goMensFashionSection()}
-            />
-
-               <Divider style={{ backgroundColor: 'white',height: 20 }} />
-
-            {/* Womens-Fashion Catagory */}
-            <Tile
-            imageSrc={require('../../Assets/Catagories/women-fashion.jpg')}
-            title="Womens Fashion"
-            featured
-            caption="-102 Items"
-            height={Metrics.DEVICE_WIDTH*0.5}
-            onPress={ () =>  this.goWomensFashionSection()}
-            />
-            
-            </Animatable.View>
-            </ScrollView>
-
-
+        <FlatList style={styles.list}
+          contentContainerStyle={styles.listContainer}
+          data={this.state.data}
+          horizontal={false}
+          numColumns={2}
+          keyExtractor= {(item) => {
+            return item.id;
+          }}
+          renderItem={({item}) => {
+            return (
+              <TouchableOpacity style={styles.card} onPress={() => {this.clickEventListener(item.id)}}>
+                <View style={styles.cardFooter}></View>
+                <Image style={styles.cardImage} source={item.image}/>
+                <View style={styles.cardHeader}>
+                  <View style={{alignItems:"center", justifyContent:"center"}}>
+                    <Text style={styles.title}>{item.title}</Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            )
+          }}/>
       </View>
-
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    backgroundColor: '#ffff',
+  container:{
+    flex:1,
+  },
+  list: {
+    paddingHorizontal: 5,
+    backgroundColor:"white",
+  },
+  listContainer:{
+    alignItems:'center'
+  },
+  /******** card **************/
+  card:{
+    shadowColor: '#00000021',
 
-},
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.37,
+    shadowRadius: 7.49,
 
-
-
-
-});
+    elevation: 12,
+    marginVertical: 10,
+    backgroundColor:"white",
+    flexBasis: '42%',
+    marginHorizontal: 10,
+  },
+  cardHeader: {
+    paddingVertical: 17,
+    paddingHorizontal: 16,
+    borderTopLeftRadius: 1,
+    borderTopRightRadius: 1,
+    flexDirection: 'row',
+    alignItems:"center", 
+    justifyContent:"center"
+  },
+  cardContent: {
+    paddingVertical: 12.5,
+    paddingHorizontal: 16,
+  },
+  cardFooter:{
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingTop: 12.5,
+    paddingBottom: 25,
+    paddingHorizontal: 16,
+    borderBottomLeftRadius: 1,
+    borderBottomRightRadius: 1,
+  },
+  cardImage:{
+    height: 70,
+    width: 70,
+    alignSelf:'center'
+  },
+  title:{
+    fontSize:15,
+    flex:1,
+    alignSelf:'center',
+    color:"#696969"
+  },
+});    
