@@ -26,6 +26,7 @@ import { Dropdown } from 'react-native-material-dropdown';
 import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+//image upload options
 const options = {
   title: 'Select Photo',
   takePhotoButtonTitle:'Take a Photo',
