@@ -79,19 +79,19 @@ const styles = StyleSheet.create({
 },
 
 drawerIcon:{
-    width:40,
-    height:40,
-    position: 'absolute',
-    left: Metrics.DEVICE_WIDTH/60,
-    right: 0,
- 
+  width:40,
+  height:40,
+  position: 'absolute',
+  marginTop:18,
+  left: Metrics.DEVICE_WIDTH/60,
+
 },
 imagestyle:{
-    width: 40,
-    height: 40,
-    marginTop:20,
-    marginLeft:5,
-  },
+width:40,
+height:40,
+position: 'absolute',
+left: Metrics.DEVICE_WIDTH/60,
+},
   headerTextMain:{
     color: 'white',
     fontSize: 21,

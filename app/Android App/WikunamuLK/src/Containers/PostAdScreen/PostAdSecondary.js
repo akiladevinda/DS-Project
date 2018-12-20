@@ -16,11 +16,11 @@ import {
 
 
 //Device width and height
-import Metrics from '../../Dimensions/Metrics';
+import Metrics from '../../Containers/Dimensions/Metrics';
 
 import LinearGradient from 'react-native-linear-gradient';
 
-export default class WomensFashionMain extends Component{
+export default class PostAdSecondary extends Component{
 
   constructor(props) {
     super(props);
@@ -57,10 +57,10 @@ handleBackButtonClick() {
         <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={styles.linearGradient}>
         <TouchableOpacity style={styles.drawerIcon} onPress={this.handleBackButtonClick}>
             <Image style={styles.imagestyle}
-                source={require('../../../Assets/Mobile-Phones/back_icon_new.png')} />
+                source={require('../../Assets/Mobile-Phones/back_icon_new.png')} />
             </TouchableOpacity>
         
-            <Text style={styles.headerTextMain}>Womens Fashion
+            <Text style={styles.headerTextMain}>Post Your Ad
             </Text>
         </LinearGradient>
       </View>
@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffff',
 
 },
+
 drawerIcon:{
   width:40,
   height:40,

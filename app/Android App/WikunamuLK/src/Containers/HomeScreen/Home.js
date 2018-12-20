@@ -27,6 +27,7 @@ import Metrics from '../Dimensions/Metrics';
 //Custom Library
 import { SearchBar,Tile,Divider,Button} from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
+import * as Animatable from 'react-native-animatable';
 
 //importing catagory pages
 import MobilePhoneMain from '../CatagoryScreens/MobilePhones/MobilePhoneMain';
@@ -34,7 +35,7 @@ import ElectronicsMain from '../CatagoryScreens/Electroinics/ElectronicsMain';
 import VehiclesMain from '../CatagoryScreens/Vehicles/VehiclesMain';
 import MensFashionMain from '../CatagoryScreens/MensFashion/MensFashionMain';
 import WomensFashionMain from '../CatagoryScreens/WomensFashion/WomensFashionMain';
-
+import PostAdScreenSecond from '../PostAdScreen/PostAdSecondary';
 
 
 export default class Home extends Component{
@@ -85,6 +86,11 @@ goWomensFashionSection(){
   this.props.navigation.navigate("WomensFashionMain" , {screen:WomensFashionMain});
 }
 
+//post ad button
+postMyAdSecondScreen(){
+  this.props.navigation.navigate("PostAdScreenSecond" , {screen:PostAdScreenSecond});
+}
+
   render() {
     return (
 
@@ -95,21 +101,7 @@ goWomensFashionSection(){
 
         <Toolbar navigation={this.props.navigation}/>
 
-        {/* <SearchBar
-            ref={search => this.search = search}
-            showLoading = {false}
-            searchIcon={<Image source={require('../../Assets/Drawer/search.png')}  
-                          style={{width:20,height:20}}/>}
-            platform="android"
-            clearIcon={<Image source={require('../../Assets/Drawer/cancel.png')}  
-                          style={{width:20,height:20}}/>}
-            cancelIcon={<Image source={require('../../Assets/Drawer/back.png')}  
-                          style={{width:20,height:20}}/>}
-            placeholder='Search'
-            round={true} 
-           
-            /> */}
-
+   
               <Button
                 icon={
                   <Icon
@@ -128,14 +120,17 @@ goWomensFashionSection(){
                 borderWidth: 0,
                 // marginTop:5,
                 }}
+                onPress={ () =>  this.postMyAdSecondScreen()}
               />
             
             
             <Divider style={{ backgroundColor: 'white',height: 5 }} />
 
             <ScrollView>
+            <Animatable.View animation="bounceInLeft">
 
             {/* Mobile Phone Catagory */}
+
             <Tile
               imageSrc={require('../../Assets/Catagories/phones.jpg')}
               title="Mobile Phones"
@@ -159,6 +154,7 @@ goWomensFashionSection(){
               />
               
             <Divider style={{ backgroundColor: 'white',height: 20 }} />
+
 
             {/* Vehicles Catagory */}
             <Tile
@@ -193,8 +189,8 @@ goWomensFashionSection(){
             height={Metrics.DEVICE_WIDTH*0.5}
             onPress={ () =>  this.goWomensFashionSection()}
             />
-
-
+            
+            </Animatable.View>
             </ScrollView>
 
 
