@@ -1,3 +1,10 @@
+/**
+ * © Copyrights 2018
+ * Wikunamu.LK - Mobile Application
+ * Version 1.0
+ * Author : Akila Devinda
+ */
+
 import React, { Component } from 'react';
 import {
   StyleSheet,
@@ -9,17 +16,20 @@ import {
   ScrollView,
   FlatList,
   StatusBar,
-  BackHandler
+  BackHandler,
+  RefreshControl
 } from 'react-native';
 
 import Metrics from '../../Dimensions/Metrics';
 import LinearGradient from 'react-native-linear-gradient';
 import AwesomeAlert from 'react-native-awesome-alerts';
 
+import ElectronicsMore from './ElectronicsMore';
+
 const URL_TESTING = 'http://www.powertrend.lk/backend/web/index.php?r=api/paid-books';
 
 
-export default class ElectronicsMain extends Component {
+export default class MobilePhoneMain extends Component {
 
   constructor(props) {
     super(props);
@@ -27,6 +37,7 @@ export default class ElectronicsMain extends Component {
           this.state = {
             paidBooks:[],
             progress:false,
+            refreshing: false,
         };
 
   this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
@@ -49,6 +60,13 @@ export default class ElectronicsMain extends Component {
   handleBackButtonClick() {
       this.props.navigation.goBack();
       return true;
+  }
+
+  _onRefresh = () => {
+    this.setState({refreshing: true});
+    this.fetchData().then(() => {
+      this.setState({refreshing: false});
+    });
   }
 
   
@@ -95,8 +113,14 @@ export default class ElectronicsMain extends Component {
 
   }
 
-  addProductToCart = () => {
-    Alert.alert('Success', 'The product has been added to your cart')
+  //Refresh Auto When Back To Home
+  autoRefresh(){
+    this.fetchData();
+  }
+
+
+  addProductToCart(item){
+    this.props.navigation.navigate("ElectronicsMore",{screen: "ElectronicsMore",Item:item,onGoBack: () => this.autoRefresh(),})
   }
 
   render() {
@@ -112,6 +136,14 @@ export default class ElectronicsMain extends Component {
             <Text style={styles.headerTextMain}>Electronics
             </Text>
         </LinearGradient>
+
+        <ScrollView  refreshControl={
+                    <RefreshControl
+                        onRefresh={() => this.fetchData()}
+                        refreshing={this.state.refreshing}
+                    />
+                }>
+
 
         <FlatList style={styles.list}
           contentContainerStyle={styles.listContainer}
@@ -143,7 +175,7 @@ export default class ElectronicsMain extends Component {
                 <View style={styles.cardFooter}>
                   <View style={styles.socialBarContainer}>
                     <View style={styles.socialBarSection}>
-                      <TouchableOpacity style={styles.socialBarButton} onPress={() => this.addProductToCart()}>
+                      <TouchableOpacity style={styles.socialBarButton} onPress={this.addProductToCart.bind(this,item)}>
                         <Text style={[styles.socialBarLabel, styles.buyNow]}>View More</Text>
                       </TouchableOpacity>
                     </View>
@@ -152,6 +184,9 @@ export default class ElectronicsMain extends Component {
               </View>
             )
           }}/>
+
+    </ScrollView>
+
 
           <AwesomeAlert
           title="Loading ..."
@@ -218,7 +253,7 @@ const styles = StyleSheet.create({
   },
   cardImage:{
     flex: 1,
-    height: 150,
+    height: 140,
     width: null,
   },
   /******** card components **************/

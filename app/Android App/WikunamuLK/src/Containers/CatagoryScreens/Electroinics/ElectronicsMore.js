@@ -26,7 +26,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import AwesomeAlert from 'react-native-awesome-alerts';
 
 
-export default class MobilePhoneMore extends Component {
+export default class ElectronicsMore extends Component {
 
   constructor(props) {
     super(props);
@@ -74,7 +74,7 @@ export default class MobilePhoneMore extends Component {
                 source={require('../../../Assets/Mobile-Phones/back_icon_new.png')} />
             </TouchableOpacity>
         
-            <Text style={styles.headerTextMain}>Mobile Phones
+            <Text style={styles.headerTextMain}>Electronics
             </Text>
         </LinearGradient>
 

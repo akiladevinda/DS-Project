@@ -31,6 +31,8 @@ import MensFashionMain from './Containers/CatagoryScreens/MensFashion/MensFashio
 import WomensFashionMain from './Containers/CatagoryScreens/WomensFashion/WomensFashionMain';
 import PostAdScreenSecond from './Containers/PostAdScreen/PostAdSecondary';
 import MobilePhoneMore from './Containers/CatagoryScreens/MobilePhones/MobilePhoneMore';
+import ElectronicsMore from './Containers/CatagoryScreens/Electroinics/ElectronicsMore';
+
 
 //Device width and height
 import Metrics from './Containers/Dimensions/Metrics';
@@ -156,7 +158,7 @@ drawerBackgroundColor: "white",
 
 // Main App Navigation
 const NavigationApp = StackNavigator({ 
-  
+
   Splash:{ screen: Splash,navigationOptions: { title: 'Splash', header: null, gesturesEnabled: false},},
   Drawer:{ screen: Drawer,navigationOptions: { title: 'Drawer', header: null, gesturesEnabled: false},},
   Home:{ screen: Home,navigationOptions: { title: 'Home', header: null, gesturesEnabled: false},},
@@ -171,6 +173,7 @@ const NavigationApp = StackNavigator({
   WomensFashionMain:{ screen: WomensFashionMain,navigationOptions: { title: ' WomensFashionMain', header: null, gesturesEnabled: false},},
   PostAdScreenSecond:{ screen: PostAdScreenSecond,navigationOptions: { title: ' PostAdScreenSecond', header: null, gesturesEnabled: false},},
   MobilePhoneMore:{ screen: MobilePhoneMore,navigationOptions: { title: ' MobilePhoneMore', header: null, gesturesEnabled: false},},
+  ElectronicsMore:{ screen: ElectronicsMore,navigationOptions: { title: ' ElectronicsMore', header: null, gesturesEnabled: false},},
 
 });
 
