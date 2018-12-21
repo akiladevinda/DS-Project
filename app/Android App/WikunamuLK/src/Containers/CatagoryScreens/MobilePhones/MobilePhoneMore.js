@@ -31,6 +31,12 @@ export default class ProductDetail extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      bookImage: this.props.navigation.state.params.Item.bookImage,
+      bookName: this.props.navigation.state.params.Item.bookName,
+    }
+
+
     this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
 
 
@@ -75,8 +81,8 @@ export default class ProductDetail extends Component {
 
         <ScrollView>
           <View style={{alignItems:'center', marginHorizontal:30}}>
-            <Image style={styles.productImg} source={{uri:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3v7KDJN7TAoJa5sFaPWcp1HX8JFcpF3z5K3ngz4L6kWoEP7Ca"}}/>
-            <Text style={styles.name}>Super Soft T-Shirt</Text>
+            <Image style={styles.productImg} source={{uri:this.state.bookImage}}/>
+            <Text style={styles.name}>{this.state.bookName}</Text>
             <Text style={styles.price}>$ 12.22</Text>
             <Text style={styles.description}>
               Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 

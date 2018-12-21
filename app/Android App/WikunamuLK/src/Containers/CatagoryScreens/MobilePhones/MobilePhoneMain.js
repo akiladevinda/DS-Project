@@ -104,8 +104,8 @@ export default class MobilePhoneMain extends Component {
 
   }
 
-  addProductToCart = () => {
-    this.props.navigation.navigate("MobilePhoneMore" , {screen:MobilePhoneMore});
+  addProductToCart(item){
+    this.props.navigation.navigate("MobilePhoneMore",{screen: "MobilePhoneMore",Item:item})
   }
 
   render() {
@@ -152,7 +152,7 @@ export default class MobilePhoneMain extends Component {
                 <View style={styles.cardFooter}>
                   <View style={styles.socialBarContainer}>
                     <View style={styles.socialBarSection}>
-                      <TouchableOpacity style={styles.socialBarButton} onPress={() => this.addProductToCart()}>
+                      <TouchableOpacity style={styles.socialBarButton} onPress={this.addProductToCart.bind(this,item)}>
                         <Text style={[styles.socialBarLabel, styles.buyNow]}>View More</Text>
                       </TouchableOpacity>
                     </View>
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
   },
   cardImage:{
     flex: 1,
-    height: 150,
+    height: 140,
     width: null,
   },
   /******** card components **************/
