@@ -17,6 +17,7 @@ import {
   FlatList,
   StatusBar,
   BackHandler,
+  RefreshControl
 } from 'react-native';
 
 import Metrics from '../../Dimensions/Metrics';
@@ -36,6 +37,7 @@ export default class MobilePhoneMain extends Component {
           this.state = {
             paidBooks:[],
             progress:false,
+            refreshing: false,
         };
 
   this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
@@ -58,6 +60,13 @@ export default class MobilePhoneMain extends Component {
   handleBackButtonClick() {
       this.props.navigation.goBack();
       return true;
+  }
+
+  _onRefresh = () => {
+    this.setState({refreshing: true});
+    this.fetchData().then(() => {
+      this.setState({refreshing: false});
+    });
   }
 
   
@@ -104,8 +113,14 @@ export default class MobilePhoneMain extends Component {
 
   }
 
+  //Refresh Auto When Back To Home
+  autoRefresh(){
+    this.fetchData();
+  }
+
+
   addProductToCart(item){
-    this.props.navigation.navigate("MobilePhoneMore",{screen: "MobilePhoneMore",Item:item})
+    this.props.navigation.navigate("MobilePhoneMore",{screen: "MobilePhoneMore",Item:item,onGoBack: () => this.autoRefresh(),})
   }
 
   render() {
@@ -121,6 +136,14 @@ export default class MobilePhoneMain extends Component {
             <Text style={styles.headerTextMain}>Mobile Phones
             </Text>
         </LinearGradient>
+
+        <ScrollView  refreshControl={
+                    <RefreshControl
+                        onRefresh={() => this.fetchData()}
+                        refreshing={this.state.refreshing}
+                    />
+                }>
+
 
         <FlatList style={styles.list}
           contentContainerStyle={styles.listContainer}
@@ -161,6 +184,9 @@ export default class MobilePhoneMain extends Component {
               </View>
             )
           }}/>
+
+    </ScrollView>
+
 
           <AwesomeAlert
           title="Loading ..."

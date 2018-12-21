@@ -56,8 +56,9 @@ export default class ProductDetail extends Component {
   
   //Back button handle event - Android Only
   handleBackButtonClick() {
-      this.props.navigation.goBack();
-      return true;
+    this.props.navigation.state.params.onGoBack();
+    this.props.navigation.goBack(null);
+    return true;
   }
 
 
@@ -66,7 +67,7 @@ export default class ProductDetail extends Component {
     return (
       <View style={styles.container}>
 
-<StatusBar backgroundColor="#3764ad" barStyle="light-content"/>
+      <StatusBar backgroundColor="#3764ad" barStyle="light-content"/>
         <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={styles.linearGradient}>
         <TouchableOpacity style={styles.drawerIcon} onPress={this.handleBackButtonClick}>
             <Image style={styles.imagestyle}
