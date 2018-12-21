@@ -123,20 +123,6 @@ handleBackButtonClick() {
 
         <Toolbar navigation={this.props.navigation}/>
 
-        <Tile
-          imageSrc={require('../../Assets/PostAd/post_ad.png')}
-          title="Post Your Ad"
-          featured
-          caption="Quick & Easy Steps"
-          height={Metrics.DEVICE_WIDTH * 0.3}
-          activeOpacity={30}
-
-
-        />
-
-        <Divider style={{ backgroundColor: 'white', height: 20 }} />
-
-
 
         <ScrollView style={{ backgroundColor: 'white' }}>
           <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>

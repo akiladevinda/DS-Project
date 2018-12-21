@@ -29,6 +29,9 @@ export default class Register extends Component {
     state = {
       email   : '',
       password: '',
+      fullname:'',
+      contact_no:'',
+
     }
   }
 
@@ -49,7 +52,7 @@ export default class Register extends Component {
           <TextInput style={styles.inputs}
               placeholder="Full name"
               underlineColorAndroid='transparent'
-              onChangeText={(email) => this.setState({email})}/>
+              onChangeText={(fullname) => this.setState({fullname})}/>
           <Image style={styles.inputIcon} source={ require("../../../Assets/Register/fullname.png")}/>
         </View>
 
@@ -67,7 +70,7 @@ export default class Register extends Component {
               placeholder="Contact Number"
               keyboardType="number-pad"
               underlineColorAndroid='transparent'
-              onChangeText={(email) => this.setState({email})}/>
+              onChangeText={(contact_no) => this.setState({contact_no})}/>
           <Image style={styles.inputIcon} source={ require("../../../Assets/Register/mobile.png")}/>
         </View>
         
