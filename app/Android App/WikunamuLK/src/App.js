@@ -30,8 +30,16 @@ import VehiclesMain from './Containers/CatagoryScreens/Vehicles/VehiclesMain';
 import MensFashionMain from './Containers/CatagoryScreens/MensFashion/MensFashionMain';
 import WomensFashionMain from './Containers/CatagoryScreens/WomensFashion/WomensFashionMain';
 import PostAdScreenSecond from './Containers/PostAdScreen/PostAdSecondary';
+import HouseRentMain from './Containers/CatagoryScreens/HouseRent/HouseRentMain';
+import JobsMain from './Containers/CatagoryScreens/JobsPage/JobsMain';
+import OthersMain from './Containers/CatagoryScreens/OthersPage/OthersMain';
+
+//import more details pages
 import MobilePhoneMore from './Containers/CatagoryScreens/MobilePhones/MobilePhoneMore';
 import ElectronicsMore from './Containers/CatagoryScreens/Electroinics/ElectronicsMore';
+import HouseRentMore from './Containers/CatagoryScreens/HouseRent/HouseRentMore';
+import JobsMore from './Containers/CatagoryScreens/JobsPage/JobsMore';
+import OthersMore from './Containers/CatagoryScreens/OthersPage/OthersMore';
 
 
 //Device width and height
@@ -174,6 +182,12 @@ const NavigationApp = StackNavigator({
   PostAdScreenSecond:{ screen: PostAdScreenSecond,navigationOptions: { title: ' PostAdScreenSecond', header: null, gesturesEnabled: false},},
   MobilePhoneMore:{ screen: MobilePhoneMore,navigationOptions: { title: ' MobilePhoneMore', header: null, gesturesEnabled: false},},
   ElectronicsMore:{ screen: ElectronicsMore,navigationOptions: { title: ' ElectronicsMore', header: null, gesturesEnabled: false},},
+  HouseRentMain:{ screen: HouseRentMain,navigationOptions: { title: ' HouseRentMain', header: null, gesturesEnabled: false},},
+  JobsMain:{ screen: JobsMain,navigationOptions: { title: ' JobsMain', header: null, gesturesEnabled: false},},
+  OthersMain:{ screen: OthersMain,navigationOptions: { title: ' OthersMain', header: null, gesturesEnabled: false},},
+  HouseRentMore:{ screen: HouseRentMore,navigationOptions: { title: ' HouseRentMore', header: null, gesturesEnabled: false},},
+  JobsMore:{ screen: JobsMore,navigationOptions: { title: ' JobsMore', header: null, gesturesEnabled: false},},
+  OthersMore:{ screen: OthersMore,navigationOptions: { title: ' OthersMore', header: null, gesturesEnabled: false},},
 
 });
 

@@ -34,6 +34,9 @@ import VehiclesMain from '../CatagoryScreens/Vehicles/VehiclesMain';
 import MensFashionMain from '../CatagoryScreens/MensFashion/MensFashionMain';
 import WomensFashionMain from '../CatagoryScreens/WomensFashion/WomensFashionMain';
 import PostAdScreenSecond from '../PostAdScreen/PostAdSecondary';
+import JobsMain from '../CatagoryScreens/JobsPage/JobsMain';
+import HouseRentMain from '../CatagoryScreens/HouseRent/HouseRentMain';
+import OthersMain from '../CatagoryScreens/OthersPage/OthersMain';
 
 export default class Home extends Component {
 
@@ -48,7 +51,7 @@ export default class Home extends Component {
         {id:5, title: "Vehicles", image:require('../../Assets/Catagories/vehicles.png')} ,
         {id:6, title: "Jobs", image:require('../../Assets/Catagories/jobs.png')} ,
         {id:7, title: "House Rent", image:require('../../Assets/Catagories/rent.png')} ,
-        {id:8, title: "Others", image:require('../../Assets/Catagories/electronics.png')} ,
+        {id:8, title: "Others", image:require('../../Assets/Catagories/other.png')} ,
       ]
     };
   }
@@ -84,11 +87,11 @@ export default class Home extends Component {
     }else if(item == 5){
       this.props.navigation.navigate("VehiclesMain" , {screen:VehiclesMain});
     }else if(item == 6){
-      
+      this.props.navigation.navigate("JobsMain" , {screen:JobsMain});
     }else if(item == 7){
-      
+      this.props.navigation.navigate("HouseRentMain" , {screen:HouseRentMain});
     }else if(item == 8){
-      
+      this.props.navigation.navigate("OthersMain" , {screen:OthersMain});
     }
   }
 
