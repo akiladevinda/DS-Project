@@ -1,0 +1,48 @@
+/* Styles go here */
+
+.mat-tab-label{
+  color:rgb(194, 45, 45);
+  min-width: 100% !important;
+  padding: 5px;
+     background-color:red;
+      color:rgb(197, 27, 27);
+      font-weight: 700;
+}
+
+/deep/ .mat-tab-label{
+  min-width: 25px !important;
+  padding: 5px;
+     background-color:red;
+      color:rgb(149, 151, 31);
+      font-weight: 700;
+}
+// dgdg
+.md-tab.ng-scope.ng-isolate-scope.md-ink-ripple.md-active{
+    background-color:transparent;
+    color:rgb(121, 21, 21);
+    font-weight: 700;
+}
+
+.md-tab.ng-scope.ng-isolate-scope.md-ink-ripple{
+  background-color:transparent;
+  color:rgb(187, 31, 31);
+  font-weight: 700;
+}
+
+
+
+.mat-tab-label:active{
+  min-width: 25px !important;
+  padding: 5px;
+     background-color:transparent;
+      color:rgb(139, 38, 38);
+      font-weight: 700;
+}
+
+.mat-tab-label:selected{
+  min-width: 25px !important;
+  padding: 5px;
+     background-color:transparent;
+      color:rgb(82, 22, 22);
+      font-weight: 700;
+}
