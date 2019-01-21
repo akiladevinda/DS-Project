@@ -7,6 +7,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WomensFashionComponent implements OnInit {
 
+
+  array = [
+    {
+      name: 'STRIPE COMBO T-SHIRT',
+      image: 'http://www.nolimit.lk/wp-content/uploads/2018/10/0012.jpg',
+      price: '1,390'
+    },
+    {
+      name: 'STRIPE COMBO T-SHIRT',
+      image: 'http://www.nolimit.lk/wp-content/uploads/2018/10/0012.jpg',
+      price: '1,390'
+    },
+    {
+      name: 'STRIPE COMBO T-SHIRT',
+      image: 'http://www.nolimit.lk/wp-content/uploads/2018/10/0012.jpg',
+      price: '1,390'
+    },
+    {
+      name: 'STRIPE COMBO T-SHIRT',
+      image: 'http://www.nolimit.lk/wp-content/uploads/2018/10/0012.jpg',
+      price: '1,390'
+    },
+    {
+      name: 'STRIPE COMBO T-SHIRT',
+      image: 'http://www.nolimit.lk/wp-content/uploads/2018/10/0012.jpg',
+      price: '1,390'
+    },
+
+    {
+      name: 'STRIPE COMBO T-SHIRT',
+      image: 'http://www.nolimit.lk/wp-content/uploads/2018/10/0012.jpg',
+      price: '1,390'
+    },
+  ];
+
   constructor() { }
 
   ngOnInit() {

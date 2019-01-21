@@ -1,3 +1,22 @@
-<p>
-  electronics works!
-</p>
+<div style="height:780px;background-color: white">
+
+
+  <h4 class="heading">Electronics</h4>
+  <mat-card  class="new-product-card" *ngFor="let element of array">
+
+    <img class="new-product-card-image" mat-card-image src="{{element.image}}" alt="">
+    <mat-card-content  class="new-product-card-content">
+      <p>
+        {{element.name}}
+     </p>
+    </mat-card-content>
+    <hr>
+
+    <span class="new-product-card-price">LKR &nbsp;{{element.price}}</span>
+    <hr>
+
+    <button mat-raised-button class="new-product-card-price-add" routerLink="/item-page">View details</button>
+  </mat-card>
+
+  </div>
+  <router-outlet></router-outlet>

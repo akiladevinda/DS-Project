@@ -1,12 +1,12 @@
 <mat-toolbar style="background-color: rgb(255, 255, 255);">
-  <img style="width: 98px;margin-left: 4%;" src="assets/logo/logo.png">
+  <img style="width: 98px;margin-left: 4%;" src="assets/logo/logo.png" routerLink="/home">
 
   <span style=" color: rgb(109, 109, 109);text-align: right;flex: 1 1 auto;">
 
-    <a style="cursor: pointer;font-size:70%">Post Your Ad</a>&nbsp;&nbsp;&nbsp;
+    <a mat-button style="cursor: pointer;font-size:70%" routerLink="/post-add" >Post Your Ad</a>&nbsp;&nbsp;&nbsp;
     <a style="cursor: pointer;font-size:70%">My Ads</a>&nbsp;&nbsp;&nbsp;
     <a style="cursor: pointer;font-size:70%">About</a>&nbsp;&nbsp;&nbsp;
-    <a style="cursor: pointer;font-size:70%">Log in</a>
+    <a mat-button  style="cursor: pointer;font-size:70%" routerLink="/login">Log in</a>
 
 
     </span>
@@ -14,3 +14,5 @@
 
 
 </mat-toolbar>
+
+<router-outlet></router-outlet>

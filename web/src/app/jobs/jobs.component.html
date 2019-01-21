@@ -1,3 +1,66 @@
-<p>
-  jobs works!
-</p>
+<div style="height:780px;background-color: white">
+
+
+  <h4 class="heading">Jobs</h4>
+
+  <mat-card class="new-product-card">
+
+      <img class="new-product-card-image" mat-card-image src="https://www.analyticsindiamag.com/wp-content/uploads/2018/11/SoftwareEngineer_Final.png" alt="">
+      <mat-card-content class="new-product-card-content">
+        <p>
+          software engineer(JAVA)
+        </p>
+      </mat-card-content>
+      <hr>
+
+
+
+      <button mat-raised-button class="new-product-card-price-add">View details</button>
+    </mat-card>
+    <mat-card class="new-product-card">
+
+      <img class="new-product-card-image" mat-card-image src="https://d3b423mfsq4bmy.cloudfront.net/wp-content/uploads/2014/11/tips-for-data-entry-jobs-quality-nov-2014.png" alt="">
+      <mat-card-content class="new-product-card-content">
+        <p>
+          Data entry
+        </p>
+      </mat-card-content>
+      <hr>
+
+
+
+      <button mat-raised-button class="new-product-card-price-add">View details</button>
+    </mat-card>
+
+    <mat-card class="new-product-card">
+
+      <img class="new-product-card-image" mat-card-image src="https://images.locanto.sg/Marketing-Executive/vap_3983771974.jpg" alt="">
+      <mat-card-content class="new-product-card-content">
+        <p>
+          marketing executive
+        </p>
+      </mat-card-content>
+      <hr>
+
+
+
+      <button mat-raised-button class="new-product-card-price-add">View details</button>
+    </mat-card>
+
+    <mat-card class="new-product-card" *ngFor="let element of array">
+
+      <img class="new-product-card-image" mat-card-image src="{{element.image}}" alt="">
+      <mat-card-content class="new-product-card-content">
+        <p>
+          {{element.name}}
+        </p>
+      </mat-card-content>
+      <hr>
+
+
+
+      <button mat-raised-button class="new-product-card-price-add" routerLink="/item-page">View details</button>
+    </mat-card>
+
+    </div>
+    <router-outlet></router-outlet>

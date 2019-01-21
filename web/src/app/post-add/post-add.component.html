@@ -1,0 +1,70 @@
+<div style="height:780px;background-color: white">
+
+    <div class="background-two">
+
+
+        <mat-card class="post-add" >
+
+          <mat-card-title style="text-align: center">Post Your Add</mat-card-title>
+
+            <form class="example-form">
+
+
+                <table class="example-full-width" cellspacing="0"><tr>
+                  <td><mat-form-field class="example-full-width">
+                      <mat-select placeholder="Category">
+                          <mat-option *ngFor="let food of foods" [value]="food.value">
+                            {{food.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                  </mat-form-field></td>
+                  <td><mat-form-field class="example-full-width">
+                      <mat-select placeholder="Condtion">
+                          <mat-option *ngFor="let food of foods" [value]="food.value">
+                            {{food.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                  </mat-form-field></td>
+                </tr></table>
+
+                <p>
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Your Name">
+                  </mat-form-field>
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Item Model">
+                  </mat-form-field>
+                </p>
+
+                <p>
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Title">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Discription">
+                    </mat-form-field>
+                  </p>
+                  <p>
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="City">
+                      </mat-form-field>
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Price">
+                      </mat-form-field>
+                    </p>
+
+                    <input type="file" name="file" id="file" (change)="onFileChanged($event)" />
+
+
+              </form>
+
+              <button style="float: left;margin-left:20%;margin-top: 1%;background-color: #30ADC1;color: white;" mat-raised-button >Post My Add</button>
+
+
+          </mat-card>
+
+
+
+
+      </div>
+      </div>

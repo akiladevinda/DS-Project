@@ -1,4 +1,5 @@
 
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -23,6 +24,16 @@ import { MensFashionComponent } from './mens-fashion/mens-fashion.component';
 import { JobsComponent } from './jobs/jobs.component';
 import { ElectronicsComponent } from './electronics/electronics.component';
 
+import {MatDialogModule} from '@angular/material/dialog';
+import { ItemDetailsPageComponent } from './item-details-page/item-details-page.component';
+import { PostAddComponent } from './post-add/post-add.component';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import { LoginComponent } from './login/login.component';
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +47,9 @@ import { ElectronicsComponent } from './electronics/electronics.component';
     MensFashionComponent,
     JobsComponent,
     ElectronicsComponent,
+    ItemDetailsPageComponent,
+    PostAddComponent,
+    LoginComponent,
 
 
   ],
@@ -49,6 +63,10 @@ import { ElectronicsComponent } from './electronics/electronics.component';
     MatChipsModule,
     MatTabsModule,
     MatCardModule,
+    MatDialogModule,
+    MatInputModule,
+    MatSelectModule
+
 
   ],
 
