@@ -136,7 +136,7 @@ export default class PostAdSecondary extends Component {
             </Text>
         </LinearGradient>
 
-        <Tile
+        {/* <Tile
           imageSrc={require('../../Assets/PostAd/post_ad.png')}
           title="Post Your Ad"
           featured
@@ -145,7 +145,7 @@ export default class PostAdSecondary extends Component {
           activeOpacity={30}
 
 
-        />
+        /> */}
 
         <Divider style={{ backgroundColor: 'white', height: 20 }} />
 

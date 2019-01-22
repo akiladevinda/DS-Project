@@ -46,7 +46,7 @@ export default class Register extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image style={styles.bgImage} source={ require("../../../Assets/Register/bg.png")}/>
+        <Image style={styles.bgImage} source={ require("../../../Assets/Register/newbg.png")}/>
         <Animatable.View  animation="bounceInLeft" style={{marginTop:Metrics.DEVICE_HEIGHT/3}}>
         <View style={styles.inputContainer}>
           <TextInput style={styles.inputs}

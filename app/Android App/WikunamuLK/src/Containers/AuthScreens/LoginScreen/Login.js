@@ -32,8 +32,46 @@ export default class Login extends Component {
     }
   }
 
+
+
+  fetchRegister(){
+
+    var object = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body:JSON.stringify( {
+        "username": this.state.email,
+        "password":this.state.password,
+      })
+  };
+
+
+  fetch('http://10.0.2.2/API/post/create.php',object)
+    .then((response) => response.json())
+    .then((responseText) => {
+
+      if(responseText.message == 'Ok'){
+        alert('Registered')
+      }else if(responseText.message=='Error'){
+        alert('Connection Error')
+      }
+
+    })
+    .catch((error) => {
+      this.setState({
+       
+      });
+    });
+  }
+
+
+
   onClickListener = (viewId) => {
-    Alert.alert("Alert", "Button pressed "+viewId);
+    // Alert.alert("Alert", "Button pressed "+viewId);
+    this.fetchRegister();
   }
 
   createAccountButton(){
@@ -43,7 +81,7 @@ export default class Login extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image style={styles.bgImage} source={ require("../../../Assets/Register/bg.png")}/>
+        <Image style={styles.bgImage} source={ require("../../../Assets/Register/newbg.png")}/>
         <Animatable.View  animation="bounceInLeft" style={{marginTop:Metrics.DEVICE_HEIGHT/3}}>
 
         <View style={styles.inputContainer}>

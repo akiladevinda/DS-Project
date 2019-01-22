@@ -42,6 +42,11 @@ import JobsMore from './Containers/CatagoryScreens/JobsPage/JobsMore';
 import OthersMore from './Containers/CatagoryScreens/OthersPage/OthersMore';
 
 
+//testing route pages
+import MobileTest from './Containers/CatagoryScreens/MobilePhones/MobileTest';
+
+
+
 //Device width and height
 import Metrics from './Containers/Dimensions/Metrics';
 
@@ -167,6 +172,9 @@ drawerBackgroundColor: "white",
 // Main App Navigation
 const NavigationApp = StackNavigator({ 
 
+  Login:{ screen: Login,navigationOptions: { title: 'Login', header: null, gesturesEnabled: false},},
+  Register:{ screen: Register,navigationOptions: { title: 'Register', header: null, gesturesEnabled: false},},
+
   Splash:{ screen: Splash,navigationOptions: { title: 'Splash', header: null, gesturesEnabled: false},},
   Drawer:{ screen: Drawer,navigationOptions: { title: 'Drawer', header: null, gesturesEnabled: false},},
   Home:{ screen: Home,navigationOptions: { title: 'Home', header: null, gesturesEnabled: false},},
@@ -188,6 +196,7 @@ const NavigationApp = StackNavigator({
   HouseRentMore:{ screen: HouseRentMore,navigationOptions: { title: ' HouseRentMore', header: null, gesturesEnabled: false},},
   JobsMore:{ screen: JobsMore,navigationOptions: { title: ' JobsMore', header: null, gesturesEnabled: false},},
   OthersMore:{ screen: OthersMore,navigationOptions: { title: ' OthersMore', header: null, gesturesEnabled: false},},
+  MobileTest:{ screen: MobileTest,navigationOptions: { title: ' MobileTest', header: null, gesturesEnabled: false},},
 
 });
 
