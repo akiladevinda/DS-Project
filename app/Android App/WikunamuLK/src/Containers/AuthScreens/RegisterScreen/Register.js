@@ -20,6 +20,8 @@ import {
 
 import Metrics from '../../../Containers/Dimensions/Metrics';
 import * as Animatable from 'react-native-animatable';
+import AwesomeAlert from 'react-native-awesome-alerts';
+
 
 import Login from '../LoginScreen/Login';
 
@@ -29,13 +31,17 @@ export default class Register extends Component {
 
   constructor(props) {
     super(props);
-    state = {
+    this.state = {
       email   : '',
       password: '',
       fullname:'',
       contact_no:'',
 
-    }
+      progress:false,
+      registerError:false,
+      registerComplete:false,
+
+    };
   }
 
   
@@ -44,6 +50,10 @@ export default class Register extends Component {
   }
 
   fetchRegister(){
+
+    this.setState({
+      progress:true,
+    });
 
     var object = {
       method: 'POST',
@@ -65,9 +75,16 @@ export default class Register extends Component {
     .then((responseText) => {
 
       if(responseText.status_code == '200'){
-        alert('Registration Successfull')
+        this.setState({
+          progress:false,
+          registerComplete:true,
+        });
+   
       }else if(responseText.status_code=='400'){
-        alert('Email Already Exists !')
+        this.setState({
+          progress:false,
+          registerError:true,
+        });
       }
 
     })
@@ -143,6 +160,56 @@ export default class Register extends Component {
         </TouchableOpacity>
 
         </Animatable.View>
+
+         {/* All Notification Alerts  */}
+         <AwesomeAlert
+          title="Please wait ..."
+          show={this.state.progress}
+          showProgress={true}
+          closeOnTouchOutside={false}
+          closeOnHardwareBackPress={false}
+        />
+
+        <AwesomeAlert
+          show={this.state.registerError}
+          showProgress={false}
+          title="Email Already In Use"
+          message="Try with different email to register"
+          closeOnTouchOutside={true}
+          closeOnHardwareBackPress={false}
+          showCancelButton={false}
+          showConfirmButton={true}
+          cancelText=""
+          confirmText="OK"
+          confirmButtonColor="#DD6B55"
+          onConfirmPressed={() => {
+              this.setState({
+                registerError:false
+              });
+          }}
+          />
+
+        <AwesomeAlert
+          show={this.state.registerComplete}
+          showProgress={false}
+          title="Welcome to Wikunamu.LK !!!"
+          message="Your account is successfully registered..."
+          closeOnTouchOutside={true}
+          closeOnHardwareBackPress={false}
+          showCancelButton={false}
+          showConfirmButton={true}
+          cancelText=""
+          confirmText="OK"
+          confirmButtonColor="#DD6B55"
+          onConfirmPressed={() => {
+                 //Navigate to Login Screen
+              var { navigate} = this.props.navigation;
+              navigate("Login",{});
+
+          }}
+          />
+
+
       </View>
     );
   }
