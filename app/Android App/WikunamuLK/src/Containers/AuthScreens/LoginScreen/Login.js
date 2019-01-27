@@ -14,27 +14,59 @@ import {
   Button,
   TouchableOpacity,
   Image,
-  Alert
+  Alert,
+  AsyncStorage
 } from 'react-native';
 
+//Library Files
 import Metrics from '../../../Containers/Dimensions/Metrics';
 import * as Animatable from 'react-native-animatable';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
+//Route Pages
 import Register from '../RegisterScreen/Register';
+import Home from '../../HomeScreen/Home';
+
+//Login URL - Change this to live links after hosting
+const LOGIN_URL = 'http://10.0.2.2/API/post/login.php';
+
 
 export default class Login extends Component {
 
   constructor(props) {
     super(props);
-    state = {
+    this.state = {
       email   : '',
       password: '',
-    }
+
+      progress:false,
+      loginError:false,
+    };
   }
 
+  //Get user email address from local storage
+  getUserId = async () => {
+    let email = await AsyncStorage.getItem('userEmail');
+    return email;
+  }
 
+  componentDidMount(){
+      //Local Storage Clearing If Want--- !!!!!
+      // AsyncStorage.clear();
+      
+      //Getting user logged email
+      this.getUserId().then((userEmail) => {
+        console.log(userEmail);
+        // alert(userEmail);
+      })
+  }
 
-  fetchRegister(){
+  //Login API Fetch Method
+  fetchLogin(){
+
+    this.setState({
+      progress:true,
+    });
 
     var object = {
       method: 'POST',
@@ -43,20 +75,40 @@ export default class Login extends Component {
         'Content-Type': 'application/json'
       },
       body:JSON.stringify( {
-        "username": this.state.email,
+        "email": this.state.email,
         "password":this.state.password,
       })
   };
 
 
-  fetch('http://10.0.2.2/API/post/create.php',object)
+  fetch(LOGIN_URL,object)
     .then((response) => response.json())
     .then((responseText) => {
 
-      if(responseText.message == 'Ok'){
-        alert('Registered')
-      }else if(responseText.message=='Error'){
-        alert('Connection Error')
+      if(responseText.status_code == '200'){
+        // alert('Login Success')
+        this.setState({
+          progress:false,
+        });
+        //Testing method - For saving login details with async storage
+        try {
+            AsyncStorage.setItem('userEmail', JSON.stringify(this.state.email));
+        }
+        catch (e) {
+          console.log('caught error', e);
+        }
+
+        //Tem Solution - Drawer - Real is Homne Screen
+        var { navigate} = this.props.navigation;
+        navigate("Drawer",{});
+  
+      }else if(responseText.status_code=='400'){
+
+        this.setState({
+          progress:false,
+          loginError:true,
+        });
+     
       }
 
     })
@@ -71,7 +123,7 @@ export default class Login extends Component {
 
   onClickListener = (viewId) => {
     // Alert.alert("Alert", "Button pressed "+viewId);
-    this.fetchRegister();
+    this.fetchLogin();
   }
 
   createAccountButton(){
@@ -113,6 +165,36 @@ export default class Login extends Component {
         </TouchableOpacity>
 
         </Animatable.View>
+
+        {/* All Notification Alerts  */}
+        <AwesomeAlert
+          title="Please wait ..."
+          show={this.state.progress}
+          showProgress={true}
+          closeOnTouchOutside={false}
+          closeOnHardwareBackPress={false}
+        />
+
+        <AwesomeAlert
+          show={this.state.loginError}
+          showProgress={false}
+          title="Invalid Credentials"
+          message="Please check your detials"
+          closeOnTouchOutside={true}
+          closeOnHardwareBackPress={false}
+          showCancelButton={false}
+          showConfirmButton={true}
+          cancelText=""
+          confirmText="OK"
+          confirmButtonColor="#DD6B55"
+          onConfirmPressed={() => {
+              this.setState({
+                loginError:false
+              });
+          }}
+          />
+
+
       </View>
     );
   }

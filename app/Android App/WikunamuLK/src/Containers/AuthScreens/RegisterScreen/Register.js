@@ -14,13 +14,16 @@ import {
   Button,
   TouchableOpacity,
   Image,
-  Alert
+  Alert,
+  AsyncStorage
 } from 'react-native';
 
 import Metrics from '../../../Containers/Dimensions/Metrics';
 import * as Animatable from 'react-native-animatable';
 
 import Login from '../LoginScreen/Login';
+
+const REGISTER_URL = 'http://10.0.2.2/API/post/register.php';
 
 export default class Register extends Component {
 
@@ -35,8 +38,51 @@ export default class Register extends Component {
     }
   }
 
+  
+  componentDidMount(){
+     
+  }
+
+  fetchRegister(){
+
+    var object = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body:JSON.stringify( {
+        "full_name": this.state.fullname,
+        "email":this.state.email,
+        "contact_number": this.state.contact_no,
+        "password":this.state.password,
+      })
+  };
+
+
+  fetch(REGISTER_URL,object)
+    .then((response) => response.json())
+    .then((responseText) => {
+
+      if(responseText.status_code == '200'){
+        alert('Registration Successfull')
+      }else if(responseText.status_code=='400'){
+        alert('Email Already Exists !')
+      }
+
+    })
+    .catch((error) => {
+      this.setState({
+       
+      });
+    });
+  }
+
+
+
   onClickListener = (viewId) => {
-    Alert.alert("Alert", "Button pressed "+viewId);
+    // Alert.alert("Alert", "Button pressed "+viewId);
+    this.fetchRegister();
   }
 
   loginButtonClick(){

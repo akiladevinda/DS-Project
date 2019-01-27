@@ -62,6 +62,16 @@ const CustomeDrawerImage = (props) => (
       <ScrollView style={{width:Metrics.DEVICE_WIDTH,height:Metrics.DEVICE_HEIGHT/1.6}}>
       <DrawerItems
               {...props}
+              onItemPress = {({ route, focused }) => {
+                  if(route.routeName == 'Log out'){
+                     props.navigation.navigate('Login');
+                     AsyncStorage.setItem('alreadyLaunched', JSON.stringify(false))
+
+                  }else{
+                    props.navigation.navigate(route.routeName);
+                  }
+                }
+                }
             />
 
             </ScrollView>
@@ -172,10 +182,11 @@ drawerBackgroundColor: "white",
 // Main App Navigation
 const NavigationApp = StackNavigator({ 
 
+  Splash:{ screen: Splash,navigationOptions: { title: 'Splash', header: null, gesturesEnabled: false},},
   Login:{ screen: Login,navigationOptions: { title: 'Login', header: null, gesturesEnabled: false},},
   Register:{ screen: Register,navigationOptions: { title: 'Register', header: null, gesturesEnabled: false},},
 
-  Splash:{ screen: Splash,navigationOptions: { title: 'Splash', header: null, gesturesEnabled: false},},
+  
   Drawer:{ screen: Drawer,navigationOptions: { title: 'Drawer', header: null, gesturesEnabled: false},},
   Home:{ screen: Home,navigationOptions: { title: 'Home', header: null, gesturesEnabled: false},},
   PostAdScreenMain:{ screen: PostAdScreenMain,navigationOptions: { title: 'HoPostAdScreenMainme', header: null, gesturesEnabled: false},},

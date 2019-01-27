@@ -16,7 +16,8 @@ import {
   ScrollView,
   FlatList,
   StatusBar,
-  BackHandler
+  BackHandler,
+  AsyncStorage
 } from 'react-native';
 //System Files
 import Toolbar from '../Toolbar/Toolbar';
@@ -59,7 +60,10 @@ export default class Home extends Component {
   }
 
   componentWillMount(){
-  
+
+    //Write Local Storage when the application launched after login
+    AsyncStorage.setItem('alreadyLaunched', JSON.stringify(true));
+
 
   }
   componentDidMount(){
