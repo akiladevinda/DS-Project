@@ -227,6 +227,8 @@ componentWillMount(){
         userLoggedEmail:JSON.parse(userEmail)
       });
     })
+
+   
 }
 
 //Post Ad Button Click Event

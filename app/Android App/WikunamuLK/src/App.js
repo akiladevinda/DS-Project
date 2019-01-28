@@ -7,7 +7,7 @@
 
 import React, {Component} from 'react';
 import { Animated, Easing,Dimensions,StyleSheet,View,Image,AsyncStorage,ScrollView} from 'react-native';
-import { StackNavigator,DrawerNavigator, DrawerActions , DrawerItems,NavigationActions } from 'react-navigation';
+import { StackNavigator,DrawerNavigator, DrawerActions , DrawerItems,NavigationActions ,createStackNavigator ,createDrawerNavigator} from 'react-navigation';
 
 
 //import route pages
@@ -83,7 +83,7 @@ const CustomeDrawerImage = (props) => (
 
 
 //Drawer icons and pages
-const Drawer = DrawerNavigator({
+const Drawer = createDrawerNavigator({
   
   'All ads':{
       screen: Home,
@@ -180,15 +180,16 @@ drawerBackgroundColor: "white",
 });
 
 // Main App Navigation
-const NavigationApp = StackNavigator({ 
+const NavigationApp = createStackNavigator({ 
 
   Splash:{ screen: Splash,navigationOptions: { title: 'Splash', header: null, gesturesEnabled: false},},
   Login:{ screen: Login,navigationOptions: { title: 'Login', header: null, gesturesEnabled: false},},
   Register:{ screen: Register,navigationOptions: { title: 'Register', header: null, gesturesEnabled: false},},
 
   
-  Drawer:{ screen: Drawer,navigationOptions: { title: 'Drawer', header: null, gesturesEnabled: false},},
+  
   Home:{ screen: Home,navigationOptions: { title: 'Home', header: null, gesturesEnabled: false},},
+  Drawer:{ screen: Drawer,navigationOptions: { title: 'Drawer', header: null, gesturesEnabled: false},},
   PostAdScreenMain:{ screen: PostAdScreenMain,navigationOptions: { title: 'HoPostAdScreenMainme', header: null, gesturesEnabled: false},},
   MyAdsMainScreen:{ screen: MyAdsMainScreen,navigationOptions: { title: ' MyAdsMainScreen', header: null, gesturesEnabled: false},},
   UserProfile:{ screen: UserProfile,navigationOptions: { title: ' UserProfile', header: null, gesturesEnabled: false},},
