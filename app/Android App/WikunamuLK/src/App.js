@@ -64,6 +64,7 @@ const CustomeDrawerImage = (props) => (
               {...props}
               onItemPress = {({ route, focused }) => {
                   if(route.routeName == 'Log out'){
+                    props.navigation.navigate('Drawer');
                      props.navigation.navigate('Login');
                      AsyncStorage.setItem('alreadyLaunched', JSON.stringify(false))
 

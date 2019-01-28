@@ -22,6 +22,7 @@ import {
 import Metrics from '../../../Containers/Dimensions/Metrics';
 import * as Animatable from 'react-native-animatable';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import { Dialog} from "react-native-simple-dialogs";
 
 //Route Pages
 import Register from '../RegisterScreen/Register';
@@ -42,6 +43,7 @@ export default class Login extends Component {
       progress:false,
       loginError:false,
       fillDetails:false,
+      conErrorNew:false,
       
     };
   }
@@ -115,9 +117,7 @@ export default class Login extends Component {
 
     })
     .catch((error) => {
-      this.setState({
-       
-      });
+      this.setState({conErrorNew:true});
     });
   }
 
@@ -221,6 +221,44 @@ export default class Login extends Component {
               });
           }}
           />
+
+
+                    <Dialog
+                    title="Oops... Something went wrong.."
+                    animationType="fade"
+                    contentStyle={
+                        {
+                            alignItems: "center",
+                            justifyContent: "center",
+                        }
+                    }
+                    visible={ this.state.conErrorNew }
+                >
+                  <View>
+                    <Text style={ { marginVertical: 30 ,textAlign:'center'} }>
+                    Please make sure you have turn on your internet connection to proceed !
+                    </Text>
+                    <View style={{flexDirection: 'row',alignItems: 'center',justifyContent: 'center',}}>
+
+                    <View style={{width:Metrics.DEVICE_WIDTH/3}}>
+                    <Button
+                        onPress={ () => alert('exit') }
+                        title="EXIT APP"
+                        backgroundColor="red"
+                        fontSize={14}      
+                    />
+                    </View>
+                    <View style={{marginLeft:40,width:Metrics.DEVICE_WIDTH/3}}>
+                     <Button
+                        onPress={ () => this.fetchLogin() }
+                        backgroundColor="#777777"
+                        title="RETRY"  
+                        fontSize={14}      
+                        />
+                     </View>
+                    </View>
+                  </View>
+                </Dialog>
 
 
       </View>

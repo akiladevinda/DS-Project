@@ -63,9 +63,10 @@ export default class UserProfile extends Component{
   
   componentDidMount(){
 
+    //Retrieve user logged email address from local storage and pass to API call
     retrieve('userEmail').then(result =>{
         this.fetchUserDetailsAPI(result);
-  });
+    });
      BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
    }
 

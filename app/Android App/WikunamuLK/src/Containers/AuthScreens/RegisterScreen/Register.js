@@ -208,7 +208,7 @@ export default class Register extends Component {
         <AwesomeAlert
           show={this.state.registerComplete}
           showProgress={false}
-          title="Welcome to Wikunamu.LK !!!"
+          title="Awesome !!!"
           message="Your account is successfully registered..."
           closeOnTouchOutside={true}
           closeOnHardwareBackPress={false}
