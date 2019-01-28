@@ -40,6 +40,9 @@ export default class Register extends Component {
       progress:false,
       registerError:false,
       registerComplete:false,
+      fillDetails:false,
+      weakPassword:false,
+      contactNumberError:false,
 
     };
   }
@@ -99,7 +102,20 @@ export default class Register extends Component {
 
   onClickListener = (viewId) => {
     // Alert.alert("Alert", "Button pressed "+viewId);
-    this.fetchRegister();
+    if(this.state.fullname.length<=0 || this.state.password<=0 || this.state.email.length<=0 || this.state.contact_no<=0){
+
+        this.setState({fillDetails:true});
+
+    }else if(this.state.password.length<=5){
+        this.setState({weakPassword:true});
+    }else if(this.state.contact_no.length>10){
+        this.setState({contactNumberError:true});
+    }else{
+      this.fetchRegister();
+    }
+
+   
+    
   }
 
   loginButtonClick(){
@@ -208,6 +224,56 @@ export default class Register extends Component {
 
           }}
           />
+           <AwesomeAlert
+          show={this.state.fillDetails}
+          showProgress={false}
+          title="Fill All Fields"
+          message="Please fill all fields..."
+          closeOnTouchOutside={true}
+          closeOnHardwareBackPress={false}
+          showCancelButton={false}
+          showConfirmButton={true}
+          cancelText=""
+          confirmText="OK"
+          confirmButtonColor="#DD6B55"
+          onConfirmPressed={() => {
+             this.setState({fillDetails:false});
+          }}
+          />
+           <AwesomeAlert
+          show={this.state.weakPassword}
+          showProgress={false}
+          title="Weak Password"
+          message="Password should be more than 5 characters"
+          closeOnTouchOutside={true}
+          closeOnHardwareBackPress={false}
+          showCancelButton={false}
+          showConfirmButton={true}
+          cancelText=""
+          confirmText="OK"
+          confirmButtonColor="#DD6B55"
+          onConfirmPressed={() => {
+             this.setState({weakPassword:false});
+          }}
+          />
+
+        <AwesomeAlert
+          show={this.state.contactNumberError}
+          showProgress={false}
+          title="Contact Number Not Match"
+          message="Please re check the provided contact number"
+          closeOnTouchOutside={true}
+          closeOnHardwareBackPress={false}
+          showCancelButton={false}
+          showConfirmButton={true}
+          cancelText=""
+          confirmText="OK"
+          confirmButtonColor="#DD6B55"
+          onConfirmPressed={() => {
+             this.setState({contactNumberError:false});
+          }}
+          />
+
 
 
       </View>

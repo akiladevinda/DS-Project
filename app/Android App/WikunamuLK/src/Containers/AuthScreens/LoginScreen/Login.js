@@ -41,6 +41,7 @@ export default class Login extends Component {
 
       progress:false,
       loginError:false,
+      
     };
   }
 
