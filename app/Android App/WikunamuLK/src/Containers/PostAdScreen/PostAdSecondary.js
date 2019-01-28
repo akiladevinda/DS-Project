@@ -26,6 +26,10 @@ import { Dropdown } from 'react-native-material-dropdown';
 import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import DeviceInfo from 'react-native-device-info';
+
+//get device information
+const uniqueId = DeviceInfo.getUniqueID();
 
 //Post Ad Live API Link
 const POSTAD_API_URL = 'http://10.0.2.2/API/post/post-ad.php';
@@ -134,9 +138,9 @@ export default class PostAdSecondary extends Component {
         "ad_description": this.state.description,
         "city":this.state.city,
         "price": this.state.price,
-        "image":'Still Testing',
+        "image":'image still testing',
         "user_email":this.state.userLoggedEmail,
-        "user_uniqueID": 'unique_id',
+        "user_uniqueID":uniqueId,
         "user_contactnum": this.state.contact_number,
       })
   };
@@ -209,10 +213,10 @@ export default class PostAdSecondary extends Component {
       } else if (response.error) {
         console.log('ImagePicker Error: ', response.error);
       } else {
-        const source = { uri: response.uri };
+        // const source = { uri: response.uri };
     
         // You can also display the image using data:
-        // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+        const source = { uri: 'data:image/jpeg;base64,' + response.data };
     
         this.setState({
           imageSource: source,

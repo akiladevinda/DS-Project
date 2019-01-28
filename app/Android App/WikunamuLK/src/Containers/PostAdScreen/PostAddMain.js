@@ -371,8 +371,6 @@ handleBackButtonClick() {
                 height: 55,
                 marginRight:20,
 
-              
-                // marginTop:5,
                 }}
            
               />
