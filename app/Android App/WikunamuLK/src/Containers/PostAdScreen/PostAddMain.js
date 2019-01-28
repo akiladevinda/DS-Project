@@ -25,6 +25,10 @@ import { Dropdown } from 'react-native-material-dropdown';
 import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import DeviceInfo from 'react-native-device-info';
+
+//get device information
+const uniqueId = DeviceInfo.getUniqueID();
 
 //Post Ad Live API Link
 const POSTAD_API_URL = 'http://10.0.2.2/API/post/post-ad.php';
@@ -152,7 +156,7 @@ export default class PostAddMain extends Component{
         "price": this.state.price,
         "image":'Still Testing',
         "user_email":this.state.userLoggedEmail,
-        "user_uniqueID": 'unique_id',
+        "user_uniqueID": uniqueId,
         "user_contactnum": this.state.contact_number,
       })
   };

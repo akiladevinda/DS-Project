@@ -41,6 +41,7 @@ export default class Login extends Component {
 
       progress:false,
       loginError:false,
+      fillDetails:false,
       
     };
   }
@@ -124,7 +125,14 @@ export default class Login extends Component {
 
   onClickListener = (viewId) => {
     // Alert.alert("Alert", "Button pressed "+viewId);
-    this.fetchLogin();
+    if(this.state.email.length<=0 || this.state.password<=0){
+      this.setState({
+          fillDetails:true,
+      });
+    }else{
+      this.fetchLogin();
+    }
+    
   }
 
   createAccountButton(){
@@ -191,6 +199,25 @@ export default class Login extends Component {
           onConfirmPressed={() => {
               this.setState({
                 loginError:false
+              });
+          }}
+          />
+
+          <AwesomeAlert
+          show={this.state.fillDetails}
+          showProgress={false}
+          title="Fill All Fields"
+          message="Please fill all the details"
+          closeOnTouchOutside={true}
+          closeOnHardwareBackPress={false}
+          showCancelButton={false}
+          showConfirmButton={true}
+          cancelText=""
+          confirmText="OK"
+          confirmButtonColor="#DD6B55"
+          onConfirmPressed={() => {
+              this.setState({
+                fillDetails:false
               });
           }}
           />
