@@ -22,7 +22,7 @@ import {
 import Metrics from '../../../Containers/Dimensions/Metrics';
 import * as Animatable from 'react-native-animatable';
 import AwesomeAlert from 'react-native-awesome-alerts';
-import { Dialog} from "react-native-simple-dialogs";
+import { Dialog , ProgressDialog} from "react-native-simple-dialogs";
 
 //Route Pages
 import Register from '../RegisterScreen/Register';
@@ -176,12 +176,18 @@ export default class Login extends Component {
         </Animatable.View>
 
         {/* All Notification Alerts  */}
-        <AwesomeAlert
+        {/* <AwesomeAlert
           title="Please wait ..."
           show={this.state.progress}
           showProgress={true}
           closeOnTouchOutside={false}
           closeOnHardwareBackPress={false}
+        /> */}
+
+        <ProgressDialog
+            visible={this.state.progress}
+            title="Checking Details"
+            message="Please, wait..."
         />
 
         <AwesomeAlert

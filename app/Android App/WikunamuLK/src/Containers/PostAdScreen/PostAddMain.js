@@ -26,6 +26,7 @@ import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import DeviceInfo from 'react-native-device-info';
+import { Dialog , ProgressDialog} from "react-native-simple-dialogs";
 
 //get device information
 const uniqueId = DeviceInfo.getUniqueID();
@@ -370,12 +371,17 @@ handleBackButtonClick() {
           </KeyboardAvoidingView>
         </ScrollView>
         {/* All Notification Alerts  */}
-          <AwesomeAlert
+          {/* <AwesomeAlert
           title="Please wait ..."
           show={this.state.progress}
           showProgress={true}
           closeOnTouchOutside={false}
           closeOnHardwareBackPress={false}
+        /> */}
+         <ProgressDialog
+            visible={this.state.progress}
+            title="Checking Details"
+            message="Please, wait..."
         />
           <AwesomeAlert
           show={this.state.postAdSuccess}

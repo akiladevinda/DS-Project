@@ -22,7 +22,7 @@ import Toolbar from '../Toolbar/Toolbar';
 //Device width and height
 import Metrics from '../Dimensions/Metrics';
 import AwesomeAlert from 'react-native-awesome-alerts';
-import { ConfirmDialog } from 'react-native-simple-dialogs';
+import { ConfirmDialog , ProgressDialog} from 'react-native-simple-dialogs';
 
 
 //Global URL File
@@ -213,12 +213,17 @@ editMyProfileScreen(){
         </View>
     </View>
      {/* All Notification Alerts  */}
-     <AwesomeAlert
+       {/* <AwesomeAlert
           title="Please wait ..."
           show={this.state.progress}
           showProgress={true}
           closeOnTouchOutside={false}
           closeOnHardwareBackPress={false}
+        /> */}
+        <ProgressDialog
+            visible={this.state.progress}
+            title="Checking Details"
+            message="Please, wait..."
         />
 
         <ConfirmDialog

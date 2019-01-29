@@ -29,7 +29,7 @@ import Metrics from '../../Containers/Dimensions/Metrics';
 //Custom Library
 import LinearGradient from 'react-native-linear-gradient';
 import AwesomeAlert from 'react-native-awesome-alerts';
-
+import { ConfirmDialog , ProgressDialog} from 'react-native-simple-dialogs';
 
 //Global URL File
 import _CONFIG_ from '../Global/_CONFIG_';
@@ -235,14 +235,18 @@ handleBackButtonClick() {
         </ScrollView>
 
         {/* All Custom Alerts */}
-        <AwesomeAlert
+          {/* <AwesomeAlert
           title="Please wait ..."
           show={this.state.progress}
           showProgress={true}
           closeOnTouchOutside={false}
           closeOnHardwareBackPress={false}
+        /> */}
+        <ProgressDialog
+            visible={this.state.progress}
+            title="Checking Details"
+            message="Please, wait..."
         />
-        
 
       </View>
     );
