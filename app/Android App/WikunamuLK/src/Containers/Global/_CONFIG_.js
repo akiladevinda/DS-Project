@@ -30,7 +30,8 @@ const UPDATE_DETAILS_URL = 'http://10.0.2.2/API/post/update-user.php';
 const USER_POSTAD_URL = 'http://10.0.2.2/API/post/post-ad.php';
 //Get All Ad Details
 const GET_ADDETAILS_URL = 'http://10.0.2.2/API/post/get-ad-details.php'
-
+//Delete User Account From Database
+const DELETE_USERACC_URL = 'http://10.0.2.2/API/post/delete-user.php'
 
  /**
  * Backup API LINKS -----------------------------------------------------
@@ -48,5 +49,6 @@ export default {
   USER_REGISTER_URL:USER_REGISTER_URL,
   USER_POSTAD_URL:USER_POSTAD_URL,
   GET_ADDETAILS_URL:GET_ADDETAILS_URL,
+  DELETE_USERACC_URL:DELETE_USERACC_URL,
 
 }

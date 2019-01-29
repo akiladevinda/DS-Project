@@ -22,6 +22,8 @@ import Toolbar from '../Toolbar/Toolbar';
 //Device width and height
 import Metrics from '../Dimensions/Metrics';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import { ConfirmDialog } from 'react-native-simple-dialogs';
+
 
 //Global URL File
 import _CONFIG_ from '../Global/_CONFIG_';
@@ -51,6 +53,7 @@ export default class UserProfile extends Component{
       user_email:'',
       user_contactnumber:'',
       data:[],
+      deleteConfirmation:false,
     };
     this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
 }
@@ -126,10 +129,62 @@ handleBackButtonClick() {
     return true;
 }
 
+autoRefresh(){
+  retrieve('userEmail').then(result =>{
+    this.fetchUserDetailsAPI(result);
+});
+}
+
 editMyProfileScreen(){
   var { navigate} = this.props.navigation;
-  navigate("UserProfileEdit",{});
+  navigate("UserProfileEdit",{onGoBack: () => this.autoRefresh()});
 }
+
+
+  //Delete User From Database API Fetch
+  deleteUserFetch(){
+
+    fetch(_CONFIG_.DELETE_USERACC_URL, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body:JSON.stringify( {
+        "email": this.state.user_email,
+      })
+
+  })
+      .then((response) => response.json())
+      .then((responseText) => {
+
+      if(responseText.status_code == '200'){
+
+        var { navigate} = this.props.navigation;
+        navigate("Login",{});
+        AsyncStorage.setItem('alreadyLaunched', JSON.stringify(false))
+        this.setState({deleteConfirmation:false});
+        
+      }else if(responseText.status_code == '400'){
+          //API Error
+          
+      }
+        
+          
+      })
+      .catch((error) => {
+        this.setState({
+          
+        });
+          
+      });
+
+  }
+
+  //Delete Account Button Press Event
+  deleteAccountButtonClick(){
+    this.setState({deleteConfirmation:true});
+  }
 
 
   render() {
@@ -152,7 +207,7 @@ editMyProfileScreen(){
           <TouchableOpacity style={styles.buttonContainer} onPress={() => this.editMyProfileScreen()}>
             <Text style={styles.buttonText}>Edit My Details</Text>  
           </TouchableOpacity>              
-          <TouchableOpacity style={styles.buttonContainerDelete}  onPress={() => this.deleteMyAccountButton()}>
+          <TouchableOpacity style={styles.buttonContainerDelete}  onPress={() => this.deleteAccountButtonClick()}>
             <Text style={styles.buttonText}>Delete My Account</Text> 
           </TouchableOpacity>
         </View>
@@ -165,6 +220,22 @@ editMyProfileScreen(){
           closeOnTouchOutside={false}
           closeOnHardwareBackPress={false}
         />
+
+        <ConfirmDialog
+            title="Are You Sure Delete Account ?"
+            message="Please note this cannot be undone"
+            visible={this.state.deleteConfirmation}
+            onTouchOutside={() => this.setState({dialogVisible: false})}
+            positiveButton={{
+                title: "YES",
+                onPress: () => this.deleteUserFetch()
+            }}
+            negativeButton={{
+                title: "NO",
+                onPress: () => this.setState({deleteConfirmation:false})
+            }}
+        />
+
   </View>
 );
 }

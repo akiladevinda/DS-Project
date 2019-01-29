@@ -6,7 +6,7 @@
  */
 
 import React, {Component} from 'react';
-import { Animated, Easing,Dimensions,StyleSheet,View,Image,AsyncStorage,ScrollView} from 'react-native';
+import { Animated, Easing,Dimensions,StyleSheet,View,Image,AsyncStorage,ScrollView,Text} from 'react-native';
 import { StackNavigator,DrawerNavigator, DrawerActions , DrawerItems,NavigationActions ,createStackNavigator ,createDrawerNavigator} from 'react-navigation';
 
 
@@ -59,8 +59,8 @@ const CustomeDrawerImage = (props) => (
  
     <Image
       style={styles.drawerHeaderImage}
-      source={require('./Assets/Drawer/header_new.png')}/>
-      <View >
+      source={require('./Assets/Drawer/header_new.png')}/> 
+      <View >  
       <ScrollView style={{width:Metrics.DEVICE_WIDTH,height:Metrics.DEVICE_HEIGHT/1.6}}>
       <DrawerItems
               {...props}

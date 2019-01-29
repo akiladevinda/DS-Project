@@ -30,6 +30,7 @@ import Metrics from '../../Containers/Dimensions/Metrics';
 import LinearGradient from 'react-native-linear-gradient';
 import AwesomeAlert from 'react-native-awesome-alerts';
 
+
 //Global URL File
 import _CONFIG_ from '../Global/_CONFIG_';
 
@@ -79,11 +80,12 @@ export default class UserProfileEdit extends Component {
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
   }
 
-  //Back button handle event - Android Only
-  handleBackButtonClick() {
-    this.props.navigation.goBack();
-    return true;
-  }
+ //back button method
+handleBackButtonClick() {
+  this.props.navigation.state.params.onGoBack();
+  this.props.navigation.goBack(null);
+  return true;
+}
 
   onClickListener = (viewId) => {
     Alert.alert("Alert", "Button pressed "+viewId);
@@ -180,6 +182,7 @@ export default class UserProfileEdit extends Component {
 
   }
 
+
   render() {
     return (
       <View style={styles.container}>
@@ -239,6 +242,7 @@ export default class UserProfileEdit extends Component {
           closeOnTouchOutside={false}
           closeOnHardwareBackPress={false}
         />
+        
 
       </View>
     );
