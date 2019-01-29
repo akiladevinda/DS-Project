@@ -55,6 +55,7 @@ export default class UserProfileEdit extends Component {
       password: '',
       contact_no:'',
       full_name:'',
+      userEmailForUpdating:'',
       progress:false,
     }
 
@@ -66,6 +67,9 @@ export default class UserProfileEdit extends Component {
     // Retrieve user logged email address from local storage and pass to API call
     retrieve('userEmail').then(result =>{
         this.fetchUserDetailsAPI(result);
+        this.setState({
+          userEmailForUpdating:JSON.parse(result)
+        })
     });
 
     BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
@@ -90,7 +94,9 @@ export default class UserProfileEdit extends Component {
 
     let userLoggedEmail = JSON.parse(value)
 
-    this.setState({progress:true});
+    this.setState({
+      progress:true,
+    });
 
     fetch(_CONFIG_.USER_PROFILE_URL_SEC, {
         method: 'POST',
@@ -115,7 +121,7 @@ export default class UserProfileEdit extends Component {
                 progress:false,
               });
         }else if(responseText.data[0].status_code == '400'){
-            //API Error
+            this.setState({progress:false});
         }
           
             
@@ -130,9 +136,46 @@ export default class UserProfileEdit extends Component {
   }
 
   //Update User Details To database
-  updateUserDetailsAPI(value){
+  updateUserDetailsAPI(){
+
+    this.setState({
+      progress:true,
+    });
     
-    let userLoggedEmail = JSON.parse(value)
+    fetch(_CONFIG_.UPDATE_DETAILS_URL, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body:JSON.stringify( {
+          "email": this.state.userEmailForUpdating,
+          "full_name": this.state.full_name,
+          "contact_number":this.state.contact_no,
+          "passowrd":this.state.password
+        })
+  
+    })
+        .then((response) => response.json())
+        .then((responseText) => {
+
+        if(responseText.status_code == '200'){
+
+          this.setState({progress:false});
+          
+        }else if(responseText.status_code == '400'){
+            //API Error
+            this.setState({progress:false});
+        }
+          
+            
+        })
+        .catch((error) => {
+          this.setState({
+            
+          });
+            
+        });
 
 
   }
@@ -181,7 +224,7 @@ export default class UserProfileEdit extends Component {
               textContentType='password'
               onChangeText={(password) => this.setState({password})}/>
         </View>
-        <TouchableHighlight style={[styles.buttonContainer, styles.sendButton]} onPress={() => this.onClickListener('login')}>
+        <TouchableHighlight style={[styles.buttonContainer, styles.sendButton]} onPress={() => this.updateUserDetailsAPI()}>
           <Text style={styles.buttonText}>Update My Profile</Text>
         </TouchableHighlight>
 

@@ -25,6 +25,21 @@ import Toolbar from '../Toolbar/Toolbar';
 //Device width and height
 import Metrics from '../Dimensions/Metrics';
 
+//Global Config File
+import _CONFIG_ from '../Global/_CONFIG_';
+
+//Get Email From Async Storage
+const retrieve = async (key)
+ => {
+     try{
+        let value =  await AsyncStorage.getItem(key)
+
+        return value;
+    }catch(error){
+        throw error;
+    }
+};
+
 
 export default class MyAdsMainScreen extends Component{
 
@@ -39,6 +54,9 @@ export default class MyAdsMainScreen extends Component{
          {image: "https://images-na.ssl-images-amazon.com/images/I/81vB-Irbk9L._SX355_.jpg"},
          {image: "https://images-na.ssl-images-amazon.com/images/I/81vB-Irbk9L._SX355_.jpg"},
       ]),
+
+      ad_data:[],
+
     };
     this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
 
@@ -50,8 +68,14 @@ componentWillMount(){
 }
 
 componentDidMount(){
-  BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
-}
+
+  //Retrieve user logged email address from local storage and pass to API call
+  retrieve('userEmail').then(result =>{
+      this.fetchAdDetails(result);
+  });
+
+   BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+ }
 
 componentWillUnmount() {
   BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
@@ -62,6 +86,41 @@ handleBackButtonClick() {
   this.props.navigation.goBack();
     return true;
 }
+
+    fetchAdDetails(value){
+
+      let userLoggedEmail = JSON.parse(value)
+
+      this.setState({progress:true});
+
+      fetch(_CONFIG_.GET_ADDETAILS_URL, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body:JSON.stringify( {
+          "email": userLoggedEmail,
+        })
+
+
+    })
+        .then((response) => response.json())
+        .then((responseText) => {
+          // alert(responseText.data);
+          // console.log(responseText.data[0].full_name)
+            this.setState({
+             ad_data:responseText.data,
+            });
+            
+        })
+        .catch((error) => {
+          this.setState({
+            
+          });
+            
+        });
+    }
 
   render() {
     return (
