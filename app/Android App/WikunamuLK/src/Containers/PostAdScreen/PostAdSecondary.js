@@ -11,7 +11,7 @@ import {
   StyleSheet,
   Text,
   View,
-  Image, Dimensions, ImageBackground, AsyncStorage, StatusBar, BackHandler, TouchableOpacity, ScrollView, KeyboardAvoidingView
+  Image, Dimensions, ImageBackground, AsyncStorage, StatusBar, BackHandler, TouchableOpacity, ScrollView, KeyboardAvoidingView,TouchableHighlight
 } from 'react-native';
 
 
@@ -368,29 +368,10 @@ export default class PostAdSecondary extends Component {
                     />
 
             <Divider style={{ backgroundColor: 'white', height: 10 }} />
-            <Button
-                icon={
-                  <Icon
-                    name='plus-circle'
-                    size={25}
-                    color='white'
-                  />
-                }
-                title='POST MY AD'
-                raised={true}
-                rounded={true}
-                onPress={() => this.onPostAdButtonClicked()}
-                buttonStyle={{  
-                backgroundColor: "rgba(92, 99,216, 1)",
-                width: Metrics.DEVICE_WIDTH/1,
-                height: 55,
-                marginRight:20,
-
-              
-                // marginTop:5,
-                }}
-           
-              />
+ 
+              <TouchableHighlight style={[styles.buttonContainer, styles.sendButton]} onPress={() => this.onPostAdButtonClicked()}>
+                <Text style={styles.buttonText}>Post My Ad</Text>
+              </TouchableHighlight>
 
             </View>
 
@@ -500,8 +481,26 @@ const styles = StyleSheet.create({
     width: Metrics.DEVICE_WIDTH / 3
   },
   uploadImage:{
-    marginLeft:50,
-  }
+    marginLeft:Metrics.DEVICE_WIDTH/5,
+  },
+
+  buttonContainer: {
+    height:55,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom:20,
+    width:300,
+    borderRadius:30,
+    marginLeft:Metrics.DEVICE_WIDTH/8,
+  },
+  sendButton: {
+    backgroundColor: "#ce4040",
+  },
+  buttonText: {
+    color: 'white',
+    fontSize:17,
+  },
 
 
 

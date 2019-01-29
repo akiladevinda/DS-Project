@@ -41,6 +41,7 @@ import OthersMain from '../CatagoryScreens/OthersPage/OthersMain';
 
 import MobileTest from '../CatagoryScreens/MobilePhones/MobileTest';
 
+
 export default class Home extends Component {
 
   constructor(props) {

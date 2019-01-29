@@ -124,6 +124,11 @@ handleBackButtonClick() {
     return true;
 }
 
+editMyProfileScreen(){
+  var { navigate} = this.props.navigation;
+  navigate("UserProfileEdit",{});
+}
+
 
   render() {
     return (
@@ -142,7 +147,7 @@ handleBackButtonClick() {
           <Text style={styles.info}>{this.state.user_email}</Text>
           <Text style={styles.info}>{this.state.user_contactnumber}</Text>
           
-          <TouchableOpacity style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.buttonContainer} onPress={() => this.editMyProfileScreen()}>
             <Text style={styles.buttonText}>Edit My Details</Text>  
           </TouchableOpacity>              
           <TouchableOpacity style={styles.buttonContainerDelete}  onPress={() => this.deleteMyAccountButton()}>

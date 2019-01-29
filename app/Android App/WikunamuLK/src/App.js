@@ -17,6 +17,7 @@ import PostAdScreenMain from './Containers/PostAdScreen/PostAddMain';
 import MyAdsMainScreen from './Containers/MyAdScreen/MyAdsMainScreen';
 import UserProfile from './Containers/UserProfileScreen/UserProfile';
 import About from './Containers/AboutAppScreen/About';
+import UserProfileEdit from './Containers/UserProfileScreen/UserProfileEdit';
 
 //import Authentication Screens
 import Register from './Containers/AuthScreens/RegisterScreen/Register';
@@ -33,6 +34,7 @@ import PostAdScreenSecond from './Containers/PostAdScreen/PostAdSecondary';
 import HouseRentMain from './Containers/CatagoryScreens/HouseRent/HouseRentMain';
 import JobsMain from './Containers/CatagoryScreens/JobsPage/JobsMain';
 import OthersMain from './Containers/CatagoryScreens/OthersPage/OthersMain';
+
 
 //import more details pages
 import MobilePhoneMore from './Containers/CatagoryScreens/MobilePhones/MobilePhoneMore';
@@ -188,7 +190,6 @@ const NavigationApp = createStackNavigator({
   Register:{ screen: Register,navigationOptions: { title: 'Register', header: null, gesturesEnabled: false},},
 
   
-  
   Home:{ screen: Home,navigationOptions: { title: 'Home', header: null, gesturesEnabled: false},},
   Drawer:{ screen: Drawer,navigationOptions: { title: 'Drawer', header: null, gesturesEnabled: false},},
   PostAdScreenMain:{ screen: PostAdScreenMain,navigationOptions: { title: 'HoPostAdScreenMainme', header: null, gesturesEnabled: false},},
@@ -210,6 +211,9 @@ const NavigationApp = createStackNavigator({
   JobsMore:{ screen: JobsMore,navigationOptions: { title: ' JobsMore', header: null, gesturesEnabled: false},},
   OthersMore:{ screen: OthersMore,navigationOptions: { title: ' OthersMore', header: null, gesturesEnabled: false},},
   MobileTest:{ screen: MobileTest,navigationOptions: { title: ' MobileTest', header: null, gesturesEnabled: false},},
+  UserProfileEdit:{ screen: UserProfileEdit,navigationOptions: { title: ' UserProfileEdit', header: null, gesturesEnabled: false},},
+  
+
 
 });
 
