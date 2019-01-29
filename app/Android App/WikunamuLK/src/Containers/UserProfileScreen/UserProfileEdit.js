@@ -28,6 +28,22 @@ import Metrics from '../../Containers/Dimensions/Metrics';
 
 //Custom Library
 import LinearGradient from 'react-native-linear-gradient';
+import AwesomeAlert from 'react-native-awesome-alerts';
+
+//Global URL File
+import _CONFIG_ from '../Global/_CONFIG_';
+
+//Get Email From Async Storage
+const retrieve = async (key)
+ => {
+     try{
+        let value =  await AsyncStorage.getItem(key)
+
+        return value;
+    }catch(error){
+        throw error;
+    }
+};
 
 
 export default class UserProfileEdit extends Component {
@@ -39,12 +55,19 @@ export default class UserProfileEdit extends Component {
       password: '',
       contact_no:'',
       full_name:'',
+      progress:false,
     }
 
     this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
   }
 
   componentDidMount(){
+
+    // Retrieve user logged email address from local storage and pass to API call
+    retrieve('userEmail').then(result =>{
+        this.fetchUserDetailsAPI(result);
+    });
+
     BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
   }
 
@@ -60,6 +83,58 @@ export default class UserProfileEdit extends Component {
 
   onClickListener = (viewId) => {
     Alert.alert("Alert", "Button pressed "+viewId);
+  }
+
+  //user detail fetch API mwthod
+  fetchUserDetailsAPI(value){
+
+    let userLoggedEmail = JSON.parse(value)
+
+    this.setState({progress:true});
+
+    fetch(_CONFIG_.USER_PROFILE_URL_SEC, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body:JSON.stringify( {
+          "email": userLoggedEmail,
+        })
+  
+    })
+        .then((response) => response.json())
+        .then((responseText) => {
+
+        if(responseText.data[0].status_code == '200'){
+            this.setState({
+                full_name:responseText.data[0].full_name,
+                email:responseText.data[0].email,
+                contact_no:responseText.data[0].contact_number,
+                password:responseText.data[0].password,
+                progress:false,
+              });
+        }else if(responseText.data[0].status_code == '400'){
+            //API Error
+        }
+          
+            
+        })
+        .catch((error) => {
+          this.setState({
+            
+          });
+            
+        });
+
+  }
+
+  //Update User Details To database
+  updateUserDetailsAPI(value){
+    
+    let userLoggedEmail = JSON.parse(value)
+
+
   }
 
   render() {
@@ -78,37 +153,32 @@ export default class UserProfileEdit extends Component {
 
         <ScrollView>
         <View style={{flex: 1,alignContent:'center',alignItems:'center'}}>
-        <Image style={styles.logo} source={{uri: 'https://png.icons8.com/google/color/120'}}/>
+        <Image style={styles.logo} source={require('../../Assets/MyProfile/user.png')}/>
 
         <View style={styles.inputContainer}>
-          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/user/ultraviolet/50/3498db'}}/>
+          <Image style={styles.inputIcon} source={require('../../Assets/MyProfile/fullname.png')}/>
           <TextInput style={styles.inputs}
               placeholder="Full Name"
               underlineColorAndroid='transparent'
+              value={this.state.full_name}
               onChangeText={(full_name) => this.setState({full_name})}/>
         </View>
-
+   
         <View style={styles.inputContainer}>
-          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
-          <TextInput style={styles.inputs}
-              placeholder="Email"
-              underlineColorAndroid='transparent'
-              onChangeText={(email) => this.setState({email})}/>
-        </View>
-
-        
-        <View style={styles.inputContainer}>
-          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/speech-bubble/ultraviolet/50'}}/>
+          <Image style={styles.inputIcon} source={require('../../Assets/MyProfile/contactno.png')}/>
           <TextInput style={[ styles.messageInput]}
               placeholder="Contact Number"
               underlineColorAndroid='transparent'
+              value={this.state.contact_no}
               onChangeText={(contact_no) => this.setState({contact_no})}/>
         </View>
         <View style={styles.inputContainer}>
-          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/speech-bubble/ultraviolet/50'}}/>
+          <Image style={styles.inputIcon} source={require('../../Assets/MyProfile/password.png')}/>
           <TextInput style={[ styles.messageInput]}
               placeholder="Password"
               underlineColorAndroid='transparent'
+              value={this.state.password}
+              textContentType='password'
               onChangeText={(password) => this.setState({password})}/>
         </View>
         <TouchableHighlight style={[styles.buttonContainer, styles.sendButton]} onPress={() => this.onClickListener('login')}>
@@ -117,6 +187,16 @@ export default class UserProfileEdit extends Component {
 
         </View>
         </ScrollView>
+
+        {/* All Custom Alerts */}
+        <AwesomeAlert
+          title="Please wait ..."
+          show={this.state.progress}
+          showProgress={true}
+          closeOnTouchOutside={false}
+          closeOnHardwareBackPress={false}
+        />
+
       </View>
     );
   }
@@ -127,20 +207,20 @@ const styles = StyleSheet.create({
     flex: 1,
     // justifyContent: 'flex-start',
     // alignItems: 'flex-start',
-    backgroundColor: '#eaeaea',
+    backgroundColor: '#4371b2',
   },
   logo:{
-    width:120,
-    height:120,
+    width:200,
+    height:200,
     justifyContent: 'center',
     marginBottom:20,
   },
   inputContainer: {
       borderBottomColor: '#F5FCFF',
-      backgroundColor: '#FFFFFF',
+      backgroundColor: 'white',
       borderRadius:30,
       borderBottomWidth: 1,
-      width:250,
+      width:300,
       height:45,
       marginBottom:20,
       flexDirection: 'row',

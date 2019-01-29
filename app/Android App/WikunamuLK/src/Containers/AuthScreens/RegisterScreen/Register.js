@@ -25,7 +25,8 @@ import AwesomeAlert from 'react-native-awesome-alerts';
 
 import Login from '../LoginScreen/Login';
 
-const REGISTER_URL = 'http://10.0.2.2/API/post/register.php';
+//Global CONFIG File
+import _CONFIG_ from '../../Global/_CONFIG_';
 
 export default class Register extends Component {
 
@@ -73,7 +74,7 @@ export default class Register extends Component {
   };
 
 
-  fetch(REGISTER_URL,object)
+  fetch(_CONFIG_.USER_REGISTER_URL,object)
     .then((response) => response.json())
     .then((responseText) => {
 

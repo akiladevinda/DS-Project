@@ -23,9 +23,10 @@ import Toolbar from '../Toolbar/Toolbar';
 import Metrics from '../Dimensions/Metrics';
 import AwesomeAlert from 'react-native-awesome-alerts';
 
-//User Detail API LINK
-const USER_DETAILS_API = 'http://10.0.2.2/API/post/user-details.php';
+//Global URL File
+import _CONFIG_ from '../Global/_CONFIG_';
 
+//Get Email From Async Storage
 const retrieve = async (key)
  => {
      try{
@@ -67,6 +68,7 @@ export default class UserProfile extends Component{
     retrieve('userEmail').then(result =>{
         this.fetchUserDetailsAPI(result);
     });
+
      BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
    }
 
@@ -77,7 +79,7 @@ export default class UserProfile extends Component{
 
       this.setState({progress:true});
 
-      fetch(USER_DETAILS_API, {
+      fetch(_CONFIG_.USER_PROFILE_URL, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',

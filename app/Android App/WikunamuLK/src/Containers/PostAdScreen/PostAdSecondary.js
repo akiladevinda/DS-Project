@@ -31,9 +31,8 @@ import DeviceInfo from 'react-native-device-info';
 //get device information
 const uniqueId = DeviceInfo.getUniqueID();
 
-//Post Ad Live API Link
-const POSTAD_API_URL = 'http://10.0.2.2/API/post/post-ad.php';
-
+//Global CONFIG File
+import _CONFIG_ from '../Global/_CONFIG_';
 
 //image upload options
 const options = {
@@ -146,7 +145,7 @@ export default class PostAdSecondary extends Component {
   };
 
 
-  fetch(POSTAD_API_URL,object)
+  fetch(_CONFIG_.USER_POSTAD_URL,object)
     .then((response) => response.json())
     .then((responseText) => {
 

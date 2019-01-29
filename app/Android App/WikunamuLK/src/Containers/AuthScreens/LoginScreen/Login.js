@@ -28,8 +28,8 @@ import { Dialog} from "react-native-simple-dialogs";
 import Register from '../RegisterScreen/Register';
 import Home from '../../HomeScreen/Home';
 
-//Login URL - Change this to live links after hosting
-const LOGIN_URL = 'http://10.0.2.2/API/post/login.php';
+//Global CONFIG File
+import _CONFIG_ from '../../Global/_CONFIG_';
 
 
 export default class Login extends Component {
@@ -85,7 +85,7 @@ export default class Login extends Component {
   };
 
 
-  fetch(LOGIN_URL,object)
+  fetch(_CONFIG_.USER_LOGIN_URL,object)
     .then((response) => response.json())
     .then((responseText) => {
 
