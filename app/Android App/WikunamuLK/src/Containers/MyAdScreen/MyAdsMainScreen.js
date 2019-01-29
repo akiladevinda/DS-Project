@@ -18,7 +18,8 @@ import {
   ListView,
   TouchableOpacity,
   StatusBar,
-  BackHandler
+  BackHandler,
+  AsyncStorage
 } from 'react-native';
 
 import Toolbar from '../Toolbar/Toolbar';
@@ -55,7 +56,7 @@ export default class MyAdsMainScreen extends Component{
          {image: "https://images-na.ssl-images-amazon.com/images/I/81vB-Irbk9L._SX355_.jpg"},
       ]),
 
-      ad_data:[],
+      newData:[],
 
     };
     this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
@@ -91,7 +92,8 @@ handleBackButtonClick() {
 
       let userLoggedEmail = JSON.parse(value)
 
-      this.setState({progress:true});
+      console.log(userLoggedEmail)
+
 
       fetch(_CONFIG_.GET_ADDETAILS_URL, {
         method: 'POST',
@@ -110,7 +112,7 @@ handleBackButtonClick() {
           // alert(responseText.data);
           // console.log(responseText.data[0].full_name)
             this.setState({
-             ad_data:responseText.data,
+              newData:responseText.data,
             });
             
         })
@@ -139,8 +141,8 @@ handleBackButtonClick() {
             <View style={styles.box}>
               <Image style={styles.image} source={{uri: service.image}} />
               <View style={styles.boxContent}>
-                <Text style={styles.title}>Galaxy Note 9</Text>
-                <Text style={styles.description}>LKR 50000</Text>
+                <Text style={styles.title}>Title</Text>
+                <Text style={styles.description}>Price</Text>
                 <View style={styles.buttons}>
                   <TouchableHighlight style={[styles.button, styles.view]} onPress={() => this.clickListener('login')}>
                     <Image style={styles.icon} source={require('../../Assets/MyAds/delete.png')}/>

@@ -331,6 +331,7 @@ export default class PostAdSecondary extends Component {
               <TextField
                 label='Description'
                 value={description}
+                multiline={true}
                 onChangeText={(description) => this.setState({ description })}
               />
               <TextField

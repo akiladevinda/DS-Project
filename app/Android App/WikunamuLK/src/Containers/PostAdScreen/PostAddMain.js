@@ -323,6 +323,7 @@ handleBackButtonClick() {
               <TextField
                 label='Description'
                 value={description}
+                multiline={true}
                 onChangeText={(description) => this.setState({ description })}
               />
               <TextField
