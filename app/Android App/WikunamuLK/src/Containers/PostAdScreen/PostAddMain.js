@@ -397,8 +397,8 @@ handleBackButtonClick() {
           confirmButtonColor="#DD6B55"
           onConfirmPressed={() => {
                //Navigate to Home Screen
-              var { navigate} = this.props.navigation;
-              navigate("Drawer",{});
+              this.props.navigation.goBack();
+              return true;
           }}
           />
 

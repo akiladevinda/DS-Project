@@ -48,8 +48,6 @@ const retrieve = async (key)
 };
 
 
-
-
 export default class MyAdsMainScreen extends Component{
 
   constructor(props) {

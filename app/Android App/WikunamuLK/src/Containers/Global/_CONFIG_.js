@@ -42,6 +42,9 @@ const DELETE_USERACC_URL = 'http://10.0.2.2/API/post/delete-user.php'
 //Delete Ad Details from Database
 const DELETE_AD_URL = 'http://10.0.2.2/API/post/delete-ad.php'
 
+//Get Category Details
+const GET_CATDETAILS_URL = 'http://10.0.2.2/API/post/get-category-details.php'
+
 
 
  /**
@@ -62,5 +65,6 @@ export default {
   GET_ADDETAILS_URL:GET_ADDETAILS_URL,
   DELETE_USERACC_URL:DELETE_USERACC_URL,
   DELETE_AD_URL:DELETE_AD_URL,
+  GET_CATDETAILS_URL:GET_CATDETAILS_URL,
 
 }
