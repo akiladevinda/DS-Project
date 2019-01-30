@@ -145,7 +145,7 @@ editMyProfileScreen(){
   deleteUserFetch(){
 
     fetch(_CONFIG_.DELETE_USERACC_URL, {
-      method: 'POST',
+      method: 'DELETE',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'

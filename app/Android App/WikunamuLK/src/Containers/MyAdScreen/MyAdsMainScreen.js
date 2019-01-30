@@ -23,17 +23,19 @@ import {
 } from 'react-native';
 
 import Toolbar from '../Toolbar/Toolbar';
-//Device width and height
+// Device width and height
 import Metrics from '../Dimensions/Metrics';
 
-//Global Config File
+// Global Config File
 import _CONFIG_ from '../Global/_CONFIG_';
 
 //Get Email From Async Storage
 const retrieve = async (key)
+
  => {
      try{
         let value =  await AsyncStorage.getItem(key)
+
 
         return value;
     }catch(error){
@@ -42,23 +44,19 @@ const retrieve = async (key)
 };
 
 
+
+
 export default class MyAdsMainScreen extends Component{
 
   constructor(props) {
     super(props);
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows([
-         {image: "https://images-na.ssl-images-amazon.com/images/I/81vB-Irbk9L._SX355_.jpg"},
-         {image: "https://images-na.ssl-images-amazon.com/images/I/81vB-Irbk9L._SX355_.jpg"},
-         {image: "https://images-na.ssl-images-amazon.com/images/I/81vB-Irbk9L._SX355_.jpg"},
-         {image: "https://images-na.ssl-images-amazon.com/images/I/81vB-Irbk9L._SX355_.jpg"},
-         {image: "https://images-na.ssl-images-amazon.com/images/I/81vB-Irbk9L._SX355_.jpg"},
-      ]),
-
-      newData:[],
-
+      jsonData: null,
     };
+    this.dataSource = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2
+    });
+
     this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
 
 }
@@ -88,7 +86,7 @@ handleBackButtonClick() {
     return true;
 }
 
-    fetchAdDetails(value){
+  fetchAdDetails(value){
 
       let userLoggedEmail = JSON.parse(value)
 
@@ -102,17 +100,19 @@ handleBackButtonClick() {
           'Content-Type': 'application/json'
         },
         body:JSON.stringify( {
-          "email": userLoggedEmail,
+          "user_email": userLoggedEmail,
         })
 
 
     })
         .then((response) => response.json())
         .then((responseText) => {
-          // alert(responseText.data);
-          // console.log(responseText.data[0].full_name)
+
+          // console.log(responseText.data)
+        
             this.setState({
-              newData:responseText.data,
+              jsonData:responseText.data
+
             });
             
         })
@@ -132,17 +132,17 @@ handleBackButtonClick() {
 
         <StatusBar backgroundColor="#3764ad" barStyle="light-content"/>
 
-        <Toolbar navigation={this.props.navigation}/>
-
+        <Toolbar navigation={this.props.navigation}/> 
+        {this.state.jsonData &&
         <ListView enableEmptySections={true}
-        dataSource={this.state.dataSource}
+         dataSource={this.dataSource.cloneWithRows(this.state.jsonData)}
         renderRow={(service) => {
           return (
             <View style={styles.box}>
-              <Image style={styles.image} source={{uri: service.image}} />
+               {/* <Image style={styles.image} source={{uri: service.image}} /> */}
               <View style={styles.boxContent}>
-                <Text style={styles.title}>Title</Text>
-                <Text style={styles.description}>Price</Text>
+                <Text style={styles.title}>{service.ad_title}</Text>
+                <Text style={styles.description}>{service.price}</Text>
                 <View style={styles.buttons}>
                   <TouchableHighlight style={[styles.button, styles.view]} onPress={() => this.clickListener('login')}>
                     <Image style={styles.icon} source={require('../../Assets/MyAds/delete.png')}/>
@@ -157,7 +157,7 @@ handleBackButtonClick() {
               </View>
             </View>
           )
-        }}/>
+        }}/> }
      
       </View>
 
