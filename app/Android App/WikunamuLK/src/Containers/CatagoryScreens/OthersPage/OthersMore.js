@@ -17,7 +17,8 @@ import {
   FlatList,
   Button,
   StatusBar,
-  BackHandler
+  BackHandler,
+  Linking
 } from 'react-native';
 
 
@@ -66,6 +67,15 @@ export default class OthersMore extends Component {
     return true;
   }
 
+   //Get Call to Ad owner
+   getCallButtonPress(){
+    Linking.openURL('tel:'+this.state.item_user_contactnumber)
+  }
+
+  //Send email to ad owner
+  sendEmailButtonPress(){
+    Linking.openURL('mailto:'+this.state.item_user_email)
+  }
 
 
   render() {
@@ -101,11 +111,11 @@ export default class OthersMore extends Component {
       
           <View style={styles.separator}></View>
           <View style={styles.addToCarContainer}>
-            <TouchableOpacity style={styles.shareButton} onPress={()=> this.clickEventListener()}>
+            <TouchableOpacity style={styles.shareButton} onPress={()=> this.getCallButtonPress()}>
               <Text style={styles.shareButtonText}>Get Call</Text>  
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.shareButton} onPress={()=> this.clickEventListener()}>
+            <TouchableOpacity style={styles.shareButtonEmail} onPress={()=> this.sendEmailButtonPress()}>
               <Text style={styles.shareButtonText}>Send Email</Text>  
             </TouchableOpacity>
           </View> 
@@ -224,6 +234,15 @@ const styles = StyleSheet.create({
       // width:Metrics.DEVICE_WIDTH,
       height:60,
       marginTop:20,
+    },
+    shareButtonEmail: {
+      marginTop:10,
+      height:45,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius:30,
+      backgroundColor: "#ea3333",
     },
   
 

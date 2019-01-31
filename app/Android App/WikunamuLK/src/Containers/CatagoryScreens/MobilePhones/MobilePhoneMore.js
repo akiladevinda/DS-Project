@@ -17,7 +17,8 @@ import {
   FlatList,
   Button,
   StatusBar,
-  BackHandler
+  BackHandler,
+  Linking
 } from 'react-native';
 
 
@@ -66,6 +67,16 @@ export default class MobilePhoneMore extends Component {
     return true;
   }
 
+    //Get Call to Ad owner
+    getCallButtonPress(){
+      Linking.openURL('tel:'+this.state.item_user_contactnumber)
+    }
+  
+    //Send email to ad owner
+    sendEmailButtonPress(){
+      Linking.openURL('mailto:'+this.state.item_user_email)
+    }
+
 
 
   render() {
@@ -101,11 +112,11 @@ export default class MobilePhoneMore extends Component {
       
           <View style={styles.separator}></View>
           <View style={styles.addToCarContainer}>
-            <TouchableOpacity style={styles.shareButton} onPress={()=> this.clickEventListener()}>
+            <TouchableOpacity style={styles.shareButton} onPress={()=> this.getCallButtonPress()}>
               <Text style={styles.shareButtonText}>Get Call</Text>  
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.shareButton} onPress={()=> this.clickEventListener()}>
+            <TouchableOpacity style={styles.shareButtonEmail} onPress={()=> this.sendEmailButtonPress()}>
               <Text style={styles.shareButtonText}>Send Email</Text>  
             </TouchableOpacity>
           </View> 
@@ -194,6 +205,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius:30,
     backgroundColor: "#00BFFF",
+  },
+  shareButtonEmail: {
+    marginTop:10,
+    height:45,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius:30,
+    backgroundColor: "#ea3333",
   },
   shareButtonText:{
     color: "#FFFFFF",
