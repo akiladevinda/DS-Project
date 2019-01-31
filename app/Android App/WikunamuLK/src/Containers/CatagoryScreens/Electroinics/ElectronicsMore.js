@@ -32,8 +32,13 @@ export default class ElectronicsMore extends Component {
     super(props);
 
     this.state = {
-      bookImage: this.props.navigation.state.params.Item.bookImage,
-      bookName: this.props.navigation.state.params.Item.bookName,
+      item_title: this.props.navigation.state.params.Service.ad_title,
+      item_price: this.props.navigation.state.params.Service.price,
+      item_description:this.props.navigation.state.params.Service.ad_description,
+      item_condition:this.props.navigation.state.params.Service.item_condition,
+      item_city:this.props.navigation.state.params.Service.city,
+      item_user_email : this.props.navigation.state.params.Service.user_email,
+      item_user_contactnumber:this.props.navigation.state.params.Service.user_contactnum,
     }
 
 
@@ -82,21 +87,26 @@ export default class ElectronicsMore extends Component {
 
         <ScrollView>
           <View style={{alignItems:'center', marginHorizontal:30}}>
-            <Image style={styles.productImg} source={{uri:this.state.bookImage}}/>
-            <Text style={styles.name}>{this.state.bookName}</Text>
-            <Text style={styles.price}>$ 12.22</Text>
+            <Image style={styles.productImg} source={require('../../../Assets/Test/iphone3.jpg')}/>
+            <Text style={styles.name}>{this.state.item_title}</Text>
+            <Text style={styles.price}>LKR {this.state.item_price}</Text>
+            <Text style={styles.price}>Condition :  {this.state.item_condition}</Text>
+            <Text style={styles.price}>Location :  {this.state.item_city}</Text>
+            <Text style={styles.price}>Email :  {this.state.item_user_email}</Text>
+            <Text style={styles.price}>Contact Number :  {this.state.item_user_contactnumber}</Text>
             <Text style={styles.description}>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
-              Aenean commodo ligula eget dolor. Aenean massa. Cum sociis 
-              natoque penatibus et magnis dis parturient montes, 
-              nascetur ridiculus mus. Donec quam felis, ultricies nec
+             {this.state.item_description}
             </Text>
           </View>
       
           <View style={styles.separator}></View>
           <View style={styles.addToCarContainer}>
             <TouchableOpacity style={styles.shareButton} onPress={()=> this.clickEventListener()}>
-              <Text style={styles.shareButtonText}>Contact Seller</Text>  
+              <Text style={styles.shareButtonText}>Get Call</Text>  
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.shareButton} onPress={()=> this.clickEventListener()}>
+              <Text style={styles.shareButtonText}>Send Email</Text>  
             </TouchableOpacity>
           </View> 
         </ScrollView>

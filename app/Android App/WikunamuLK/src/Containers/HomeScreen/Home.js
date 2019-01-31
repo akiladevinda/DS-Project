@@ -39,8 +39,6 @@ import JobsMain from '../CatagoryScreens/JobsPage/JobsMain';
 import HouseRentMain from '../CatagoryScreens/HouseRent/HouseRentMain';
 import OthersMain from '../CatagoryScreens/OthersPage/OthersMain';
 
-import MobileTest from '../CatagoryScreens/MobilePhones/MobileTest';
-
 
 export default class Home extends Component {
 
@@ -84,7 +82,7 @@ export default class Home extends Component {
 
   clickEventListener(item) {
     if(item == 1){
-      this.props.navigation.navigate("MobileTest" , {screen:MobileTest});
+      this.props.navigation.navigate("MobilePhoneMain" , {screen:MobilePhoneMain});
     }else if(item == 2){
       this.props.navigation.navigate("ElectronicsMain" , {screen:ElectronicsMain});
     }else if(item == 3){

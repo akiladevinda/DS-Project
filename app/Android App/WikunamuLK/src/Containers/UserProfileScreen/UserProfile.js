@@ -224,13 +224,14 @@ editMyProfileScreen(){
             visible={this.state.progress}
             title="Checking Details"
             message="Please, wait..."
+            onTouchOutside={() => this.setState({progress: true})}
         />
 
         <ConfirmDialog
             title="Are You Sure Delete Account ?"
             message="Please note this cannot be undone"
             visible={this.state.deleteConfirmation}
-            onTouchOutside={() => this.setState({dialogVisible: false})}
+            onTouchOutside={() => this.setState({deleteConfirmation: true})}
             positiveButton={{
                 title: "YES",
                 onPress: () => this.deleteUserFetch()

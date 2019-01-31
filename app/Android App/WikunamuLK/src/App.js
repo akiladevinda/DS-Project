@@ -44,9 +44,9 @@ import JobsMore from './Containers/CatagoryScreens/JobsPage/JobsMore';
 import OthersMore from './Containers/CatagoryScreens/OthersPage/OthersMore';
 import MensFashionMore from './Containers/CatagoryScreens/MensFashion/MensFashionMore';
 import WomensFashionMore from './Containers/CatagoryScreens/WomensFashion/WomensFashionMore';
+import VehiclesMore from './Containers/CatagoryScreens/Vehicles/VehiclesMore';
 
-//testing route pages
-import MobileTest from './Containers/CatagoryScreens/MobilePhones/MobileTest';
+
 
 
 
@@ -211,10 +211,10 @@ const NavigationApp = createStackNavigator({
   HouseRentMore:{ screen: HouseRentMore,navigationOptions: { title: ' HouseRentMore', header: null, gesturesEnabled: false},},
   JobsMore:{ screen: JobsMore,navigationOptions: { title: ' JobsMore', header: null, gesturesEnabled: false},},
   OthersMore:{ screen: OthersMore,navigationOptions: { title: ' OthersMore', header: null, gesturesEnabled: false},},
-  MobileTest:{ screen: MobileTest,navigationOptions: { title: ' MobileTest', header: null, gesturesEnabled: false},},
   UserProfileEdit:{ screen: UserProfileEdit,navigationOptions: { title: ' UserProfileEdit', header: null, gesturesEnabled: false},},
   MensFashionMore:{ screen: MensFashionMore,navigationOptions: { title: ' MensFashionMore', header: null, gesturesEnabled: false},},
   WomensFashionMore:{ screen: WomensFashionMore,navigationOptions: { title: ' WomensFashionMore', header: null, gesturesEnabled: false},},
+  VehiclesMore:{ screen: VehiclesMore,navigationOptions: { title: ' VehiclesMore', header: null, gesturesEnabled: false},},
   
 
 

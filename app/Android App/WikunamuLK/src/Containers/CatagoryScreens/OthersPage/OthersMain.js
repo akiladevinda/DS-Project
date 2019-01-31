@@ -5,128 +5,136 @@
  * Author : Akila Devinda
  */
 
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
-  Image,
+  TextInput,
+  Button,
+  TouchableHighlight,
   Alert,
-  ScrollView,
-  FlatList,
+  Image,
+  ListView,
+  TouchableOpacity,
   StatusBar,
   BackHandler,
-  RefreshControl
+  AsyncStorage
 } from 'react-native';
 
+// Global Config File
+import _CONFIG_ from '../../Global/_CONFIG_';
+
+// Device width and height
 import Metrics from '../../Dimensions/Metrics';
+
+import { Dialog , ProgressDialog , ConfirmDialog} from "react-native-simple-dialogs";
 import LinearGradient from 'react-native-linear-gradient';
-import AwesomeAlert from 'react-native-awesome-alerts';
 
-import OthersMroe from './OthersMore';
-
-const URL_TESTING = 'http://www.powertrend.lk/backend/web/index.php?r=api/paid-books';
-
-
-export default class OthersMain extends Component {
+export default class OthersMain extends Component{
 
   constructor(props) {
     super(props);
-
-          this.state = {
-            paidBooks:[],
-            progress:false,
-            refreshing: false,
-        };
-
-  this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
-  
-  }
-
-  componentWillMount(){
-    this.fetchData();
-   }
-
-   componentDidMount(){
-    BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
-  }
-  
-  componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
-  }
-  
-  //Back button handle event - Android Only
-  handleBackButtonClick() {
-      this.props.navigation.goBack();
-      return true;
-  }
-
-  _onRefresh = () => {
-    this.setState({refreshing: true});
-    this.fetchData().then(() => {
-      this.setState({refreshing: false});
+    this.state = {
+      jsonData: null,
+      progress:false,
+      noAdsMessage:false,
+    };
+    this.dataSource = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2
     });
-  }
+    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
 
-  
-
-
-  fetchData = () => {
-
-    this.setState({
-      progress:true
-    });
-
-    //Downloaded Books API Call  --------------------------------------
-    fetch(URL_TESTING, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body:JSON.stringify( {
-        "serialNumber": "0bf3575814103e87",
-      })
+}
 
 
-  })
-      .then((response) => response.json())
-      .then((responseText) => {
-        // alert(responseText.success);
+componentWillMount(){
+ 
+}
+
+componentDidMount(){
+     //Retrieve user logged email address from local storage and pass to API call
+
+  this.fetchCategoryDetailsAPI();
+
+  BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+}
+
+componentWillUnmount() {
+  BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+}
+
+//Fetch Category Details and get values from API
+fetchCategoryDetailsAPI(){
+
+  // let userLoggedEmail = JSON.parse(value)
+
+
+      this.setState({progress:true});
+
+      fetch(_CONFIG_.GET_CATDETAILS_URL, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body:JSON.stringify( {
+          "category_name": 'Others',
+        })
+
+
+    })
+        .then((response) => response.json())
+        .then((responseText) => {
+            if(responseText.status_code == '400'){
+              this.setState({
+                    progress:false,
+                    noAdsMessage:true,
+                  });
+            }else if(responseText.data[0].status_code == '200'){
+              this.setState({
+                jsonData:responseText.data,
+                progress:false,
+              });
+            }
+            
+        })
+        .catch((error) => {
           this.setState({
-            paidBooks: responseText.data,
-            // progress:false,
+            
           });
+            
+        });
 
-          if(responseText.success == true){
-            this.setState({
-              progress:false,
-            });
-          }
-          
-      })
-      .catch((error) => {
-          // alert('errorrrr');
-      });
-      
+}
 
-  }
+//Back button handle event - Android Only
+handleBackButtonClick() {
+    this.props.navigation.goBack();
+    return true;
+}
 
-  //Refresh Auto When Back To Home
-  autoRefresh(){
-    this.fetchData();
-  }
+getClickedAd(service){
+  alert(service.ad_title)
+}
 
+ //Refresh Auto When Back To Mens Fashion Screen
+ autoRefresh(){
+  this.fetchCategoryDetailsAPI();
+}
 
-  addProductToCart(item){
-    this.props.navigation.navigate("OthersMroe",{screen: "OthersMroe",Item:item,onGoBack: () => this.autoRefresh(),})
-  }
+//Navigate More Information Screen
+navigateMensFashionMore(service){
+  this.props.navigation.navigate("OthersMore",{screen: "OthersMore",Service:service,onGoBack: () => this.autoRefresh(),})
+}
 
   render() {
     return (
-      <View style={styles.container}>
-      <StatusBar backgroundColor="#3764ad" barStyle="light-content"/>
+
+     
+      <View style={styles.containerr}>
+
+        <StatusBar backgroundColor="#3764ad" barStyle="light-content"/>
         <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={styles.linearGradient}>
         <TouchableOpacity style={styles.drawerIcon} onPress={this.handleBackButtonClick}>
             <Image style={styles.imagestyle}
@@ -137,187 +145,133 @@ export default class OthersMain extends Component {
             </Text>
         </LinearGradient>
 
-        <ScrollView  refreshControl={
-                    <RefreshControl
-                        onRefresh={() => this.fetchData()}
-                        refreshing={this.state.refreshing}
-                    />
-                }>
-
-
-        <FlatList style={styles.list}
-          contentContainerStyle={styles.listContainer}
-          data={this.state.paidBooks}
-          horizontal={false}
-          numColumns={2}
-          keyExtractor= {(item) => {
-            return item.id;
-          }}
-          ItemSeparatorComponent={() => {
-            return (
-              <View style={styles.separator}/>
-            )
-          }}
-          renderItem={(post) => {
-            const item = post.item;
-            return (
-              <View style={styles.card}>
-               
-               <View style={styles.cardHeader}>
-                  <View>
-                    <Text style={styles.title}>{item.bookName}</Text>
-                    <Text style={styles.price}>{item.bookName}</Text>
-                  </View>
-                </View>
-
-                <Image style={styles.cardImage} source={{uri:item.bookImage}}/>
-                
-                <View style={styles.cardFooter}>
-                  <View style={styles.socialBarContainer}>
-                    <View style={styles.socialBarSection}>
-                      <TouchableOpacity style={styles.socialBarButton} onPress={this.addProductToCart.bind(this,item)}>
-                        <Text style={[styles.socialBarLabel, styles.buyNow]}>View More</Text>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
+        {this.state.jsonData &&
+        <ListView enableEmptySections={true}
+         dataSource={this.dataSource.cloneWithRows(this.state.jsonData)}
+        renderRow={(service) => {
+          return (
+            <View style={styles.box}>
+               <Image style={styles.image} source={require('../../../Assets/Test/iphone3.jpg')} />
+              <View style={styles.boxContent}>
+                <Text style={styles.title}>{service.ad_title}</Text>
+                <Text style={styles.description}>LKR {service.price}</Text>
+                <View style={styles.buttons}>
+                  <TouchableHighlight style={[styles.button, styles.view]}onPress={this.navigateMensFashionMore.bind(this,service)} >
+                    <Text style={{fontSize:15,color:'white'}}>View More</Text>
+                  </TouchableHighlight>    
                 </View>
               </View>
-            )
-          }}/>
+            </View>
+          )
+        }}/> }
 
-    </ScrollView>
+        <ProgressDialog
+              visible={this.state.progress}
+              title="Loading Data"
+              message="Please, wait..."
+          />
+          <ConfirmDialog
+            title="Sorry !!! No Ads"
+            message="No any items for this category ..."
+            visible={this.state.noAdsMessage}
+            onTouchOutside={() => this.setState({noAdsMessage: true})}
+            positiveButton={{
+                title: "OK",
+                onPress: () => this.handleBackButtonClick()
+            }}
 
-
-          <AwesomeAlert
-          title="Loading ..."
-          show={this.state.progress}
-          showProgress={true}
-          closeOnTouchOutside={false}
-          closeOnHardwareBackPress={false}
-        />
-
-
-
+        /> 
       </View>
+
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container:{
-    flex:1,
-  },
-  list: {
-    paddingHorizontal: 5,
-    backgroundColor:"#E6E6E6",
-  },
-  listContainer:{
-    alignItems:'center'
-  },
-  separator: {
-    marginTop: 10,
-  },
-  /******** card **************/
-  card:{
-    shadowColor: '#00000021',
-    shadowOffset: {
-      width: 2
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 4,
-    marginVertical: 8,
-    backgroundColor:"white",
-    flexBasis: '47%',
-    marginHorizontal: 5,
-  },
-  cardHeader: {
-    paddingVertical: 17,
-    paddingHorizontal: 16,
-    borderTopLeftRadius: 1,
-    borderTopRightRadius: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  cardContent: {
-    paddingVertical: 12.5,
-    paddingHorizontal: 16,
-  },
-  cardFooter:{
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingTop: 12.5,
-    paddingBottom: 25,
-    paddingHorizontal: 16,
-    borderBottomLeftRadius: 1,
-    borderBottomRightRadius: 1,
-  },
-  cardImage:{
+  container: {
     flex: 1,
-    height: 140,
-    width: null,
-  },
-  /******** card components **************/
-  title:{
-    fontSize:18,
-    flex:1,
-  },
-  price:{
-    fontSize:16,
-    color: "green",
-    marginTop: 5
-  },
-  buyNow:{
-    color: "purple",
-  },
-  icon: {
-    width:25,
-    height:25,
-  },
-  /******** social bar ******************/
-  socialBarContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-    flex: 1
-  },
-  socialBarSection: {
-    justifyContent: 'center',
-    flexDirection: 'row',
-    flex: 1,
-  },
-  socialBarlabel: {
-    marginLeft: 8,
-    alignSelf: 'flex-end',
-    justifyContent: 'center',
-  },
-  socialBarButton:{
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+},
 
-
-  drawerIcon:{
-    width:40,
-    height:40,
-    position: 'absolute',
-    marginTop:18,
-    left: Metrics.DEVICE_WIDTH/60,
-  
-  },
-  imagestyle:{
+drawerIcon:{
   width:40,
   height:40,
   position: 'absolute',
+  marginTop:18,
   left: Metrics.DEVICE_WIDTH/60,
+
+},
+imagestyle:{
+width:40,
+height:40,
+position: 'absolute',
+left: Metrics.DEVICE_WIDTH/60,
+},
+  headerTextMain:{
+    color: 'white',
+    fontSize: 21,
+    marginLeft:Metrics.DEVICE_WIDTH/3.1,
+    // width:Metrics.DEVICE_WIDTH,
+    height:60,
+    marginTop:20,
   },
-    headerTextMain:{
-      color: 'white',
-      fontSize: 21,
-      marginLeft:Metrics.DEVICE_WIDTH/3.1,
-      // width:Metrics.DEVICE_WIDTH,
-      height:60,
-      marginTop:20,
-    },
+
+  image: {
+    width: 100,
+    height:100,
+  },
+  box: {
+    padding:20,
+    marginTop:5,
+    marginBottom:5,
+    backgroundColor: 'white',
+    flexDirection: 'row',
+  },
+  boxContent: {
+    flex:1,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    marginLeft:10,
+  },
+  title:{
+    fontSize:18,
+    color:"#151515",
+  },
+  description:{
+    fontSize:15,
+    color: "#646464",
+  },
+  buttons:{
+    flexDirection: 'row',
+  },
+  button: {
+    height:35,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius:10,
+    width:90,
+    marginRight:5,
+    marginTop:5,
+  },
+  icon:{
+    width:20,
+    height:20,
+  },
+  view: {
+    backgroundColor: "#2774d8",
+  },
+  profile: {
+    backgroundColor: "#1E90FF",
+  },
+  message: {
+    backgroundColor: "#228B22",
+  },
   
-});   
+  
+
+
+
+
+});

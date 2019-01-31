@@ -38,6 +38,7 @@ export default class WomensFashionMain extends Component{
     this.state = {
       jsonData: null,
       progress:false,
+      noAdsMessage:false,
     };
     this.dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
@@ -85,14 +86,17 @@ fetchCategoryDetailsAPI(){
     })
         .then((response) => response.json())
         .then((responseText) => {
-          // console.log(responseText.data)
-        if(responseText.data[0].status_code == '200'){
+            if(responseText.status_code == '400'){
+              this.setState({
+                    progress:false,
+                    noAdsMessage:true,
+                  });
+            }else if(responseText.data[0].status_code == '200'){
               this.setState({
                 jsonData:responseText.data,
-                progress:false
+                progress:false,
               });
-        }
-            
+            }
             
         })
         .catch((error) => {
@@ -166,20 +170,17 @@ navigateMensFashionMore(service){
               title="Loading Data"
               message="Please, wait..."
           />
-          {/* <ConfirmDialog
-            title="Are You Sure Delete Ad ?"
-            message="Please note this cannot be undone"
-            visible={this.state.deleteConfirmation}
-            onTouchOutside={() => this.setState({dialogVisible: false})}
+          <ConfirmDialog
+            title="Sorry !!! No Ads"
+            message="No any items for this category ..."
+            visible={this.state.noAdsMessage}
+            onTouchOutside={() => this.setState({noAdsMessage: true})}
             positiveButton={{
-                title: "YES",
-                onPress: () => this.deleteAdFetchAPI.bind(this,service)
+                title: "OK",
+                onPress: () => this.handleBackButtonClick()
             }}
-            negativeButton={{
-                title: "NO",
-                onPress: () => this.setState({deleteConfirmation:false})
-            }}
-        />  */}
+
+        /> 
       </View>
 
     );
