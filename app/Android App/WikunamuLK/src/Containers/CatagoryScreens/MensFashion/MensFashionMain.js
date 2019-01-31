@@ -31,21 +31,6 @@ import Metrics from '../../Dimensions/Metrics';
 import { Dialog , ProgressDialog , ConfirmDialog} from "react-native-simple-dialogs";
 import LinearGradient from 'react-native-linear-gradient';
 
-//Get Email From Async Storage
-const retrieve = async (key)
-
- => {
-     try{
-        let value =  await AsyncStorage.getItem(key)
-
-
-        return value;
-    }catch(error){
-        throw error;
-    }
-};
-
-
 export default class MensFashionMain extends Component{
 
   constructor(props) {
@@ -125,6 +110,20 @@ handleBackButtonClick() {
     return true;
 }
 
+getClickedAd(service){
+  alert(service.ad_title)
+}
+
+ //Refresh Auto When Back To Mens Fashion Screen
+ autoRefresh(){
+  this.fetchCategoryDetailsAPI();
+}
+
+//Navigate More Information Screen
+navigateMensFashionMore(service){
+  this.props.navigation.navigate("MensFashionMore",{screen: "MensFashionMore",Service:service,onGoBack: () => this.autoRefresh(),})
+}
+
   render() {
     return (
 
@@ -153,7 +152,7 @@ handleBackButtonClick() {
                 <Text style={styles.title}>{service.ad_title}</Text>
                 <Text style={styles.description}>LKR {service.price}</Text>
                 <View style={styles.buttons}>
-                  <TouchableHighlight style={[styles.button, styles.view]} >
+                  <TouchableHighlight style={[styles.button, styles.view]}onPress={this.navigateMensFashionMore.bind(this,service)} >
                     <Text style={{fontSize:15,color:'white'}}>View More</Text>
                   </TouchableHighlight>    
                 </View>
@@ -251,7 +250,7 @@ left: Metrics.DEVICE_WIDTH/60,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius:10,
-    width:80,
+    width:90,
     marginRight:5,
     marginTop:5,
   },

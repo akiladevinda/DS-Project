@@ -42,6 +42,7 @@ import ElectronicsMore from './Containers/CatagoryScreens/Electroinics/Electroni
 import HouseRentMore from './Containers/CatagoryScreens/HouseRent/HouseRentMore';
 import JobsMore from './Containers/CatagoryScreens/JobsPage/JobsMore';
 import OthersMore from './Containers/CatagoryScreens/OthersPage/OthersMore';
+import MensFashionMore from './Containers/CatagoryScreens/MensFashion/MensFashionMore';
 
 
 //testing route pages
@@ -212,6 +213,7 @@ const NavigationApp = createStackNavigator({
   OthersMore:{ screen: OthersMore,navigationOptions: { title: ' OthersMore', header: null, gesturesEnabled: false},},
   MobileTest:{ screen: MobileTest,navigationOptions: { title: ' MobileTest', header: null, gesturesEnabled: false},},
   UserProfileEdit:{ screen: UserProfileEdit,navigationOptions: { title: ' UserProfileEdit', header: null, gesturesEnabled: false},},
+  MensFashionMore:{ screen: MensFashionMore,navigationOptions: { title: ' MensFashionMore', header: null, gesturesEnabled: false},},
   
 
 
