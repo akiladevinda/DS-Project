@@ -57,6 +57,7 @@ export default class MyAdsMainScreen extends Component{
       progress:false,
       email:'',
       noAdsMessage:false,
+      adDeleteTrue:false,
     };
     this.dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
@@ -162,10 +163,9 @@ handleBackButtonClick() {
         if(responseText.status_code == '200'){
               this.setState({
                 progress:false,
-
+                adDeleteTrue:true,
               });
-              this.props.navigation.goBack();
-              return true;
+            
         }
             
             
@@ -186,6 +186,11 @@ handleBackButtonClick() {
 //Navigate More Information Screen
 navigateMyAdsMore(service){
   this.props.navigation.navigate("MyAdsMore",{screen: "MyAdsMore",Service:service,})
+}
+
+gobackToHomeAfterDel(){
+  this.props.navigation.goBack();
+              return true;
 }
 
 
@@ -236,6 +241,17 @@ navigateMyAdsMore(service){
             positiveButton={{
                 title: "OK",
                 onPress: () => this.handleBackButtonClick()
+            }}
+
+        />
+          <ConfirmDialog
+            title="Deleted !!! "
+            message="Your ad deleted successfully..."
+            visible={this.state.adDeleteTrue}
+            onTouchOutside={() => this.setState({noAdsMessage: true})}
+            positiveButton={{
+                title: "OK",
+                onPress: () => this.gobackToHomeAfterDel()
             }}
 
         />
