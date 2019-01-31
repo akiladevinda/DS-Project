@@ -26,7 +26,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import AwesomeAlert from 'react-native-awesome-alerts';
 
 
-export default class MensFashionMore extends Component {
+export default class WomensFashionMore extends Component {
 
   constructor(props) {
     super(props);
@@ -79,7 +79,7 @@ export default class MensFashionMore extends Component {
                 source={require('../../../Assets/Mobile-Phones/back_icon_new.png')} />
             </TouchableOpacity>
         
-            <Text style={styles.headerTextMain}>Mens Fashion
+            <Text style={styles.headerTextMain}>Womens Fashion
             </Text>
         </LinearGradient>
 

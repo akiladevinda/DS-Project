@@ -43,7 +43,7 @@ import HouseRentMore from './Containers/CatagoryScreens/HouseRent/HouseRentMore'
 import JobsMore from './Containers/CatagoryScreens/JobsPage/JobsMore';
 import OthersMore from './Containers/CatagoryScreens/OthersPage/OthersMore';
 import MensFashionMore from './Containers/CatagoryScreens/MensFashion/MensFashionMore';
-
+import WomensFashionMore from './Containers/CatagoryScreens/WomensFashion/WomensFashionMore';
 
 //testing route pages
 import MobileTest from './Containers/CatagoryScreens/MobilePhones/MobileTest';
@@ -214,6 +214,7 @@ const NavigationApp = createStackNavigator({
   MobileTest:{ screen: MobileTest,navigationOptions: { title: ' MobileTest', header: null, gesturesEnabled: false},},
   UserProfileEdit:{ screen: UserProfileEdit,navigationOptions: { title: ' UserProfileEdit', header: null, gesturesEnabled: false},},
   MensFashionMore:{ screen: MensFashionMore,navigationOptions: { title: ' MensFashionMore', header: null, gesturesEnabled: false},},
+  WomensFashionMore:{ screen: WomensFashionMore,navigationOptions: { title: ' WomensFashionMore', header: null, gesturesEnabled: false},},
   
 
 
