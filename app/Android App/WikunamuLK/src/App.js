@@ -45,7 +45,7 @@ import OthersMore from './Containers/CatagoryScreens/OthersPage/OthersMore';
 import MensFashionMore from './Containers/CatagoryScreens/MensFashion/MensFashionMore';
 import WomensFashionMore from './Containers/CatagoryScreens/WomensFashion/WomensFashionMore';
 import VehiclesMore from './Containers/CatagoryScreens/Vehicles/VehiclesMore';
-
+import MyAdsMore from './Containers/MyAdScreen/MyAdsMore';
 
 
 
@@ -215,6 +215,7 @@ const NavigationApp = createStackNavigator({
   MensFashionMore:{ screen: MensFashionMore,navigationOptions: { title: ' MensFashionMore', header: null, gesturesEnabled: false},},
   WomensFashionMore:{ screen: WomensFashionMore,navigationOptions: { title: ' WomensFashionMore', header: null, gesturesEnabled: false},},
   VehiclesMore:{ screen: VehiclesMore,navigationOptions: { title: ' VehiclesMore', header: null, gesturesEnabled: false},},
+  MyAdsMore:{ screen: MyAdsMore,navigationOptions: { title: ' MyAdsMore', header: null, gesturesEnabled: false},},
   
 
 

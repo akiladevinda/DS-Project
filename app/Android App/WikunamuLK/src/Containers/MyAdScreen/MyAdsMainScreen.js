@@ -56,6 +56,7 @@ export default class MyAdsMainScreen extends Component{
       jsonData: null,
       progress:false,
       email:'',
+      noAdsMessage:false,
     };
     this.dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
@@ -112,13 +113,18 @@ handleBackButtonClick() {
         .then((response) => response.json())
         .then((responseText) => {
 
-          // console.log(responseText.data)
-        if(responseText.data[0].status_code == '200'){
-              this.setState({
-                jsonData:responseText.data,
-                progress:false
-              });
-        }
+    
+          if(responseText.status_code == '400'){
+            this.setState({
+                  progress:false,
+                  noAdsMessage:true,
+                });
+          }else if(responseText.data[0].status_code == '200'){
+            this.setState({
+              jsonData:responseText.data,
+              progress:false,
+            });
+          }
             
             
         })
@@ -172,6 +178,16 @@ handleBackButtonClick() {
         });
     }
 
+     //Refresh Auto When Back To Mens Fashion Screen
+ autoRefresh(){
+  this.fetchAdDetails();
+}
+
+//Navigate More Information Screen
+navigateMyAdsMore(service){
+  this.props.navigation.navigate("MyAdsMore",{screen: "MyAdsMore",Service:service,})
+}
+
 
   render() {
     return (
@@ -195,7 +211,12 @@ handleBackButtonClick() {
                 <View style={styles.buttons}>
                   <TouchableHighlight style={[styles.button, styles.view]}  onPress={this.deleteAdFetchAPI.bind(this,service)}>
                     <Text style={{fontSize:15,color:'white'}}>Delete Ad</Text>
-                  </TouchableHighlight>    
+                  </TouchableHighlight> 
+
+                  <TouchableHighlight style={[styles.button, styles.viewAd]}  onPress={this.navigateMyAdsMore.bind(this,service)}>
+                    <Text style={{fontSize:15,color:'white'}}>View Ad</Text>
+                  </TouchableHighlight>
+
                 </View>
               </View>
             </View>
@@ -207,20 +228,17 @@ handleBackButtonClick() {
               title="Loading Data"
               message="Please, wait..."
           />
-          {/* <ConfirmDialog
-            title="Are You Sure Delete Ad ?"
-            message="Please note this cannot be undone"
-            visible={this.state.deleteConfirmation}
-            onTouchOutside={() => this.setState({dialogVisible: false})}
+           <ConfirmDialog
+            title="Sorry !!! No Ads"
+            message="No any items for this category ..."
+            visible={this.state.noAdsMessage}
+            onTouchOutside={() => this.setState({noAdsMessage: true})}
             positiveButton={{
-                title: "YES",
-                onPress: () => this.deleteAdFetchAPI.bind(this,service)
+                title: "OK",
+                onPress: () => this.handleBackButtonClick()
             }}
-            negativeButton={{
-                title: "NO",
-                onPress: () => this.setState({deleteConfirmation:false})
-            }}
-        />  */}
+
+        />
      
       </View>
 
@@ -277,6 +295,9 @@ icon:{
 },
 view: {
   backgroundColor: "#FF1493",
+},
+viewAd: {
+  backgroundColor: "#2774d8",
 },
 profile: {
   backgroundColor: "#1E90FF",
