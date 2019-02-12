@@ -208,7 +208,9 @@ gobackToHomeAfterDel(){
          dataSource={this.dataSource.cloneWithRows(this.state.jsonData)}
         renderRow={(service) => {
           return (
+            <TouchableOpacity onPress={this.navigateMyAdsMore.bind(this,service)}>
             <View style={styles.box}>
+          
                <Image style={styles.image} source={require('../../Assets/Test/iphone3.jpg')} />
               <View style={styles.boxContent}>
                 <Text style={styles.title}>{service.ad_title}</Text>
@@ -218,13 +220,15 @@ gobackToHomeAfterDel(){
                     <Text style={{fontSize:15,color:'white'}}>Delete Ad</Text>
                   </TouchableHighlight> 
 
-                  <TouchableHighlight style={[styles.button, styles.viewAd]}  onPress={this.navigateMyAdsMore.bind(this,service)}>
+                  {/* <TouchableHighlight style={[styles.button, styles.viewAd]}  onPress={this.navigateMyAdsMore.bind(this,service)}>
                     <Text style={{fontSize:15,color:'white'}}>View Ad</Text>
-                  </TouchableHighlight>
+                  </TouchableHighlight> */}
 
                 </View>
               </View>
+             
             </View>
+            </TouchableOpacity>
           )
         }}/> }
 

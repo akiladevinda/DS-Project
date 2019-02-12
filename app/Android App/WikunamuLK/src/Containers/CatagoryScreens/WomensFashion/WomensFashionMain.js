@@ -150,18 +150,17 @@ navigateMensFashionMore(service){
          dataSource={this.dataSource.cloneWithRows(this.state.jsonData)}
         renderRow={(service) => {
           return (
+            <TouchableOpacity onPress={this.navigateMensFashionMore.bind(this,service)}>
             <View style={styles.box}>
                <Image style={styles.image} source={require('../../../Assets/Test/iphone3.jpg')} />
               <View style={styles.boxContent}>
                 <Text style={styles.title}>{service.ad_title}</Text>
                 <Text style={styles.description}>LKR {service.price}</Text>
                 <View style={styles.buttons}>
-                  <TouchableHighlight style={[styles.button, styles.view]}onPress={this.navigateMensFashionMore.bind(this,service)} >
-                    <Text style={{fontSize:15,color:'white'}}>View More</Text>
-                  </TouchableHighlight>    
                 </View>
               </View>
             </View>
+            </TouchableOpacity>
           )
         }}/> }
 

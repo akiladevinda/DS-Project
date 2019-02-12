@@ -14,7 +14,7 @@
  /**
  * Primary API LINKS -----------------------------------------------------
  */
-//Old One const USER_REGISTER_URL = 'https://wikunamulkapp.000webhostapp.com/API/post/register.php';
+//Old One const USER_REGISTER_URL = 'https://localhost/API/post/register.php';
 
 //Login URL Fro All Users
 const USER_LOGIN_URL = 'https://wikunamulkapp.000webhostapp.com/API/post/login.php';
