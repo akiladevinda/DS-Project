@@ -36,7 +36,13 @@ export class MobilePhonesComponent implements OnInit {
   ];
 
 
-  constructor() { }
+  constructor() {
+   }
+
+   newpage(element) {
+    console.log(element);
+
+  }
 
   ngOnInit() {
   }

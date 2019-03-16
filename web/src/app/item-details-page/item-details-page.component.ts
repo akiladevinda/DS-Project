@@ -7,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ItemDetailsPageComponent implements OnInit {
 
-  constructor() { }
+  element;
+
+  constructor() {
+
+
+   }
 
   ngOnInit() {
   }

@@ -4,12 +4,12 @@
 <div style="height:780px;background-color: white;margin-top: 2%;">
 
 
-  <mat-card class="new-product-card" *ngFor="let element of array">
+  <mat-card class="new-product-card" *ngFor="let element of itemList">
 
-    <img class="new-product-card-image" mat-card-image src="{{element.image}}" alt="">
+    <img class="new-product-card-image" mat-card-image src="https://static.carmudi.lk/NeA5noiWycBfUilmhZWQzbtsru0=/fit-in/745x405/filters:watermark(http://static.carmudi.lk/vZAZwYDMggPn1UKPIhoWTrqbVFc=/187x0/WATERMARK/carmudi-watermark.png,-17,-17,30)/listing_images/LK/upload_5c443ee6c58cf9.02163433.jpg" alt="">
     <mat-card-content class="new-product-card-content">
       <p>
-        {{element.name}}
+        {{element.ad_title}}
       </p>
     </mat-card-content>
     <hr>
@@ -17,8 +17,8 @@
     <span class="new-product-card-price">LKR &nbsp;{{element.price}}</span>
     <hr>
 
-    <button mat-raised-button class="new-product-card-price-add" routerLink="/item-page">View details</button>
+    <button mat-raised-button class="new-product-card-price-add"  routerLink='/item-page' (click)="newpage(element)">View details</button>
   </mat-card>
-
+  <button mat-button (click)="tets()">Basic</button>
   </div>
   <router-outlet></router-outlet>

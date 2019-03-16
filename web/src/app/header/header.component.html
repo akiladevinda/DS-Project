@@ -3,12 +3,17 @@
 
   <span style=" color: rgb(109, 109, 109);text-align: right;flex: 1 1 auto;">
 
-    <a mat-button style="cursor: pointer;font-size:70%" routerLink="/post-add" >Post Your Ad</a>&nbsp;&nbsp;&nbsp;
-    <a style="cursor: pointer;font-size:70%">My Ads</a>&nbsp;&nbsp;&nbsp;
+    <a *ngIf="userName !=null" mat-button style="cursor: pointer;font-size:70%" routerLink="/post-add" >Post Your Ad</a>&nbsp;&nbsp;&nbsp;
+    <a *ngIf="userName !=null" mat-button style="cursor: pointer;font-size:70%" routerLink="/myads">My Ads</a>&nbsp;&nbsp;&nbsp;
     <a style="cursor: pointer;font-size:70%">About</a>&nbsp;&nbsp;&nbsp;
-    <a mat-button  style="cursor: pointer;font-size:70%" routerLink="/login">Log in</a>
+    <a  mat-button style="cursor: pointer;font-size:70%" routerLink="/login">Login</a>&nbsp;&nbsp;&nbsp;
 
 
+
+    <a  *ngIf="userName !=null" mat-button  style="cursor: pointer;font-size:70%" >{{userName}}</a>
+    <!-- <a  *ngIf="userName !=null" mat-button  style="cursor: pointer;font-size:70%" routerLink="/login" (click)="tets()">{{userName}}</a> -->
+
+    <button   *ngIf="userName null" mat-raised-button  style="cursor: pointer;font-size:70%" routerLink="/login" (click)="tets()">Logout</button>
     </span>
 
 

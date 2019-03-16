@@ -12,16 +12,16 @@
 
                 <table class="example-full-width" cellspacing="0"><tr>
                   <td><mat-form-field class="example-full-width">
-                      <mat-select placeholder="Category">
-                          <mat-option *ngFor="let food of foods" [value]="food.value">
+                      <mat-select placeholder="Category" [(ngModel)]="category" name="category">
+                          <mat-option *ngFor="let food of foods" [value]="food.value" >
                             {{food.viewValue}}
                           </mat-option>
                         </mat-select>
                   </mat-form-field></td>
                   <td><mat-form-field class="example-full-width">
-                      <mat-select placeholder="Condtion">
-                          <mat-option *ngFor="let food of foods" [value]="food.value">
-                            {{food.viewValue}}
+                      <mat-select placeholder="Condtion" [(ngModel)]="condition" name="condition">
+                          <mat-option *ngFor="let condition of conditions" [value]="condition.value" >
+                            {{condition.viewValue}}
                           </mat-option>
                         </mat-select>
                   </mat-form-field></td>
@@ -29,37 +29,38 @@
 
                 <p>
                   <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Your Name">
+                    <input matInput placeholder="Your Email Address" [(ngModel)]="email" name="email">
                   </mat-form-field>
                   <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Item Model">
+                    <input matInput placeholder="Item Model" [(ngModel)]="model" name="model">
                   </mat-form-field>
                 </p>
 
                 <p>
                     <mat-form-field class="example-full-width">
-                      <input matInput placeholder="Title">
+                      <input matInput placeholder="Title" [(ngModel)]="title" name="title">
                     </mat-form-field>
                     <mat-form-field class="example-full-width">
-                      <input matInput placeholder="Discription">
+                      <input matInput placeholder="Discription" [(ngModel)]="discription" name="discription">
                     </mat-form-field>
                   </p>
                   <p>
                       <mat-form-field class="example-full-width">
-                        <input matInput placeholder="City">
+                        <input matInput placeholder="City" [(ngModel)]="city" name="city">
                       </mat-form-field>
                       <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Price">
+                        <input type="number" matInput placeholder="Price" [(ngModel)]="price" name="price">
                       </mat-form-field>
                     </p>
 
                     <input type="file" name="file" id="file" (change)="onFileChanged($event)" />
 
 
-              </form>
 
-              <button style="float: left;margin-left:20%;margin-top: 1%;background-color: #30ADC1;color: white;" mat-raised-button >Post My Add</button>
 
+
+            </form>
+            <button style="float: left;margin-left:10%;margin-top: 2%;background-color: #30ADC1;color: white;" mat-raised-button (click)="getAlladdsByUser()" >Post My Add</button>
 
           </mat-card>
 

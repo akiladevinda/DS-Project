@@ -1,3 +1,4 @@
+import { AdvertismentService } from './../_services/advertisment.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./vehicles.component.scss']
 })
 export class VehiclesComponent implements OnInit {
+
+  itemList = [];
 
   array = [
     {
@@ -44,9 +47,68 @@ export class VehiclesComponent implements OnInit {
     },
   ];
 
-  constructor() { }
+
+  images = [
+    {
+
+      // tslint:disable-next-line:max-line-length
+      image: 'https://static.carmudi.lk/8pqfCoD1CnD_tMzy9civEf61MPU=/fit-in/745x405/filters:watermark(http://static.carmudi.lk/vZAZwYDMggPn1UKPIhoWTrqbVFc=/187x0/WATERMARK/carmudi-watermark.png,-17,-17,30)/listing_images/LK/upload_5c419d9ed29365.27368614.jpg'
+
+    },
+    {
+      // tslint:disable-next-line:max-line-length
+      image: 'https://static.carmudi.lk/-vYDk32jp5oGPfArEFSlLTvBBBY=/fit-in/745x405/filters:watermark(http://static.carmudi.lk/vZAZwYDMggPn1UKPIhoWTrqbVFc=/187x0/WATERMARK/carmudi-watermark.png,-17,-17,30)/listing_images/LK/upload_5c078bee492821.03647606.jpg'
+    },
+
+    {
+      // tslint:disable-next-line:max-line-length
+      image: 'https://static.carmudi.lk/NeA5noiWycBfUilmhZWQzbtsru0=/fit-in/745x405/filters:watermark(http://static.carmudi.lk/vZAZwYDMggPn1UKPIhoWTrqbVFc=/187x0/WATERMARK/carmudi-watermark.png,-17,-17,30)/listing_images/LK/upload_5c443ee6c58cf9.02163433.jpg'
+    }
+  ];
+
+  constructor(private advertismentService: AdvertismentService) { }
+
+  getAdvertismentByCategory() {
+
+    const advertisment = {};
+
+    advertisment['category_name'] = 'Mens Fashion';
+
+    // this.itemList.push(this.images);
+
+    this.advertismentService.getAdvertismentByCategory(advertisment).subscribe(result => {
+
+      // this.itemList = result;
+      console.log(result);
+      console.log('result.length');
+      console.log(result.data.length);
+
+      for ( let i = 0; i < result.data.length; i++ ) {
+
+        this.itemList.push(result.data[i]);
+        console.log('Joooo');
+        console.log(result.data[i]);
+
+      }
+
+    });
+
+  }
+
+  newpage(element) {
+
+    console.log(element);
+  }
 
   ngOnInit() {
+    this.getAdvertismentByCategory();
+
+
+  }
+
+  tets(){
+    console.log('Helllo');
+    console.log(this.itemList);
   }
 
 }

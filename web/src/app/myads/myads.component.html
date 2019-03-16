@@ -1,0 +1,25 @@
+<div style="height:780px;background-color: white">
+
+
+  <h4 class="heading">my ads</h4>
+
+  <mat-card class="new-product-card" *ngFor="let element of itemList">
+
+    <img class="new-product-card-image" mat-card-image src="https://media.wired.com/photos/5b86fce8900cb57bbfd1e7ee/master/pass/Jaguar_I-PACE_S_Indus-Silver_065.jpg" alt="">
+    <mat-card-content class="new-product-card-content">
+      <p>
+        {{element.ad_title}}
+      </p>
+    </mat-card-content>
+    <hr>
+
+    <span class="new-product-card-price">LKR &nbsp;{{element.price}}</span>
+    <hr>
+
+    <button mat-raised-button class="new-product-card-price-add" routerLink="/item-page">View details</button>
+  </mat-card>
+
+  <!-- <button mat-button (click)="tets()">Basic</button> -->
+
+  </div>
+  <router-outlet></router-outlet>
