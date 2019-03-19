@@ -82,14 +82,14 @@ export default class UserProfile extends Component{
 
       this.setState({progress:true});
 
-      fetch(_CONFIG_.USER_PROFILE_URL, {
+      fetch(_CONFIG_.USER_PROFILE_URL_MAIN, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
         body:JSON.stringify( {
-          "email": userLoggedEmail,
+          "User_Email": userLoggedEmail,
         })
   
   
@@ -99,9 +99,9 @@ export default class UserProfile extends Component{
           // alert(responseText.data);
           // console.log(responseText.data[0].full_name)
             this.setState({
-              user_fullname:responseText.data[0].full_name,
-              user_email:responseText.data[0].email,
-              user_contactnumber:responseText.data[0].contact_number,
+              user_fullname:responseText.data[0].User_Full_Name,
+              user_email:responseText.data[0].User_Email,
+              user_contactnumber:responseText.data[0].User_Contact_No,
               progress:false,
             });
             
@@ -151,7 +151,7 @@ editMyProfileScreen(){
         'Content-Type': 'application/json'
       },
       body:JSON.stringify( {
-        "email": this.state.user_email,
+        "User_Email": this.state.user_email,
       })
 
   })

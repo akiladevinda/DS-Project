@@ -106,7 +106,7 @@ handleBackButtonClick() {
           'Content-Type': 'application/json'
         },
         body:JSON.stringify( {
-          "user_email": userLoggedEmail,
+          "Ad_User_Email": userLoggedEmail,
         })
 
 
@@ -150,8 +150,8 @@ handleBackButtonClick() {
           'Content-Type': 'application/json'
         },
         body:JSON.stringify( {
-          "email": this.state.email,
-          "ad_title":service.ad_title,
+          "Ad_User_Email": this.state.email,
+          "Ad_Title":service.ad_title,
         })
 
 
@@ -213,16 +213,13 @@ gobackToHomeAfterDel(){
           
                <Image style={styles.image} source={require('../../Assets/Test/iphone3.jpg')} />
               <View style={styles.boxContent}>
-                <Text style={styles.title}>{service.ad_title}</Text>
-                <Text style={styles.description}>LKR {service.price}</Text>
+                <Text style={styles.title}>{service.Ad_Title}</Text>
+                <Text style={styles.description}>LKR {service.Ad_Price}</Text>
                 <View style={styles.buttons}>
                   <TouchableHighlight style={[styles.button, styles.view]}  onPress={this.deleteAdFetchAPI.bind(this,service)}>
                     <Text style={{fontSize:15,color:'white'}}>Delete Ad</Text>
                   </TouchableHighlight> 
 
-                  {/* <TouchableHighlight style={[styles.button, styles.viewAd]}  onPress={this.navigateMyAdsMore.bind(this,service)}>
-                    <Text style={{fontSize:15,color:'white'}}>View Ad</Text>
-                  </TouchableHighlight> */}
 
                 </View>
               </View>

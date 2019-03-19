@@ -79,7 +79,7 @@ fetchCategoryDetailsAPI(){
           'Content-Type': 'application/json'
         },
         body:JSON.stringify( {
-          "category_name": 'Others',
+          "Ad_Category_Name": 'Others',
         })
 
 
@@ -154,8 +154,8 @@ navigateMensFashionMore(service){
             <View style={styles.box}>
                <Image style={styles.image} source={require('../../../Assets/Test/iphone3.jpg')} />
               <View style={styles.boxContent}>
-                <Text style={styles.title}>{service.ad_title}</Text>
-                <Text style={styles.description}>LKR {service.price}</Text>
+                <Text style={styles.title}>{service.Ad_Title}</Text>
+                <Text style={styles.description}>LKR {service.Ad_Price}</Text>
                 <View style={styles.buttons}>
                 </View>
               </View>

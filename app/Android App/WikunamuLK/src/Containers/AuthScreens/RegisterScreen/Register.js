@@ -66,10 +66,10 @@ export default class Register extends Component {
         'Content-Type': 'application/json'
       },
       body:JSON.stringify( {
-        "full_name": this.state.fullname,
-        "email":this.state.email,
-        "contact_number": this.state.contact_no,
-        "password":this.state.password,
+        "User_Full_Name": this.state.fullname,
+        "User_Email":this.state.email,
+        "User_Contact_No": this.state.contact_no,
+        "User_Password":this.state.password,
       })
   };
 

@@ -132,17 +132,17 @@ export default class PostAdSecondary extends Component {
         'Content-Type': 'application/json'
       },
       body:JSON.stringify( {
-        "category_name": this.state.selectCategory,
-        "item_condition":this.state.selectCondition,
-        "item_name": this.state.itemname,
-        "ad_title":this.state.title,
-        "ad_description": this.state.description,
-        "city":this.state.city,
-        "price": this.state.price,
-        "image":'image still testing',
-        "user_email":this.state.userLoggedEmail,
-        "user_uniqueID":uniqueId,
-        "user_contactnum": this.state.contact_number,
+        "Ad_Category_Name": this.state.selectCategory,
+        "Ad_Item_Condiiton":this.state.selectCondition,
+        "Ad_Item_Name": this.state.itemname,
+        "Ad_Title":this.state.title,
+        "Ad_Description": this.state.description,
+        "Ad_City":this.state.city,
+        "Ad_Price": this.state.price,
+        "Ad_Image":'Still Testing',
+        "Ad_User_Email":this.state.userLoggedEmail,
+        "Ad_User_Unique_ID": uniqueId,
+        "Ad_User_Contact_No": this.state.contact_number,
       })
   };
 

@@ -107,7 +107,7 @@ handleBackButtonClick() {
           'Content-Type': 'application/json'
         },
         body:JSON.stringify( {
-          "email": userLoggedEmail,
+          "User_Email": userLoggedEmail,
         })
   
     })
@@ -116,10 +116,10 @@ handleBackButtonClick() {
 
         if(responseText.data[0].status_code == '200'){
             this.setState({
-                full_name:responseText.data[0].full_name,
-                email:responseText.data[0].email,
-                contact_no:responseText.data[0].contact_number,
-                password:responseText.data[0].password,
+                full_name:responseText.data[0].User_Full_Name,
+                email:responseText.data[0].User_Email,
+                contact_no:responseText.data[0].User_Contact_No,
+                password:responseText.data[0].User_Password,
                 progress:false,
               });
         }else if(responseText.data[0].status_code == '400'){
@@ -151,10 +151,10 @@ handleBackButtonClick() {
           'Content-Type': 'application/json'
         },
         body:JSON.stringify( {
-          "email": this.state.userEmailForUpdating,
-          "full_name": this.state.full_name,
-          "contact_number":this.state.contact_no,
-          "passowrd":this.state.password
+          "User_Email": this.state.userEmailForUpdating,
+          "User_Full_Name": this.state.full_name,
+          "User_Contact_No":this.state.contact_no,
+          "User_Password":this.state.password
         })
   
     })
