@@ -41,6 +41,7 @@ import { MyadsComponent } from './myads/myads.component';
 
 import {MatSnackBarModule} from "@angular/material";
 import { HttpClientModule } from '@angular/common/http';
+import { ItemPopupComponent } from './item-popup/item-popup.component';
 
 
 
@@ -66,6 +67,7 @@ import { HttpClientModule } from '@angular/common/http';
     PostAddComponent,
     LoginComponent,
     MyadsComponent,
+    ItemPopupComponent,
 
 
   ],
@@ -90,6 +92,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 
   ],
+  entryComponents: [ItemPopupComponent],
 
 
   providers: [BackendApiService],

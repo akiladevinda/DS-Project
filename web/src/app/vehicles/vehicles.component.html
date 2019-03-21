@@ -1,3 +1,4 @@
+
 <h4 class="heading">Vehicles</h4>
 
 
@@ -15,9 +16,10 @@
     <hr>
 
     <span class="new-product-card-price">LKR &nbsp;{{element.price}}</span>
+
     <hr>
 
-    <button mat-raised-button class="new-product-card-price-add"  routerLink='/item-page' (click)="newpage(element)">View details</button>
+    <button mat-raised-button class="new-product-card-price-add"   (click)="openPopup(element)">View details</button>
   </mat-card>
   <button mat-button (click)="tets()">Basic</button>
   </div>

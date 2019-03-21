@@ -1,5 +1,8 @@
 import { AdvertismentService } from './../_services/advertisment.service';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { ItemPopupComponent } from '../item-popup/item-popup.component';
+
 
 @Component({
   selector: 'app-vehicles',
@@ -66,7 +69,7 @@ export class VehiclesComponent implements OnInit {
     }
   ];
 
-  constructor(private advertismentService: AdvertismentService) { }
+  constructor(private advertismentService: AdvertismentService, private dialog: MatDialog, ) { }
 
   getAdvertismentByCategory() {
 
@@ -95,9 +98,12 @@ export class VehiclesComponent implements OnInit {
 
   }
 
-  newpage(element) {
-
+  openPopup(element) {
     console.log(element);
+    this.dialog.open(ItemPopupComponent, {
+      width: '60%',
+      data: {element: element}
+    });
   }
 
   ngOnInit() {
