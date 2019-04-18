@@ -3,6 +3,7 @@
  * Wikunamu.LK - Mobile Application
  * Version 1.0
  * Author : Akila Devinda
+ * DS PROJECT - PLYMOUTH UNIVERSITY
  */
 
 import { Dimensions } from 'react-native'
