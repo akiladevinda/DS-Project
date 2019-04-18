@@ -30,7 +30,7 @@ import Home from '../../HomeScreen/Home';
 
 //Global CONFIG File
 import _CONFIG_ from '../../Global/_CONFIG_';
-
+var API_URL = _CONFIG_.USER_LOGIN_URL;
 
 export default class Login extends Component {
 
@@ -85,7 +85,7 @@ export default class Login extends Component {
   };
 
 
-  fetch(_CONFIG_.USER_LOGIN_URL,object)
+  fetch(API_URL,object)
     .then((response) => response.json())
     .then((responseText) => {
 
@@ -117,7 +117,9 @@ export default class Login extends Component {
 
     })
     .catch((error) => {
-      this.setState({conErrorNew:true});
+      //If Error Make API Call to backup link
+      API_URL = _CONFIG_.USER_LOGIN_URL_BACKUP;
+      this.fetchLogin();
     });
   }
 

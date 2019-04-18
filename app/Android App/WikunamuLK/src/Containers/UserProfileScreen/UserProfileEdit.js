@@ -33,6 +33,9 @@ import { ConfirmDialog , ProgressDialog} from 'react-native-simple-dialogs';
 
 //Global URL File
 import _CONFIG_ from '../Global/_CONFIG_';
+var API_URL = _CONFIG_.USER_PROFILE_URL_SEC;
+var API_URL_UPDATE = _CONFIG_.UPDATE_DETAILS_URL;
+
 
 //Get Email From Async Storage
 const retrieve = async (key)
@@ -100,7 +103,7 @@ handleBackButtonClick() {
       progress:true,
     });
 
-    fetch(_CONFIG_.USER_PROFILE_URL_SEC, {
+    fetch(API_URL, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -129,10 +132,12 @@ handleBackButtonClick() {
             
         })
         .catch((error) => {
-          this.setState({
-            
-          });
-            
+          //If Connection Error of Main API
+          API_URL = _CONFIG_.USER_PROFILE_URL_SEC_BACKUP;
+          retrieve('userEmail').then(result =>{
+            this.fetchUserDetailsAPI(result);
+        });
+
         });
 
   }
@@ -144,7 +149,7 @@ handleBackButtonClick() {
       progress:true,
     });
     
-    fetch(_CONFIG_.UPDATE_DETAILS_URL, {
+    fetch(API_URL_UPDATE, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -173,9 +178,9 @@ handleBackButtonClick() {
             
         })
         .catch((error) => {
-          this.setState({
-            
-          });
+         //If connection error of main API
+         API_URL_UPDATE = _CONFIG_.UPDATE_DETAILS_URL_BACKUP;
+         this.updateUserDetailsAPI();
             
         });
 

@@ -24,6 +24,7 @@ import {
 
 // Global Config File
 import _CONFIG_ from '../../Global/_CONFIG_';
+var API_URL = _CONFIG_.GET_CATDETAILS_URL;
 
 // Device width and height
 import Metrics from '../../Dimensions/Metrics';
@@ -72,7 +73,7 @@ fetchCategoryDetailsAPI(){
 
       this.setState({progress:true});
 
-      fetch(_CONFIG_.GET_CATDETAILS_URL, {
+      fetch(API_URL, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -100,9 +101,9 @@ fetchCategoryDetailsAPI(){
             
         })
         .catch((error) => {
-          this.setState({
-            
-          });
+            //If connection error on main API 
+        API_URL = _CONFIG_.GET_CATDETAILS_URL_BACKUP;
+        this.fetchCategoryDetailsAPI();
             
         });
 

@@ -8,7 +8,7 @@
 import React, {Component} from 'react';
 import { Animated, Easing,Dimensions,StyleSheet,View,Image,AsyncStorage,ScrollView,Text} from 'react-native';
 import { StackNavigator,DrawerNavigator, DrawerActions , DrawerItems,NavigationActions ,createStackNavigator ,createDrawerNavigator} from 'react-navigation';
-
+import { fromRight } from 'react-navigation-transitions';
 
 //import route pages
 import Splash from './Containers/SplashScreen/Splash';
@@ -219,6 +219,8 @@ const NavigationApp = createStackNavigator({
   
 
 
+},{
+  transitionConfig: () => fromRight(),
 });
 
   

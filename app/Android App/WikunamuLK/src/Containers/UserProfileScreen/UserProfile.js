@@ -27,6 +27,8 @@ import { ConfirmDialog , ProgressDialog} from 'react-native-simple-dialogs';
 
 //Global URL File
 import _CONFIG_ from '../Global/_CONFIG_';
+var API_URL = _CONFIG_.USER_PROFILE_URL_MAIN;
+var API_URL_REM_USER = _CONFIG_.DELETE_USERACC_URL;
 
 //Get Email From Async Storage
 const retrieve = async (key)
@@ -82,7 +84,7 @@ export default class UserProfile extends Component{
 
       this.setState({progress:true});
 
-      fetch(_CONFIG_.USER_PROFILE_URL_MAIN, {
+      fetch(API_URL, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -107,9 +109,9 @@ export default class UserProfile extends Component{
             
         })
         .catch((error) => {
-          this.setState({
-            
-          });
+          //Connection Error of Main API
+          API_URL = _CONFIG_.USER_PROFILE_URL_MAIN_BACKUP;
+          this.fetchUserDetailsAPI();
             
         });
     }
@@ -144,7 +146,7 @@ editMyProfileScreen(){
   //Delete User From Database API Fetch
   deleteUserFetch(){
 
-    fetch(_CONFIG_.DELETE_USERACC_URL, {
+    fetch(API_URL_REM_USER, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',
@@ -173,9 +175,9 @@ editMyProfileScreen(){
           
       })
       .catch((error) => {
-        this.setState({
-          
-        });
+       //If connection error on main API
+       API_URL_REM_USER = _CONFIG_.DELETE_USERACC_URL_BACKUP;
+       this.deleteUserFetch();
           
       });
 

@@ -27,6 +27,7 @@ import Login from '../LoginScreen/Login';
 
 //Global CONFIG File
 import _CONFIG_ from '../../Global/_CONFIG_';
+var API_URL = _CONFIG_.USER_REGISTER_URL;
 
 export default class Register extends Component {
 
@@ -74,7 +75,7 @@ export default class Register extends Component {
   };
 
 
-  fetch(_CONFIG_.USER_REGISTER_URL,object)
+  fetch(API_URL,object)
     .then((response) => response.json())
     .then((responseText) => {
 
@@ -93,9 +94,9 @@ export default class Register extends Component {
 
     })
     .catch((error) => {
-      this.setState({
-       
-      });
+      //Connection erorr of main API
+      API_URL = _CONFIG_.USER_REGISTER_URL_BACKUP;
+      this.fetchRegister();
     });
   }
 

@@ -32,6 +32,8 @@ import { Dialog , ProgressDialog , ConfirmDialog} from "react-native-simple-dial
 
 // Global Config File
 import _CONFIG_ from '../Global/_CONFIG_';
+var API_URL_GETADS = _CONFIG_.GET_ADDETAILS_URL;
+var API_URL_DELADS = _CONFIG_.DELETE_AD_URL;
 
 //Get Email From Async Storage
 const retrieve = async (key)
@@ -99,7 +101,7 @@ handleBackButtonClick() {
 
       this.setState({progress:true});
 
-      fetch(_CONFIG_.GET_ADDETAILS_URL, {
+      fetch(API_URL_GETADS, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -130,9 +132,11 @@ handleBackButtonClick() {
             
         })
         .catch((error) => {
-          this.setState({
-            
-          });
+         //If connection error on main API
+         API_URL_GETADS = _CONFIG_.GET_ADDETAILS_URL_BACKUP;
+         retrieve('userEmail').then(result =>{
+          this.fetchAdDetails(result);
+      });
             
         });
     }
@@ -143,7 +147,7 @@ handleBackButtonClick() {
 
       this.setState({progress:true});
 
-      fetch(_CONFIG_.DELETE_AD_URL, {
+      fetch(API_URL_DELADS, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -171,9 +175,9 @@ handleBackButtonClick() {
             
         })
         .catch((error) => {
-          this.setState({
-            
-          });
+         //If connection error on main API
+         API_URL_DELADS = _CONFIG_.DELETE_AD_URL_BACKUP;
+         this.deleteAdFetchAPI(service);
             
         });
     }

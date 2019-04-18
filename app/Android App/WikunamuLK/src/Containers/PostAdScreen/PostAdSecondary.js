@@ -35,6 +35,8 @@ const uniqueId = DeviceInfo.getUniqueID();
 
 //Global CONFIG File
 import _CONFIG_ from '../Global/_CONFIG_';
+var API_URL = _CONFIG_.USER_POSTAD_URL;
+
 
 //image upload options
 const options = {
@@ -147,7 +149,7 @@ export default class PostAdSecondary extends Component {
   };
 
 
-  fetch(_CONFIG_.USER_POSTAD_URL,object)
+  fetch(API_URL,object)
     .then((response) => response.json())
     .then((responseText) => {
 
@@ -166,9 +168,9 @@ export default class PostAdSecondary extends Component {
 
     })
     .catch((error) => {
-      this.setState({
-       
-      });
+        ///If connection error of main API
+        API_URL = _CONFIG_.USER_POSTAD_URL_BACKUP;
+        this.fetchPostAdAPI();
     });
   }
 
