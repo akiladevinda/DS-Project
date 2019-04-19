@@ -156,16 +156,15 @@ handleBackButtonClick() {
         },
         body:JSON.stringify( {
           "Ad_User_Email": this.state.email,
-          "Ad_Title":service.ad_title,
+          "Ad_Title":service.Ad_Title,
         })
 
 
     })
         .then((response) => response.json())
         .then((responseText) => {
-
-          // console.log(responseText.data)
         if(responseText.status_code == '200'){
+
               this.setState({
                 progress:false,
                 adDeleteTrue:true,
@@ -183,7 +182,7 @@ handleBackButtonClick() {
         });
     }
 
-     //Refresh Auto When Back To Mens Fashion Screen
+   //Refresh Auto When Back To Mens Fashion Screen
  autoRefresh(){
   this.fetchAdDetails();
 }
