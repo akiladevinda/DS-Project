@@ -93,6 +93,7 @@ export default class PostAdSecondary extends Component {
       selectCategory:'',
       selectCondition:'',
       userLoggedEmail:'',
+      access_token:'',
 
       progress:false,
       postAdSuccess:false,
@@ -107,6 +108,11 @@ export default class PostAdSecondary extends Component {
     let email = await AsyncStorage.getItem('userEmail');
     return email;
   }
+  //Get User Access Token
+  getAccessToken = async () => {
+    let access_token = await AsyncStorage.getItem('access_token');
+    return access_token;
+  }
 
   componentWillMount() {
     //Getting user logged email
@@ -116,6 +122,13 @@ export default class PostAdSecondary extends Component {
        userLoggedEmail:JSON.parse(userEmail)
      });
    })
+
+   this.getAccessToken().then((access_token) => {
+    console.log(access_token);
+    this.setState({
+      access_token:JSON.parse(access_token)
+    });
+  })
    
  }
 
@@ -124,6 +137,7 @@ export default class PostAdSecondary extends Component {
   //Post Ad API Fetch Method
   fetchPostAdAPI(){
 
+    console.log(this.state.access_token)
     this.setState({
       progress:true,
     });
@@ -131,21 +145,21 @@ export default class PostAdSecondary extends Component {
     var object = {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + this.state.access_token,
       },
       body:JSON.stringify( {
-        "Ad_Category_Name": this.state.selectCategory,
-        "Ad_Item_Condiiton":this.state.selectCondition,
-        "Ad_Item_Name": this.state.itemname,
-        "Ad_Title":this.state.title,
-        "Ad_Description": this.state.description,
-        "Ad_City":this.state.city,
-        "Ad_Price": this.state.price,
-        "Ad_Image":'Still Testing',
-        "Ad_User_Email":this.state.userLoggedEmail,
-        "Ad_User_Unique_ID": uniqueId,
-        "Ad_User_Contact_No": this.state.contact_number,
+        "ad_category_name": this.state.selectCategory,
+        "ad_item_condition":this.state.selectCondition,
+        "ad_item_name": this.state.itemname,
+        "ad_title":this.state.title,
+        "ad_description": this.state.description,
+        "ad_city":this.state.city,
+        "ad_price": this.state.price,
+        "ad_image":'Still Testing',
+        "ad_user_email":this.state.userLoggedEmail,
+        "ad_user_unique_id": uniqueId,
+        "ad_user_contact_no": this.state.contact_number
       })
   };
 
@@ -154,13 +168,13 @@ export default class PostAdSecondary extends Component {
     .then((response) => response.json())
     .then((responseText) => {
 
-      if(responseText.status_code == '200'){
+      if(responseText.status == 200){
         this.setState({
           progress:false,
           postAdSuccess:true,
         });
    
-      }else if(responseText.status_code=='400'){
+      }else if(responseText.status== 401){
         this.setState({
           progress:false,
           postAdError:true

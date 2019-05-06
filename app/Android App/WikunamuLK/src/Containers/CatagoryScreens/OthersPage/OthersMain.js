@@ -25,7 +25,7 @@ import {
 
 // Global Config File
 import _CONFIG_ from '../../Global/_CONFIG_';
-var API_URL = _CONFIG_.GET_CATDETAILS_URL;
+var API_URL = _CONFIG_.GET_CATDETAILS_URL_OTHERS;
 
 // Device width and height
 import Metrics from '../../Dimensions/Metrics';
@@ -33,7 +33,24 @@ import Metrics from '../../Dimensions/Metrics';
 import { Dialog , ProgressDialog , ConfirmDialog} from "react-native-simple-dialogs";
 import LinearGradient from 'react-native-linear-gradient';
 
-export default class OthersMain extends Component{
+
+//Get Email From Async Storage
+const retrieve = async (key)
+
+ => {
+     try{
+        let value =  await AsyncStorage.getItem(key)
+
+
+        return value;
+    }catch(error){
+        throw error;
+    }
+};
+
+
+
+export default class ElectronicsMain extends Component{
 
   constructor(props) {
     super(props);
@@ -57,7 +74,10 @@ componentWillMount(){
 componentDidMount(){
      //Retrieve user logged email address from local storage and pass to API call
 
-  this.fetchCategoryDetailsAPI();
+  retrieve('access_token').then(result =>{
+    this.fetchCategoryDetailsAPI(result);
+    this.setState({access_token:JSON.parse(result)});
+});
 
   BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
 }
@@ -67,42 +87,41 @@ componentWillUnmount() {
 }
 
 //Fetch Category Details and get values from API
-fetchCategoryDetailsAPI(){
+fetchCategoryDetailsAPI(value){
 
   // let userLoggedEmail = JSON.parse(value)
-
+      let access_token = JSON.parse(value)
 
       this.setState({progress:true});
 
       fetch(API_URL, {
-        method: 'POST',
+        method: 'GET',
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + access_token,
         },
-        body:JSON.stringify( {
-          "Ad_Category_Name": 'Others',
-        })
 
 
     })
         .then((response) => response.json())
         .then((responseText) => {
-            if(responseText.status_code == '400'){
-              this.setState({
-                    progress:false,
-                    noAdsMessage:true,
-                  });
-            }else if(responseText.data[0].status_code == '200'){
-              this.setState({
-                jsonData:responseText.data,
-                progress:false,
-              });
-            }
+          console.log(responseText)
+          console.log(responseText.length)
+          if(responseText.length == 0){
+            this.setState({
+                  progress:false,
+                  noAdsMessage:true,
+                });
+          }else if(responseText[0].ad_category_name.length > 0){
+            this.setState({
+              jsonData:responseText,
+              progress:false,
+            });
+          }
             
         })
         .catch((error) => {
-            //If connection error on main API 
+        //If connection error on main API 
         API_URL = _CONFIG_.GET_CATDETAILS_URL_BACKUP;
         this.fetchCategoryDetailsAPI();
             
@@ -122,12 +141,15 @@ getClickedAd(service){
 
  //Refresh Auto When Back To Mens Fashion Screen
  autoRefresh(){
-  this.fetchCategoryDetailsAPI();
+  retrieve('access_token').then(result =>{
+    this.fetchCategoryDetailsAPI(result);
+    this.setState({access_token:JSON.parse(result)});
+});
 }
 
 //Navigate More Information Screen
 navigateMensFashionMore(service){
-  this.props.navigation.navigate("OthersMore",{screen: "OthersMore",Service:service,onGoBack: () => this.autoRefresh(),})
+  this.props.navigation.navigate("ElectronicsMore",{screen: "ElectronicsMore",Service:service,onGoBack: () => this.autoRefresh(),})
 }
 
   render() {
@@ -156,8 +178,8 @@ navigateMensFashionMore(service){
             <View style={styles.box}>
                <Image style={styles.image} source={require('../../../Assets/Test/iphone3.jpg')} />
               <View style={styles.boxContent}>
-                <Text style={styles.title}>{service.Ad_Title}</Text>
-                <Text style={styles.description}>LKR {service.Ad_Price}</Text>
+                <Text style={styles.title}>{service.ad_title}</Text>
+                <Text style={styles.description}>LKR {service.ad_price}</Text>
                 <View style={styles.buttons}>
                 </View>
               </View>

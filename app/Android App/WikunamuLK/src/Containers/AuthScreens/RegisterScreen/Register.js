@@ -56,7 +56,7 @@ export default class Register extends Component {
   }
 
   fetchRegister(){
-
+console.log(API_URL)
     this.setState({
       progress:true,
     });
@@ -64,14 +64,13 @@ export default class Register extends Component {
     var object = {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body:JSON.stringify( {
-        "User_Full_Name": this.state.fullname,
-        "User_Email":this.state.email,
-        "User_Contact_No": this.state.contact_no,
-        "User_Password":this.state.password,
+        "user_name": this.state.fullname,
+        "user_email":this.state.email,
+        "user_password":this.state.password,
+        "contact_no": this.state.contact_no
       })
   };
 
@@ -79,14 +78,14 @@ export default class Register extends Component {
   fetch(API_URL,object)
     .then((response) => response.json())
     .then((responseText) => {
-
-      if(responseText.status_code == '200'){
+      console.log(responseText.status)
+      if(responseText.status == 200){
         this.setState({
           progress:false,
           registerComplete:true,
         });
    
-      }else if(responseText.status_code=='400'){
+      }else if(responseText.message=='Existing user'){
         this.setState({
           progress:false,
           registerError:true,

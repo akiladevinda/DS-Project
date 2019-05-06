@@ -34,13 +34,13 @@ export default class ElectronicsMore extends Component {
     super(props);
 
     this.state = {
-      item_title: this.props.navigation.state.params.Service.Ad_Title,
-      item_price: this.props.navigation.state.params.Service.Ad_Price,
-      item_description:this.props.navigation.state.params.Service.Ad_Description,
-      item_condition:this.props.navigation.state.params.Service.Ad_Item_Condiiton,
-      item_city:this.props.navigation.state.params.Service.Ad_City,
-      item_user_email : this.props.navigation.state.params.Service.Ad_User_Email,
-      item_user_contactnumber:this.props.navigation.state.params.Service.Ad_User_Contact_No,
+      item_title: this.props.navigation.state.params.Service.ad_title,
+      item_price: this.props.navigation.state.params.Service.ad_price,
+      item_description:this.props.navigation.state.params.Service.ad_description,
+      item_condition:this.props.navigation.state.params.Service.ad_item_condiiton,
+      item_city:this.props.navigation.state.params.Service.ad_city,
+      item_user_email : this.props.navigation.state.params.Service.user.user_email,
+      item_user_contactnumber:this.props.navigation.state.params.Service.user.contact_no,
     }
 
 

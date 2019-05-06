@@ -61,6 +61,9 @@ export default class MyAdsMainScreen extends Component{
       email:'',
       noAdsMessage:false,
       adDeleteTrue:false,
+      access_token:'',
+      User_Email:'',
+      Contact_No:'',
     };
     this.dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
@@ -76,9 +79,9 @@ componentWillMount(){
 
 componentDidMount(){
    //Retrieve user logged email address from local storage and pass to API call
-   retrieve('userEmail').then(result =>{
+   retrieve('access_token').then(result =>{
     this.fetchAdDetails(result);
-    this.setState({email:JSON.parse(result)});
+    this.setState({access_token:JSON.parse(result)});
 });
 
    BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
@@ -96,36 +99,35 @@ handleBackButtonClick() {
 
   fetchAdDetails(value){
 
-      let userLoggedEmail = JSON.parse(value)
+      let access_token = JSON.parse(value)
 
-      console.log(userLoggedEmail)
+      console.log(access_token)
 
       this.setState({progress:true});
 
       fetch(API_URL_GETADS, {
-        method: 'POST',
+        method: 'GET',
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + access_token,
         },
-        body:JSON.stringify( {
-          "Ad_User_Email": userLoggedEmail,
-        })
+      
 
 
     })
         .then((response) => response.json())
         .then((responseText) => {
 
-    
-          if(responseText.status_code == '400'){
+          console.log(responseText)
+          console.log(responseText[0].ad_category_name)
+          if(responseText[0].length < 0 ){
             this.setState({
                   progress:false,
                   noAdsMessage:true,
                 });
-          }else if(responseText.data[0].status_code == '200'){
+          }else if(responseText[0].ad_category_name.length > 0){
             this.setState({
-              jsonData:responseText.data,
+              jsonData:responseText,
               progress:false,
             });
           }
@@ -217,8 +219,8 @@ gobackToHomeAfterDel(){
           
                <Image style={styles.image} source={require('../../Assets/Test/iphone3.jpg')} />
               <View style={styles.boxContent}>
-                <Text style={styles.title}>{service.Ad_Title}</Text>
-                <Text style={styles.description}>LKR {service.Ad_Price}</Text>
+                <Text style={styles.title}>{service.ad_title}</Text>
+                <Text style={styles.description}>LKR {service.ad_price}</Text>
                 <View style={styles.buttons}>
                   <TouchableHighlight style={[styles.button, styles.view]}  onPress={this.deleteAdFetchAPI.bind(this,service)}>
                     <Text style={{fontSize:15,color:'white'}}>Delete Ad</Text>

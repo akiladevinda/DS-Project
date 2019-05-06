@@ -104,7 +104,7 @@ const Drawer = createDrawerNavigator({
   },
 
   'Post your ad':{
-    screen: PostAdScreenMain,
+    screen: PostAdScreenSecond,
     navigationOptions: {
       drawerIcon: ({ tintColor }) => (
         <Image

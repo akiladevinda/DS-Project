@@ -76,12 +76,11 @@ export default class Login extends Component {
     var object = {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body:JSON.stringify( {
-        "User_Email": this.state.email,
-        "User_Password":this.state.password,
+        "user_email": this.state.email,
+        "user_password":this.state.password
       })
   };
 
@@ -90,24 +89,26 @@ export default class Login extends Component {
     .then((response) => response.json())
     .then((responseText) => {
 
-      if(responseText.status_code == '200'){
+      if(responseText.access_token.length > 0){
+        
+        console.log(responseText.access_token)
         // alert('Login Success')
         this.setState({
           progress:false,
         });
         //Testing method - For saving login details with async storage
         try {
-            AsyncStorage.setItem('userEmail', JSON.stringify(this.state.email));
+            AsyncStorage.setItem('access_token', JSON.stringify(responseText.access_token));
         }
         catch (e) {
           console.log('caught error', e);
         }
 
-        //Tem Solution - Drawer - Real is Homne Screen
+        // Tem Solution - Drawer - Real is Homne Screen
         var { navigate} = this.props.navigation;
         navigate("Drawer",{});
   
-      }else if(responseText.status_code=='400'){
+      }else if(responseText.message=='Invalid login Credentials'){
 
         this.setState({
           progress:false,

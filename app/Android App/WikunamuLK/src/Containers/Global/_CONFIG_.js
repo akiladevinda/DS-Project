@@ -14,13 +14,13 @@
  /**
  * Primary API LINKS -----------------------------------------------------
  */
-//Old One const USER_REGISTER_URL = 'http://10.0.2.2/WIkunamuLK/api/user-register.php';
+//Old One const USER_REGISTER_URL = 'http://10.0.2.2:8080/api/wikunamu/user/save';
 
 //Login URL Fro All Users
-const USER_LOGIN_URL = 'https://wikunamulkmain.000webhostapp.com/WIkunamuLK/api/user-login.php';
+const USER_LOGIN_URL = 'http://10.0.2.2:8080/api/wikunamu/user/login';
 
 //New User Register For All Users
-const USER_REGISTER_URL = 'https://wikunamulkmain.000webhostapp.com/WIkunamuLK/api/user-register.php';
+const USER_REGISTER_URL = 'http://10.0.2.2:8080/api/wikunamu/user/save';
 
 //User Details For Main Profile Screen
 const  USER_PROFILE_URL_MAIN  = 'https://wikunamulkmain.000webhostapp.com/WIkunamuLK/api/user-details-main.php';
@@ -32,10 +32,10 @@ const USER_PROFILE_URL_SEC = 'https://wikunamulkmain.000webhostapp.com/WIkunamuL
 const UPDATE_DETAILS_URL = 'https://wikunamulkmain.000webhostapp.com/WIkunamuLK/api/user-update.php';
 
 //Post Ad Live API Link
-const USER_POSTAD_URL = 'https://wikunamulkmain.000webhostapp.com/WIkunamuLK/api/post-ad.php';
+const USER_POSTAD_URL = 'http://10.0.2.2:8080/api/wikunamu/ads/save';
 
 //Get All Ad Details
-const GET_ADDETAILS_URL = 'https://wikunamulkmain.000webhostapp.com/WIkunamuLK/api/ad-details-user.php'
+const GET_ADDETAILS_URL = 'http://10.0.2.2:8080/api/wikunamu/ads/myAds'
 
 //Delete User Account From Database
 const DELETE_USERACC_URL = 'https://wikunamulkmain.000webhostapp.com/WIkunamuLK/api/delete-user.php'
@@ -44,7 +44,15 @@ const DELETE_USERACC_URL = 'https://wikunamulkmain.000webhostapp.com/WIkunamuLK/
 const DELETE_AD_URL = 'https://wikunamulkmain.000webhostapp.com/WIkunamuLK/api/delete-ad.php'
 
 //Get Category Details
-const GET_CATDETAILS_URL = 'https://wikunamulkmain.000webhostapp.com/WIkunamuLK/api/ad-details-category.php'
+const GET_CATDETAILS_URL = 'http://10.0.2.2:8080/api/wikunamu/ads/all_by_category?ad_category_name=Mobile Phone'
+const GET_CATDETAILS_URL_MOBILE_PHONE = 'http://10.0.2.2:8080/api/wikunamu/ads/all_by_category?ad_category_name=Mobile Phone'
+const GET_CATDETAILS_URL_ELECTRONICS = 'http://10.0.2.2:8080/api/wikunamu/ads/all_by_category?ad_category_name=Electronics'
+const GET_CATDETAILS_URL_MENS_FASHION = 'http://10.0.2.2:8080/api/wikunamu/ads/all_by_category?ad_category_name=Mens Fashion'
+const GET_CATDETAILS_URL_WOMENS_FASHION = 'http://10.0.2.2:8080/api/wikunamu/ads/all_by_category?ad_category_name=Womens Fashion'
+const GET_CATDETAILS_URL_VEHICLE = 'http://10.0.2.2:8080/api/wikunamu/ads/all_by_category?ad_category_name=Vehicle'
+const GET_CATDETAILS_URL_JOBS = 'http://10.0.2.2:8080/api/wikunamu/ads/all_by_category?ad_category_name=Jobs'
+const GET_CATDETAILS_URL_HOUSE_RENT = 'http://10.0.2.2:8080/api/wikunamu/ads/all_by_category?ad_category_name=House Rent'
+const GET_CATDETAILS_URL_OTHERS= 'http://10.0.2.2:8080/api/wikunamu/ads/all_by_category?ad_category_name=Others'
 
 
 
@@ -98,6 +106,14 @@ export default {
   DELETE_USERACC_URL:DELETE_USERACC_URL,
   DELETE_AD_URL:DELETE_AD_URL,
   GET_CATDETAILS_URL:GET_CATDETAILS_URL,
+  GET_CATDETAILS_URL_MOBILE_PHONE:GET_CATDETAILS_URL_MOBILE_PHONE,
+  GET_CATDETAILS_URL_ELECTRONICS:GET_CATDETAILS_URL_ELECTRONICS,
+  GET_CATDETAILS_URL_MENS_FASHION:GET_CATDETAILS_URL_MENS_FASHION,
+  GET_CATDETAILS_URL_WOMENS_FASHION:GET_CATDETAILS_URL_WOMENS_FASHION,
+  GET_CATDETAILS_URL_VEHICLE:GET_CATDETAILS_URL_VEHICLE,
+  GET_CATDETAILS_URL_JOBS:GET_CATDETAILS_URL_JOBS,
+  GET_CATDETAILS_URL_HOUSE_RENT:GET_CATDETAILS_URL_HOUSE_RENT,
+  GET_CATDETAILS_URL_OTHERS:GET_CATDETAILS_URL_OTHERS,
 
   USER_LOGIN_URL_BACKUP:USER_LOGIN_URL_BACKUP,
   USER_REGISTER_URL_BACKUP:USER_REGISTER_URL_BACKUP,
