@@ -120,7 +120,7 @@ handleBackButtonClick() {
 
           console.log(responseText)
           console.log(responseText[0].ad_category_name)
-          if(responseText[0].length < 0 ){
+          if(responseText[0].length <= 0 ){
             this.setState({
                   progress:false,
                   noAdsMessage:true,

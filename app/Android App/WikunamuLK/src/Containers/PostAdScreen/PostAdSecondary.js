@@ -168,6 +168,8 @@ export default class PostAdSecondary extends Component {
     .then((response) => response.json())
     .then((responseText) => {
 
+      console.log(responseText)
+      
       if(responseText.status == 200){
         this.setState({
           progress:false,

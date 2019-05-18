@@ -50,7 +50,7 @@ const retrieve = async (key)
 
 
 
-export default class ElectronicsMain extends Component{
+export default class VehiclesMain extends Component{
 
   constructor(props) {
     super(props);
@@ -176,7 +176,7 @@ navigateMensFashionMore(service){
           return (
             <TouchableOpacity onPress={this.navigateMensFashionMore.bind(this,service)}>
             <View style={styles.box}>
-               <Image style={styles.image} source={require('../../../Assets/Test/iphone3.jpg')} />
+               <Image style={styles.image} source={{uri:service.ad_image}}/>
               <View style={styles.boxContent}>
                 <Text style={styles.title}>{service.ad_title}</Text>
                 <Text style={styles.description}>LKR {service.ad_price}</Text>

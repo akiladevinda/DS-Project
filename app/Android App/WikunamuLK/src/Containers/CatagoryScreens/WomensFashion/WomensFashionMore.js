@@ -34,13 +34,14 @@ export default class WomensFashionMore extends Component {
     super(props);
 
     this.state = {
-      item_title: this.props.navigation.state.params.Service.Ad_Title,
-      item_price: this.props.navigation.state.params.Service.Ad_Price,
-      item_description:this.props.navigation.state.params.Service.Ad_Description,
-      item_condition:this.props.navigation.state.params.Service.Ad_Item_Condiiton,
-      item_city:this.props.navigation.state.params.Service.Ad_City,
-      item_user_email : this.props.navigation.state.params.Service.Ad_User_Email,
-      item_user_contactnumber:this.props.navigation.state.params.Service.Ad_User_Contact_No,
+      item_title: this.props.navigation.state.params.Service.ad_title,
+      item_price: this.props.navigation.state.params.Service.ad_price,
+      item_description:this.props.navigation.state.params.Service.ad_description,
+      item_condition:this.props.navigation.state.params.Service.ad_item_condiiton,
+      item_city:this.props.navigation.state.params.Service.ad_city,
+      item_user_email : this.props.navigation.state.params.Service.user.user_email,
+      item_user_contactnumber:this.props.navigation.state.params.Service.user.contact_no,
+      item_image:this.props.navigation.state.params.Service.ad_image,
     }
 
 
@@ -68,15 +69,15 @@ export default class WomensFashionMore extends Component {
     return true;
   }
 
-    //Get Call to Ad owner
-    getCallButtonPress(){
-      Linking.openURL('tel:'+this.state.item_user_contactnumber)
-    }
-  
-    //Send email to ad owner
-    sendEmailButtonPress(){
-      Linking.openURL('mailto:'+this.state.item_user_email)
-    }
+//Get Call to Ad owner
+getCallButtonPress(){
+  Linking.openURL('tel:'+this.state.item_user_contactnumber)
+}
+
+//Send email to ad owner
+sendEmailButtonPress(){
+  Linking.openURL('mailto:'+this.state.item_user_email)
+}
 
 
   render() {
@@ -98,7 +99,7 @@ export default class WomensFashionMore extends Component {
 
         <ScrollView>
           <View style={{alignItems:'center', marginHorizontal:30}}>
-            <Image style={styles.productImg} source={require('../../../Assets/Test/iphone3.jpg')}/>
+            <Image style={styles.productImg} source={{uri:this.state.item_image}}/>
             <Text style={styles.name}>{this.state.item_title}</Text>
             <Text style={styles.price}>LKR {this.state.item_price}</Text>
             <Text style={styles.price}>Condition :  {this.state.item_condition}</Text>
@@ -116,7 +117,7 @@ export default class WomensFashionMore extends Component {
               <Text style={styles.shareButtonText}>Get Call</Text>  
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.shareButtonEmail} onPress={()=> this.sendEmailButtonPress()}>
+            <TouchableOpacity style={styles.shareButtonEmail} onPress={()=> this.clickEventListener()}>
               <Text style={styles.shareButtonText}>Send Email</Text>  
             </TouchableOpacity>
           </View> 

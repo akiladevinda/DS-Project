@@ -41,6 +41,7 @@ export default class ElectronicsMore extends Component {
       item_city:this.props.navigation.state.params.Service.ad_city,
       item_user_email : this.props.navigation.state.params.Service.user.user_email,
       item_user_contactnumber:this.props.navigation.state.params.Service.user.contact_no,
+      item_image:this.props.navigation.state.params.Service.ad_image,
     }
 
 
@@ -98,7 +99,7 @@ sendEmailButtonPress(){
 
         <ScrollView>
           <View style={{alignItems:'center', marginHorizontal:30}}>
-            <Image style={styles.productImg} source={require('../../../Assets/Test/iphone3.jpg')}/>
+            <Image style={styles.productImg} source={{uri:this.state.item_image}}/>
             <Text style={styles.name}>{this.state.item_title}</Text>
             <Text style={styles.price}>LKR {this.state.item_price}</Text>
             <Text style={styles.price}>Condition :  {this.state.item_condition}</Text>
